@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <main class="container pt-4">
+
+        {% for message in app.flashes('success') %}
+            <div class="fixed-top alert alert-success alert-dismissible fade show col-md-4 col-md-offset-4" align="center" role="alert">
+                <strong>Succès !</strong> {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+        {% for message in app.flashes('error') %}
+            <div class="fixed-top alert alert-danger alert-dismissible fade show col-md-4 col-md-offset-4" align="center" role="alert">
+                <strong>Erreur !</strong> {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+
+
+        <h1 class="text-center h2home mt-4 pt-4" style="background: rgba(0,0,0,.7);padding: 20px 20px;;min-height: 41px;"> Modifier mot de passe </h1>
+
+
+        <div class="container mt-4 pt-4 pb-4">
+                    {{ form_start(form) }}
+                    {{ form_widget(form) }}
+                    <button class="btn btnhome">Modifier</button>
+                    {{ form_end(form) }}
+                </div>
+
+        <div class="text-center mt-4">
+            <a href="{{ path('user.projet.index') }}" class="btn btnhome">
+                ← Retour </a>
+        </div>
+    </main>
+{% endblock %}

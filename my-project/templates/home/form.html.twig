@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Jumperpich | Contact {% endblock %}
+
+{% block body %}
+<div class="container pt-4">
+
+    <h1 class="text-center h2home mt-4 pt-4" style="background: rgba(0,0,0,.7);padding: 20px 20px;;min-height: 41px;"> {% trans %}Formulaire de contact{% endtrans %} </h1>
+    
+    <div class="container mt-4">
+
+            <div class="col text-center">
+                {% trans %}Ce formulaire vous permet de me contacter.{% endtrans %}<br><br>
+
+                {% trans %}C’est le bon endroit pour me soumettre une idée d’amélioration par exemple.{% endtrans %}<br><br>
+
+
+                {% trans %}Pour toutes les questions relatives au Site n’hésitez pas à consulter{% endtrans %}
+                <a href="{{ path('faq') }}" style="color:#FF69B4">{% trans %}la page FAQ.{% endtrans %}</a> <br><br>
+                {% trans %}Blocage de spam?{% endtrans %}<br>
+                {% trans %}Si vous utilisez un logiciel de blocage de courrier indésirable, vous devez le désactiver avant de cliquer sur le bouton de soumission pour recevoir un accusé de réception. Vous devez également ajouter "jumperpich59@gmail.com" à vos adresses autorisées pour recevoir toute correspondance du service.{% endtrans %}<br><br>
+
+                {% trans %}Aucun mail reçu?{% endtrans %}<br>
+                {% trans %}Vérifiez qu'il ne se trouve pas dans le dossier de "spam/courrier indésirable" de votre boite de messagerie.{% endtrans %}
+            </div>
+            <div class="col mt-4">
+                {{form_start(form)}}
+                {{form_widget(form)}}
+                {{form_end(form)}}
+                <small>{% trans %}Les informations envoyées par le biais de ce formulaire sont enregistrées dans un fichier informatisé pour traiter votre demande. Elles ne seront en aucun cas cédées à des tiers. Votre adresse email sera conservée uniquement durant le délai de ma réponse. Conformément à la loi « informatique et libertés », vous pouvez exercer votre droit d'accès aux données vous concernant et les faire rectifier.Consultez ma politique en matière de vie privée pour en savoir plus en cliquant{% endtrans %} <a href="{{ path('RGPD') }}" style="color:#FF69B4">{% trans %}ICI{% endtrans %}</a></small>
+            </div>
+        </div>
+
+</div>
+
+{% endblock %}

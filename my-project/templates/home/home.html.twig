@@ -1,0 +1,603 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Jumperpich | Jumperpich.com  {% endblock %}
+
+
+{% block body %}
+
+    <style>
+
+
+        * {
+            transition: all .125s ease-in-out;
+        }
+
+        @-moz-keyframes bump {
+            33% {
+                -moz-transform: scale(1.3);
+            }
+            66% {
+                -moz-transform: scale(0.8);
+            }
+            100% {
+                -moz-transform: scale(1.0);
+            }
+        }
+
+        @-webkit-keyframes bump {
+            33% {
+                -webkit-transform: scale(1.3);
+            }
+            66% {
+                -webkit-transform: scale(0.8);
+            }
+            100% {
+                -webkit-transform: scale(1.0);
+            }
+        }
+
+        @keyframes bump {
+            33% {
+                transform: scale(1.3);
+            }
+            66% {
+                transform: scale(0.8);
+            }
+            100% {
+                transform: scale(1.0);
+            }
+        }
+
+
+
+        .middle {
+            transition: .5s ease;
+            opacity: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .cont:hover .image {
+            opacity: 0.3;
+        }
+
+        .cont:hover .middle {
+            opacity: 1;
+        }
+
+        .text {
+            color: #fff;
+            opacity: 1;
+            font-size: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mix .link:hover .text {
+            opacity: .7;
+            text-shadow: 0 0 5px rgba(0, 0, 0, .7);
+            font-size: 5.1rem;
+        }
+
+        .image {
+            opacity: 1;
+            display: block;
+            width: 100%;
+            height: auto;
+            transition: .5s ease;
+            backface-visibility: hidden;
+        }
+
+        @media (max-width: 767.98px) {
+            .mix {
+                display: flex;
+                width: 100%;
+                margin-bottom: 15px;
+            }
+
+            .mix .link {
+                max-width: 25%;
+                display: block;
+                position: relative;
+            }
+
+            .info__content__buttons {
+                display: none
+            }
+
+            .info {
+                width: 100%;
+
+            }
+
+            .info__content {
+                position: relative;
+                float: left;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+            .info > .row {
+                position: relative;
+                float: left;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+            .middle {
+                opacity: 0;
+                text-shadow: 0 0 5px #000;
+                font-size: 1.5rem;
+            }
+
+            figure {
+                margin-bottom: 0 !important;
+            }
+
+        }
+
+
+    </style>
+
+
+    <div class="container-fluid">
+
+        {% for message in app.flashes('notice') %}
+            <div class="fixed-bottom alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>Warning !</strong> {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+        {% for message in app.flashes('success') %}
+            <div class="fixed-top alert alert-success alert-dismissible fade show col-md-4 col-md-offset-4" align="center" role="alert">
+                <strong>Succès !</strong> {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+
+        <div class="jumbotron jumbotron-fluid mt-4 reveal" style="background: rgba(0,0,0,0);min-height: 600px">
+
+
+            <div class="container text-white h2header text-center">
+
+                <h1 class="display-4 reveal-1">{% trans %}BIENVENUE {% endtrans %}</h1>
+                <p class="lead reveal-2">{% trans %}Vous etes sur le site officiel de Jumperpich{% endtrans %} ! </p>
+                <p class="lead reveal-3">{% trans %}Télécharge GRATUITEMENT et sans publicités tous les mixes dès maintenant{% endtrans %}
+                    ! </p>
+                <div class="scrolldown reveal-4">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+
+            </div>
+            <!-- /.container -->
+        </div>
+        <!-- /.jumbotron -->
+
+        <div class="container pt-4 reveal" id="new">
+            <h1 class="text-center h2home mt-4 pt-4 reveal-1" style="background: rgba(0,0,0,.7);padding: 20px 20px;;min-height: 41px;"> {% trans %}Nouveau{% endtrans %}</h1>
+
+            <div class="row justify-content-center my-4 pt-4 reveal-2"
+                 style="display: flex;flex-wrap: wrap;margin-right: -15px;margin-left: -15px;">
+                {% set rank = 0 %}
+                {% for projet in last %}
+                    {% set rank = rank + 1 %}
+                    {% if rank == 1 %}
+                        <article class="mix col-12 col-md-6 col-lg-4 col-xl-4 stagger cont reveal-3"
+                                 style="">
+                            <a class="link" href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}"
+                               title="More details">
+
+                                <figure style="display: block;padding: 10px;margin-bottom: 5px;background: rgba(0,0,0,.7);">
+                                    <div class="" style="">
+                                        <img class="image" {% if projet.filename %}
+                                            src="{{ vich_uploader_asset(projet, 'imageFile') | imagine_filter('thumb') }}"
+                                        {% else %}
+                                            src="{{ 'images/projets/empty.jpg' | imagine_filter('thumb') }}"
+                                        {% endif %} alt="No thumbnail" style="width: 100%;height: auto">
+                                    </div>
+                                </figure>
+
+                                <div class="middle">
+                                    <div class="text"><i class="fas fa-download"></i></div>
+                                </div>
+                            </a>
+
+                            <div class="info" style="background: rgba(0,0,0,.7);padding: 0 10px;min-height: 41px;">
+
+                                <div class="row"
+                                     style=" display: flex;flex-wrap: wrap;margin-right: -15px;margin-left: -15px;">
+
+                                    <div class="col-12" style="flex: 0 0 100%;max-width: 100%;">
+
+                                        <div class="info__content" style="display: flex;align-items: center;width: 100%;">
+
+                                            <h1 style="font-size: 1rem; margin-top: 0; padding-top: 0; margin-bottom: 0;text-transform: uppercase;flex-grow: 1;">
+                                                <a id='title'
+                                                   href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}">{{ projet.title }}</a>
+                                            </h1>
+                                            <div class="info__content__buttons" style="align-self: flex-end;">
+                                                {% for tag in projet.tags %}
+                                                    <div class="style"
+                                                         style="padding-left: 10px;color: #eee;line-height: 41px;display: inline-block;vertical-align: top;max-width: none!important;{% if tag.id == 1 %} color:red {% endif %}{% if tag.id == 2 %} color:orange {% endif %}{% if tag.id == 3 %} color:#8ee800 {% endif %}">
+                                                        <div>{{ tag.name }}</div>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="info infos_bis"
+                                 style="background: rgba(0,0,0,.7);padding: 0 10px;min-height: 41px;">
+
+                                <div class="row"
+                                     style=" display: flex;flex-wrap: wrap;margin-right: -15px;margin-left: -15px;">
+
+                                    <div class="col-12" style="flex: 0 0 100%;max-width: 100%;">
+
+                                        <div class="info__content" style="display: flex;align-items: center;width: 100%;">
+
+
+                                            {% set difference = date(projet.createdAt|date('Y/m/d')).diff(date('now'|date('Y/m/d'))) %}
+                                            {% set leftDays = difference.days %}
+
+                                            <h1 style="font-size: 1rem; margin-top: 0; padding-top: 0; margin-bottom: 0;flex-grow: 1;">
+
+                                                {% if app.request.locale in ['fr','fr_BE','fr_BJ','fr_BF','fr_BI','fr_CM','fr_CA','fr_CF','fr_TD','fr_KM',
+                                                    'fr_CG', 'fr_CD','fr_CI','fr_DJ','fr_GQ','fr_FR','fr_GA','fr_GP','fr_GN','fr_LU','fr_MG','fr_ML','fr_MQ',
+                                                    'fr_MC','fr_NE','fr_RW','fr_RE','fr_BL','fr_MF','fr_SN','fr_CH','fr_TG'] %}
+                                                    Il y a {{ leftDays }} jours {% else %}
+                                                    {{ leftDays }} days ago {% endif %}
+
+                                            </h1>
+                                            <div class="info__content__buttons" style="align-self: flex-end;">
+                                                <div class="style"
+                                                     style="padding-left: 10px;color: #eee;line-height: 41px;display: inline-block;vertical-align: top;max-width: none!important;">
+                                                    <i class="far fa-clock"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    {% endif %}
+                {% endfor %}
+
+            </div>
+        </div>
+
+        {% if soon is not empty %}
+        <div class="container pt-4 reveal" id="soon">
+
+            <h1 class="text-center h2home mt-4 pt-4 reveal-1" style="background: rgba(0,0,0,.7);padding: 20px 20px;;min-height: 41px;"> {% trans %}PROCHAIN MIX{% endtrans %}</h1>
+
+            <div class="row justify-content-center my-4 pt-4 reveal-2" style="display: flex;flex-wrap: wrap;margin-right: -15px;margin-left: -15px;">
+
+                {% for projet in soon %}
+
+                    <article class="mix col-12 col-md-6 col-lg-4 col-xl-4 stagger cont reveal-3"
+                             style="">
+
+                            <figure style="display: block;padding: 10px;margin-bottom: 5px;background: rgba(0,0,0,.7);">
+                                <div class="" style="">
+                                    <img class="image"
+                                         src="{{ 'pictures/soon.jpg' | imagine_filter('thumb') }}"
+                                         alt="{{ projet.name }}" style="width: 100%;height: auto">
+                                </div>
+                            </figure>
+
+                        <div class="middle">
+                            <div class="text"></div>
+                        </div>
+
+                        <div class="info" style="background: rgba(0,0,0,.7);padding: 0 10px;min-height: 41px;">
+
+                            <div class="row"
+                                 style=" display: flex;flex-wrap: wrap;margin-right: -15px;margin-left: -15px;">
+
+                                <div class="col-12" style="flex: 0 0 100%;max-width: 100%;">
+
+                                    <div class="info__content" style="display: flex;align-items: center;width: 100%;">
+
+                                        <h1 style="font-size: 1rem; margin-top: 0; padding-top: 0; margin-bottom: 0;text-transform: uppercase;flex-grow: 1;">
+                                            {{ projet.name }}
+                                        </h1>
+                                        <div class="info__content__buttons" style="align-self: flex-end;">
+                                                <div class="style"
+                                                     style="padding-left: 10px;color: #eee;line-height: 41px;display: inline-block;vertical-align: top;max-width: none!important;">
+                                                    <div>{{ projet.genre }}</div>
+                                                </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info infos_bis"
+                             style="background: rgba(0,0,0,.7);padding: 0 10px;min-height: 41px;">
+
+                            <div class="row"
+                                 style=" display: flex;flex-wrap: wrap;margin-right: -15px;margin-left: -15px;">
+
+                                <div class="col-12" style="flex: 0 0 100%;max-width: 100%;">
+
+                                    <div class="info__content" style="display: flex;align-items: center;width: 100%;">
+
+
+                                        {% set difference = date('now'|date('Y/m/d')).diff(date(projet.date|date('Y/m/d'))) %}
+
+                                        {% set leftDays = difference.days %}
+
+                                        <h1 style="font-size: 1rem; margin-top: 0; padding-top: 0; margin-bottom: 0;flex-grow: 1;">
+
+                                            {% if app.request.locale in ['fr','fr_BE','fr_BJ','fr_BF','fr_BI','fr_CM','fr_CA','fr_CF','fr_TD','fr_KM',
+                                                'fr_CG', 'fr_CD','fr_CI','fr_DJ','fr_GQ','fr_FR','fr_GA','fr_GP','fr_GN','fr_LU','fr_MG','fr_ML','fr_MQ',
+                                                'fr_MC','fr_NE','fr_RW','fr_RE','fr_BL','fr_MF','fr_SN','fr_CH','fr_TG'] %}
+                                                Disponible dans {{ leftDays }} jours {% else %}
+                                                Available in {{ leftDays }} days {% endif %}
+
+                                        </h1>
+                                        <div class="info__content__buttons" style="align-self: flex-end;">
+                                            <div class="style"
+                                                 style="padding-left: 10px;color: #eee;line-height: 41px;display: inline-block;vertical-align: top;max-width: none!important;">
+                                                <i class="far fa-clock"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                {% endfor %}
+            </div>
+
+        </div>
+        {% endif %}
+
+        <div class="container pt-4 reveal" id="recent">
+            <h1 class="text-center h2home mt-4 pt-4 reveal-1" style="background: rgba(0,0,0,.7);padding: 20px 20px;;min-height: 41px;"> {% trans %}Les plus récents{% endtrans %}</h1>
+
+            <div class="row my-4 pt-4 reveal-2"
+                 style="display: flex;flex-wrap: wrap;margin-right: -15px;margin-left: -15px;">
+                {% set rank = 0 %}
+                {% for projet in last %}
+                    {% set rank = rank + 1 %}
+                    <article class="mix col-12 col-md-6 col-lg-4 col-xl-4 stagger cont reveal-3"
+                             style="margin-bottom: 30px;">
+
+                        <a class="link" href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}"
+                           aria-label="Read more about {{ projet.title }}">
+
+                            <figure style="display: block;padding: 10px;margin-bottom:5px;background: rgba(0,0,0,.7);">
+                               <!-- {% if rank == 1 %}
+                                    DETERMINE LE MIX LE PLUS RECENT
+                                {% endif %} -->
+                                <div>
+                                    <img class="image" {% if projet.filename %}
+                                        src="{{ vich_uploader_asset(projet, 'imageFile') | imagine_filter('thumb') }}"
+                                    {% else %}
+                                        src="{{ 'images/projets/empty.jpg' | imagine_filter('thumb') }}"
+                                    {% endif %} alt="{{ projet.title }}" style="width: 100%;height: auto">
+                                </div>
+                            </figure>
+
+                            <div class="middle">
+                                <div class="text"><i class="fas fa-download"></i></div>
+                            </div>
+                        </a>
+
+                        <div class="info" style="background: rgba(0,0,0,.7);padding: 0 10px;min-height: 41px;">
+
+                            <div class="row"
+                                 style=" display: flex;flex-wrap: wrap;margin-right: -15px;margin-left: -15px;">
+
+                                <div class="col-12" style="flex: 0 0 100%;max-width: 100%;">
+
+                                    <div class="info__content" style="display: flex;align-items: center;width: 100%;">
+
+                                        <h1 style="font-size: 1rem; margin-top: 0; padding-top: 0; margin-bottom: 0;text-transform: uppercase;flex-grow: 1;">
+                                            <a href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}"
+                                               aria-label="Read more about {{ projet.title }}">{{ projet.title }}</h1>
+                                        <div class="info__content__buttons" style="align-self: flex-end;">
+                                            {% for tag in projet.tags %}
+                                                <div class="style"
+                                                     style="padding-left: 10px;color: #eee;line-height: 41px;display: inline-block;vertical-align: top;max-width: none!important;{% if tag.id == 1 %} color:red {% endif %}{% if tag.id == 2 %} color:orange {% endif %}{% if tag.id == 3 %} color:#8ee800 {% endif %}">
+                                                    <div>{{ tag.name }}</div>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                {% endfor %}
+
+            </div>
+
+            <div class="text-center mt-4">
+                <a href="{{ path('lastest') }}" class="btn btnhome f_size">
+                    {% trans %}Voir plus {% endtrans %} → </a>
+            </div>
+        </div>
+
+        <div class="container pt-4 reveal" id="popular">
+
+            <h1 class="text-center h2home mt-4 pt-4 reveal-1" style="background: rgba(0,0,0,.7);padding: 20px 20px;;min-height: 41px;"> {% trans %} Les plus populaires{% endtrans %}</h1>
+
+            <div class="row my-4 pt-4 reveal-2"
+                 style="display: flex;flex-wrap: wrap;margin-right: -15px;margin-left: -15px;">
+                {% for projet in views %}
+                    <article class="mix col-12 col-md-6 col-lg-4 col-xl-4 stagger reveal-3 cont"
+                             style="margin-bottom: 30px;">
+
+                        <a class="link" href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}"
+                           aria-label="Read more about {{ projet.title }}">
+
+                            <figure style=" display: block;padding: 10px;margin-bottom: 5px;background: rgba(0,0,0,.7);">
+                                <div>
+                                    <img class="image" {% if projet.filename %}
+                                        src="{{ vich_uploader_asset(projet, 'imageFile') | imagine_filter('thumb') }}"
+                                    {% else %}
+                                        src="{{ 'images/projets/empty.jpg' | imagine_filter('thumb') }}"
+                                    {% endif %} alt="{{ projet.title }}" style="width: 100%;height: auto">
+                                </div>
+                            </figure>
+
+                            <div class="middle">
+                                <div class="text"><i class="fas fa-download"></i></div>
+                            </div>
+                        </a>
+
+                        <div class="info" style="background: rgba(0,0,0,.7);padding: 0 10px;min-height: 41px;">
+                            <div class="row"
+                                 style=" display: flex;flex-wrap: wrap;margin-right: -15px;margin-left: -15px;">
+                                <div class="col-12" style="flex: 0 0 100%;max-width: 100%;">
+                                    <div class="info__content" style="display: flex;align-items: center;width: 100%;">
+                                        <h1 style="font-size: 1rem; margin-top: 0; padding-top: 0; margin-bottom: 0;text-transform: uppercase;flex-grow: 1;">
+                                            <a href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}"
+                                               aria-label="Read more about {{ projet.title }}">{{ projet.title }}</h1>
+                                        <div class="info__content__buttons" style="align-self: flex-end;">
+                                            {% for tag in projet.tags %}
+                                                <div class="style"
+                                                     style="padding-left: 10px;line-height: 41px;display: inline-block;vertical-align: top;max-width: none!important;{% if tag.id == 1 %} color:red {% endif %}{% if tag.id == 2 %} color:orange {% endif %}{% if tag.id == 3 %} color:#8ee800 {% endif %}">
+                                                    <div>{{ tag.name }}</div>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                {% endfor %}
+
+            </div>
+
+            <div class="text-center mt-4">
+                <a href="{{ path('ranking') }}" class="btn btnhome f_size">
+                    {% trans %}Voir plus {% endtrans %} → </a>
+            </div>
+        </div>
+
+        <div class="container my-4 py-4 reveal" id="social">
+
+            <h1 class="text-center h2home mt-4 pt-4 reveal-1" style="background: rgba(0,0,0,.7);padding: 20px 20px;;min-height: 41px;"> {% trans %}MES AUTRES MEDIAS{% endtrans %}</h1>
+
+
+            <div class="row my-4 pt-4 reveal-2"
+                 style="display: flex;flex-wrap: wrap;margin-right: -15px;margin-left: -15px;">
+
+                <article class="mix col-12 col-md-6 col-lg-4 col-xl-4 stagger reveal-3 cont"
+                         style="margin-bottom: 30px;">
+
+                    <a class="link" href="https://www.facebook.com/JumperpichMusic" target="_blank"  rel="noopener"  aria-label="Subscribe to my Facebook Page">
+
+                        <figure style=" display: block;padding: 10px;margin-bottom: 5px;background: rgba(0,0,0,.7);">
+                            <img class="image"
+                                 src="{{ asset('pictures/Facebook-icon-1.png') | imagine_filter('thumb') }}"
+                                 alt="Facebook image" style="width: 100%;height: auto">
+                        </figure>
+
+                        <div class="middle">
+                            <div class="text"><i class="fas fa-external-link-alt"></i></div>
+                        </div>
+
+                    </a>
+
+                    <div class="info" style="background: rgba(0,0,0,.7);padding: 0 10px;">
+                        <div class="row"
+                             style=" display: flex;flex-wrap: wrap;margin-right: -15px;margin-left: -15px;">
+                            <div class="col-12" style="flex: 0 0 100%;max-width: 100%;">
+                                <div class="info__content" style="display: flex;align-items: center;width: 100%;">
+                                    <h1 class="text-center" style="font-size:1rem;margin-top: 10px; padding-top: 0; margin-bottom: 10px;text-transform: uppercase;flex-grow: 1;">
+                                        <a href="https://www.facebook.com/JumperpichMusic" target="_blank"  rel="noopener"  aria-label="Subscribe to my Facebook Page" style="color:#1f55a2">FACEBOOK</a></h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="mix col-12 col-md-6 col-lg-4 col-xl-4 stagger reveal-3 cont"
+                         style="margin-bottom: 30px;">
+
+                    <a class="link" href="https://soundcloud.com/jumperpich" target="_blank"  rel="noopener"  aria-label="Subscribe to my Soundcloud">
+
+                        <figure style=" display: block;padding: 10px;margin-bottom: 5px;background: rgba(0,0,0,.7);">
+                            <img class="image"
+                                 src="{{ asset('pictures/Soundcloud-icon-1.png') | imagine_filter('thumb') }}"
+                                 alt="Soundcloud Image" style="width: 100%;height: auto">
+                        </figure>
+
+                        <div class="middle">
+                            <div class="text"><i class="fas fa-external-link-alt"></i></div>
+                        </div>
+
+                    </a>
+
+                    <div class="info" style="background: rgba(0,0,0,.7);padding: 0 10px;">
+                        <div class="row"
+                             style=" display: flex;flex-wrap: wrap;margin-right: -15px;margin-left: -15px;">
+                            <div class="col-12" style="flex: 0 0 100%;max-width: 100%;">
+                                <div class="info__content" style="display: flex;align-items: center;width: 100%;">
+                                    <h1 class="text-center" style="font-size:1rem;margin-top: 10px; padding-top: 0; margin-bottom: 10px;text-transform: uppercase;flex-grow: 1;">
+                                        <a href="https://soundcloud.com/jumperpich" target="_blank"  rel="noopener"  aria-label="Subscribe to my Soundcloud" style="color:#FF7900">SOUNDCLOUD</a></h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="mix col-12 col-md-6 col-lg-4 col-xl-4 stagger reveal-3 cont"
+                         style="margin-bottom: 30px;">
+
+                    <a class="link" href="https://www.youtube.com/user/JumperPichMusic"  target="_blank"  rel="noopener"  aria-label="Subscribe to my Youtube">
+
+                        <figure style=" display: block;padding: 10px;margin-bottom: 5px;background: rgba(0,0,0,.7);">
+                            <img class="image"
+                                 src="{{ asset('pictures/Youtube-logo-red.png') | imagine_filter('thumb') }}"
+                                 alt="Youtube Image" style="width: 100%;height: auto">
+                        </figure>
+
+                        <div class="middle">
+                            <div class="text"><i class="fas fa-external-link-alt"></i></div>
+                        </div>
+
+                    </a>
+
+                    <div class="info" style="background: rgba(0,0,0,.7);padding: 0 10px;">
+                        <div class="row"
+                             style=" display: flex;flex-wrap: wrap;margin-right: -15px;margin-left: -15px;">
+                            <div class="col-12" style="flex: 0 0 100%;max-width: 100%;">
+                                <div class="info__content" style="display: flex;align-items: center;width: 100%;">
+                                    <h1 class="text-center" style="font-size:1rem;margin-top: 10px; padding-top: 0; margin-bottom: 10px;text-transform: uppercase;flex-grow: 1;">
+                                        <a href="https://www.youtube.com/user/JumperPichMusic"  target="_blank"  rel="noopener"  aria-label="Subscribe to my Youtube" style="color:#f11a27">YOUTUBE</a></h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+
+        </div>
+    </div>
+
+
+{% endblock %}

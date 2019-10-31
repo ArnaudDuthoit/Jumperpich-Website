@@ -1,0 +1,162 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Jumperpich | Messages   {% endblock %}
+
+{% block body %}
+
+    <style> /* Default table styles */
+        table {
+            border-collapse: collapse;
+            text-align: left;
+            width: 100%;
+        }
+
+        table tr {
+            border: 1px solid
+        }
+
+        table th, table td {
+            padding: 10px 20px;
+        }
+
+        table td span {
+
+            color: #ffffff;
+            display: none;
+            font-size: 10px;
+            font-weight: bold;
+            padding: 5px;
+            position: absolute;
+            text-transform: uppercase;
+            top: 0;
+            left: 0;
+        }
+
+        /* Simple CSS for flexbox table on mobile */
+        @media (max-width: 800px) {
+            table thead {
+                left: -9999px;
+                position: absolute;
+                visibility: hidden;
+            }
+
+            table tr {
+                border: 0;
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                margin-bottom: 40px;
+            }
+
+            table td {
+                border: 1px solid;
+                margin: 0 -1px -1px 0;
+
+                position: relative;
+                width: 100%;
+            }
+
+            table td span {
+                display: block;
+                background: red;
+            }
+        }
+
+    </style>
+
+
+    {% for message in app.flashes('success') %}
+        <div class="fixed-bottom alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Succès !</strong> {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endfor %}
+
+
+    {% if contacts is not empty %}
+
+        <div class="container pt-4">
+            <h1 class="text-center h2home mt-4 pt-4" style="background: rgba(0,0,0,.7);padding: 20px 20px;;min-height: 41px;"> MESSAGES </h1>
+            <div class="mt-4">
+                <table class="text-center">
+                    <thead>
+                    <tr>
+                        <th>Objet</th>
+                        <th><i class="far fa-calendar-alt"></i></th>
+                        <th><i class="fas fa-at"></i></th>
+                        <th><i class="far fa-id-card"></i></th>
+                        <th><i class="far fa-comments"></i></th>
+                        <th><i class="fas fa-wrench"></i></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    {% for contact in contacts %}
+
+                        <!-- Modal -->
+                        <div id="myModal_{{ contact.id }}" class="modal fade" role="dialog">
+                            <div class="modal-dialog modal-sm">
+                                <!-- Modal content-->
+                                <div class="modal-content text-center" style="background: black;">
+                                    <h4 class="modal-title">{{ contact.name }}</h4>
+                                    <div class="modal-body" style="word-wrap: break-word;">
+                                        <p>{{ contact.message }}</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">&times;
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <tr>
+
+                            <td><span>Objet</span>
+                                {{ contact.subject }}
+                            </td>
+
+                            <td><span><i class="far fa-calendar-alt"></i></span>
+                                {{ contact.createdAt | date('d/m/Y H:i') }}
+                            </td>
+                            <td><span><i class="fas fa-at"></i></span>
+                                {{ contact.email }}
+                            </td>
+                            <td><span><i class="far fa-id-card"></i></span>
+                                {{ contact.name }}
+                            </td>
+
+                            <td><span><i class=" far fa-comments"></i></span>
+                                <button type="button" class="btn btn-info btn-lg" data-toggle="modal"
+                                        data-target="#myModal_{{ contact.id }}">Voir
+                                </button>
+                            </td>
+
+                            <td><span><i class="fas fa-wrench"></i></span>
+                                <form method="post" action="{{ path('admin.message.delete', {id: contact.id}) }}"
+                                      style="display: inline-block"
+                                      onsubmit="return confirm('Toute suppression est définitive ! Êtes-vous sûr de vouloir supprimer ce Message ? ')">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('authenticate') }}">
+                                    <button class="btn btn-danger">Supprimer</button>
+                                </form>
+                            </td>
+
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    {% endif %}
+    {% if contacts is  empty %}
+        <div class="container pt-4" style="margin-top: 12%">
+            <h1 class="text-center h2home mt-4 pt-4"
+                style="background: rgba(0,0,0,.7);padding: 20px 20px;;min-height: 41px">Aucun message</h1>
+        </div>
+    {% endif %}
+
+{% endblock %}

@@ -1,0 +1,306 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Jumperpich | {{ projet.title }}{% endblock %}
+
+{% block OG %}
+    <!-- Open Graph meta -->
+    <meta property="og:url" content="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:title" content="{{ projet.title }}"/>
+    <meta property="og:description"
+          content="{% trans %}Télécharge GRATUITEMENT ce mix !{% endtrans %}"/>
+    <meta property="og:image"
+          content="{{ vich_uploader_asset(projet, 'imageFile') }}"/>
+{% endblock %}
+
+{% block body %}
+
+    <style>
+
+        .middle {
+            transition: .5s ease;
+            opacity: 0.9;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .cont:hover .image {
+            opacity: 0.3;
+        }
+
+        .cont:hover .middle {
+            opacity: 1;
+        }
+
+        .text {
+            color: #fff;
+            opacity: 1;
+            font-size: 6rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mix .link:hover .text {
+            opacity: .7;
+            text-shadow: 0 0 5px rgba(0, 0, 0, .7);
+            font-size: 7rem;
+        }
+
+        .image {
+            opacity: 1;
+            display: block;
+            width: 100%;
+            height: auto;
+            transition: .5s ease;
+            backface-visibility: hidden;
+        }
+
+        .musicplayer.open {
+            height: 120px;
+            border-top: 1px solid #eee;
+        }
+
+        .musicplayer {
+            height: 0;
+            background-color: #25292c;
+            transition: height .5s ease;
+        }
+
+        .fixed-bottom {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 1030;
+        }
+
+        .musicplayer .flexy {
+            display: flex;
+            width: 100%;
+        }
+
+        .musicplayer iframe {
+            height: 120px;
+        }
+
+        iframe {
+            width: 100%;
+        }
+
+        .musicplayer .link {
+            height: 120px;
+            line-height: 120px;
+            margin: 0 20px 20px;
+            color: #eee;
+        }
+
+        .musicplayer.open .closeBtn {
+            height: 41px;
+            top: -41px;
+            opacity: 1;
+        }
+
+        .musicplayer .closeBtn {
+            border: 1px solid #eee;
+            border-bottom: none;
+            position: absolute;
+            right: 20px;
+            width: 41px;
+            height: 0;
+            text-align: center;
+            background-color: #25292c;
+            color: #fff;
+            display: block;
+            line-height: 41px;
+            transition: all .5s ease;
+            overflow: hidden;
+        }
+
+        .musicplayerpush.open {
+            height: 120px;
+        }
+
+        .musicplayerpush {
+            transition: height .5s ease;
+        }
+
+    </style>
+
+    <div class="container my-4 rounded py-4">
+
+        {% for message in app.flashes('report') %}
+            <div class="fixed-top alert alert-warning alert-dismissible fade show col-md-4 col-md-offset-4" align="center" role="alert">
+                <strong>Warning !</strong> {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+
+
+        <div class="container my-4">
+
+
+            <h1 class="text-center h2home"
+                style="background: rgba(0,0,0,.7);padding: 20px 20px;;min-height: 41px;">{{ projet.title }} </h1>
+
+
+            <div class="row mt-4">
+
+                <div class="col-md-4 mix cont link">
+                    <span style="position: absolute;top: 90%;left: 50%;transform:translate(-50%, -50%);background: rgba(0,0,0,.7);color:white">{{ projet.createdAt | date('d/m/Y') }}
+                                </span>
+                    {% if projet.filename %}
+                        <img src="{{ vich_uploader_asset(projet, 'imageFile') | imagine_filter('medium') }}" alt=""
+                             class="card-img-top image">
+                    {% else %}
+                        <img src="{{ 'images/projets/empty.jpg' | imagine_filter('medium') }}" alt=""
+                             class="card-img-top image"
+                             style="width: 100%; height: auto;">
+                    {% endif %}
+
+
+                    {% if projet.mixcloud %}
+
+                    <div class="middle" id="openplayer">
+                        <div class="text" title="Open music player"><i class="fas fa-play"></i></div>
+                    </div>
+
+                    {% endif %}
+
+                </div>
+
+                <div class="col-md-8 text-center my-auto">
+                    <div class="container mt-4">
+                        <h1>
+                            <p class="property">{{ projet.filelength }} <i class="fas fa-hourglass-half"></i>
+                                ~ {{ projet.filesize }} Mo </p>
+
+                            <p class="property">{{ projet.downloadcount }} <i class="fas fa-download"></i></p>
+
+                            {% if projet.mp3filename %}
+                                <a href="{{ path('downloadcount', {'mp3filename' : projet.mp3filename}) }}"
+                                   class="btn"
+                                   data-no-swup id="download_link" style="font-size:1.5rem">
+                                    <i class="fas fa-download"></i> {% trans %}TELECHARGEMENT{% endtrans %}
+                                </a>
+                            {% else %}
+                                <div class="text-center">
+                                    {% trans %}Téléchargement indisponible{% endtrans %}...
+                                </div>
+                            {% endif %}
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container my-4">
+            <h1 class="text-center h2home" style="background: rgba(0,0,0,.7);padding: 20px 20px;;min-height: 41px;">
+                TRACKLIST </h1>
+            <div class="row mt-4">
+                <div class="col-lg-12 text-center">
+                    {{ projet.description | nl2br }}
+                </div>
+            </div>
+        </div>
+
+        <div class="container my-4">
+
+            <h1 class="text-center h2home"
+                style="background: rgba(0,0,0,.7);padding: 20px 20px;;min-height: 41px;">{% trans %}LIENS EXTERNES{% endtrans %}</h1>
+
+            <div class="row pt-4 pb-4 justify-content-center">
+
+                {% if projet.soundcloud %}
+
+                    <div class="text-center px-4">
+                        <a class="fab fa-soundcloud px-4"
+                           href="{{ projet.soundcloud }}" target="_blank" rel="noopener">
+                        </a>
+                        <div style="display:block"> SOUNDCLOUD</div>
+                    </div>
+
+                {% endif %}
+                {% if projet.ytblink %}
+                    <div class="text-center px-4">
+                        <a class="fab fa-youtube px-4"
+                           href="{{ projet.ytblink }}" target="_blank" rel="noopener"></a>
+                        <div style="display:block"> YOUTUBE</div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="container my-4">
+            <h1 class="text-center h2home"
+                style="background: rgba(0,0,0,.7);padding: 20px 20px;;min-height: 41px;">{% trans %}PARTAGE{% endtrans %}</h1>
+            <div class="row pt-4 pb-4 justify-content-center">
+
+                <div class="text-center px-4">
+                    <a class="fab fa-twitter-square px-4"
+                       href="https://twitter.com/share?url=https://www.jumperpich.com{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}"
+                       target="_blank" rel="noopener">
+                    </a>
+                    <div style="display:block"> TWITTER</div>
+                </div>
+                <div class="text-center px-4">
+                    <a class="fab fa-facebook-square px-4"
+                       href="https://www.facebook.com/dialog/share?app_id=377287179598756&display=popup&href=https://www.jumperpich.com{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}"
+                       target="_blank" rel="noopener"></a>
+                    <div style="display:block"> FACEBOOK</div>
+                </div>
+            </div>
+
+        </div>
+
+        {% if projet.mixcloud %}
+
+            <app-musicplayer class="">
+                <div class="musicplayer fixed-bottom" id="player">
+                    <div class="flexy">
+                        <!---->
+                        {{ projet.mixcloud | raw }}
+                        <!---->
+                        <a class="link" download="" target="_blank" title="Download"
+                           href="{{ path('downloadcount', {'mp3filename' : projet.mp3filename}) }}">
+                            <i class="fas fa-download"></i></a></div>
+                    <a id="closePlayer" class="closeBtn" href="#" title="Close music player">
+                        <i class="fas fa-times"></i></a></div>
+
+            </app-musicplayer>
+
+        {% endif %}
+
+        <div class="text-center mt-4">
+            {% set referer = app.request.headers.get('referer') %}
+
+            <a href="{{ referer }}" class="btn btnhome f_size">
+                ← {% trans %}Retour{% endtrans %}  </a>
+        </div>
+
+    </div>
+
+    <script>
+
+        {% if projet.mixcloud %}
+
+        $('#closePlayer').click(function () {
+            document.getElementById('player').classList.remove("open");
+        });
+
+        $('#openplayer').click(function () {
+            document.getElementById('player').classList.add("open");
+        });
+
+        {% endif %}
+
+    </script>
+
+
+{% endblock %}

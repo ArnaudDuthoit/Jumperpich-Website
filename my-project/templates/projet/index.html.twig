@@ -1,0 +1,263 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Jumperpich | Mixes  {% endblock %}
+
+
+{% block body %}
+
+    <style>
+
+        .form-check-label {
+
+            padding: 10px;
+        }
+
+        @media (max-width: 767.98px) {
+
+            .infos_bis {
+                display: none
+            }
+
+        }
+
+    </style>
+
+    <div class="container-fluid pt-4 filter reveal">
+
+        <div class="container mt-4 rounded pt-2 pb-2 filter ">
+
+            <h1 class="text-center h2home reveal-1" style="background: rgba(0,0,0,.7);padding: 20px 20px;;min-height: 41px;">MIXES </h1>
+
+            <div class="box sticky-top sticky-offset text-center reveal-2 mt-4"
+                 style="background: rgba(0,0,0,.7);padding: 20px;color:grey">
+                <li class="form-check form-check-inline {% if current_tag is null %}active{% endif %} ">
+                    <button class="btn filter" id="tag_all" style="color:white">{% trans %}TOUT{% endtrans %}</button>
+                </li>
+                {% for tag in tags %}
+                    <li class="form-check form-check-inline {% if current_tag == tag.id %} active{% endif %}">
+                        <button class="btn filter" id="tag_{{ tag.id }}" style="color: grey">{{ tag.name }} </button>
+                    </li>
+                {% endfor %}
+
+
+                <!--<div class="form-check form-check-inline">
+                    <div class="form-inline">
+                <input type="search" id="name" name="name" onkeyup="recupValeur(this.value);" placeholder="Rechercher">
+                    </div>
+                </div> -->
+
+
+                <!-- <div class="form-check form-check-inline" id="form">
+                        <div class="form-inline">
+                            {{ form_start(form) }}
+                            {{ form_widget(form.projectname) }}
+                            <div style="display:none">
+                                {{ form_widget(form.tags) }}
+                            </div>
+                            {{ form_widget(form.Save) }}
+                        </div>
+                        {{ form_end(form) }}
+                    </div> -->
+            </div>
+
+        </div>
+
+        <div class="container mt-4 rounded pt-2 pb-4" style="min-height: 600px">
+            {% if projets | length == 0 %}
+                <div class="container mt-4">{% trans %}Aucun resultat trouvé pour{% endtrans %}
+                    <b>{{ NameSearch }}</b>
+                    {% for tag in TagsSearch %}
+                        {% trans %}dans la catégorie{% endtrans %}    <b>{{ tag.name }}</b>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <div class="row reveal-3" id="spawn">
+
+                {% for projet in projets %}
+                    <article class="mix col-12 col-md-6 col-lg-4 col-xl-4 stagger cont reveal-1"
+                             style="margin-bottom: 30px;">
+                        <a class="link" href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}"
+                           title="More details">
+
+                            <figure style="display: block;padding: 10px;margin-bottom: 5px;background: rgba(0,0,0,.7);">
+                                <div class="" style="">
+                                    <img class="image" {% if projet.filename %}
+                                        src="{{ vich_uploader_asset(projet, 'imageFile') | imagine_filter('thumb') }}"
+                                    {% else %}
+                                        src="{{ 'images/projets/empty.jpg' | imagine_filter('thumb') }}"
+                                    {% endif %} alt="No thumbnail" style="width: 100%;height: auto">
+                                </div>
+                            </figure>
+
+                            <div class="middle">
+                                <div class="text"><i class="fas fa-download"></i></div>
+                            </div>
+                        </a>
+
+                        <div class="info" style="background: rgba(0,0,0,.7);padding: 0 10px;min-height: 41px;">
+
+                            <div class="row"
+                                 style=" display: flex;flex-wrap: wrap;margin-right: -15px;margin-left: -15px;">
+
+                                <div class="col-12" style="flex: 0 0 100%;max-width: 100%;">
+
+                                    <div class="info__content" style="display: flex;align-items: center;width: 100%;">
+
+                                        <h1 style="font-size: 1rem; margin-top: 0; padding-top: 0; margin-bottom: 0;text-transform: uppercase;flex-grow: 1;">
+                                            <a id='title'
+                                               href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}">{{ projet.title }}</a>
+                                        </h1>
+                                        <div class="info__content__buttons" style="align-self: flex-end;">
+                                            {% for tag in projet.tags %}
+                                                <div class="style"
+                                                     style="padding-left: 10px;color: #eee;line-height: 41px;display: inline-block;vertical-align: top;max-width: none!important;{% if tag.id == 1 %} color:red {% endif %}{% if tag.id == 2 %} color:orange {% endif %}{% if tag.id == 3 %} color:#8ee800 {% endif %}">
+                                                    <div>{{ tag.name }}</div>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info infos_bis"
+                             style="background: rgba(0,0,0,.7);padding: 0 10px;min-height: 41px;">
+
+                            <div class="row"
+                                 style=" display: flex;flex-wrap: wrap;margin-right: -15px;margin-left: -15px;">
+
+                                <div class="col-12" style="flex: 0 0 100%;max-width: 100%;">
+
+                                    <div class="info__content" style="display: flex;align-items: center;width: 100%;">
+
+
+                                        {% set difference = date(projet.createdAt|date('Y/m/d')).diff(date('now'|date('Y/m/d'))) %}
+                                        {% set leftDays = difference.days %}
+
+                                        <h1 style="font-size: 1rem; margin-top: 0; padding-top: 0; margin-bottom: 0;flex-grow: 1;">
+
+                                            {% if app.request.locale in ['fr','fr_BE','fr_BJ','fr_BF','fr_BI','fr_CM','fr_CA','fr_CF','fr_TD','fr_KM',
+                                                'fr_CG', 'fr_CD','fr_CI','fr_DJ','fr_GQ','fr_FR','fr_GA','fr_GP','fr_GN','fr_LU','fr_MG','fr_ML','fr_MQ',
+                                                'fr_MC','fr_NE','fr_RW','fr_RE','fr_BL','fr_MF','fr_SN','fr_CH','fr_TG'] %}
+                                                Il y a {{ leftDays }} jours {% else %}
+                                                {{ leftDays }} days ago {% endif %}
+
+                                        </h1>
+                                        <div class="info__content__buttons" style="align-self: flex-end;">
+                                            <div class="style"
+                                                 style="padding-left: 10px;color: #eee;line-height: 41px;display: inline-block;vertical-align: top;max-width: none!important;">
+                                                {{ projet.views }} <i class="far fa-eye"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                {% endfor %}
+
+            </div>
+
+
+            <div class="container">
+                <div class="pagination mt-4" id="paginate_float">
+                    {{ knp_pagination_render(projets) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+
+        $('button').click(function () {
+            $('button').not($(this)).css('color', 'grey');
+            $(this).css('color', 'white');
+        });
+
+        function recupValeur() {
+
+            $.ajax({
+                url: "/api/getmix",
+                data: {
+                    'name': document.getElementById('name').value
+                },
+                success: function ($result) {
+                    document.getElementById('spawn').innerHTML = $result;
+                    $('button').css('color', 'grey');
+                    $('#tag_all').css('color', 'white');
+
+                }
+            });
+
+        }
+
+        $("#tag_all").on("click", function () {
+            recupTag_all();
+        });
+
+        $("#tag_1").on("click", function () {
+            recupTag_1();
+        });
+
+        $("#tag_2").on("click", function () {
+            recupTag_2();
+        });
+
+        $("#tag_3").on("click", function () {
+            recupTag_3();
+        });
+
+        function recupTag_all() {
+            $.ajax({
+                url: "/api/getmixtag",
+                data: {
+                    'tag': null
+                },
+                success: function ($result) {
+                    $("#spawn").hide().html($result).fadeIn('slow');
+                    //document.getElementById('row').innerHTML = $result;
+                }
+            });
+        }
+
+
+        function recupTag_1() {
+            $.ajax({
+                url: "/api/getmixtag",
+                data: {
+                    'tag': 1
+                },
+                success: function ($result) {
+                    $("#spawn").hide().html($result).fadeIn('slow');
+                }
+            })
+        }
+
+        function recupTag_2() {
+            $.ajax({
+                url: "/api/getmixtag",
+                data: {
+                    'tag': 2
+                },
+                success: function ($result) {
+                    $("#spawn").hide().html($result).fadeIn('slow');
+                }
+            });
+        }
+
+        function recupTag_3() {
+            $.ajax({
+                url: "/api/getmixtag",
+                data: {
+                    'tag': 3
+                },
+                success: function ($result) {
+                    $("#spawn").hide().html($result).fadeIn('slow');
+                }
+            });
+        }
+
+    </script>
+
+{% endblock %}

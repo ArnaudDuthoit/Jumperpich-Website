@@ -1,0 +1,86 @@
+
+
+<!--{% if projets | length == 0 %}
+    <div class="container mt-4" style="min-height: 320px">{% trans %}Aucun resultat :( {% endtrans %}</div>
+{% endif %} -->
+
+{% for projet in projets %}
+
+    <article class="mix col-12 col-md-6 col-lg-4 col-xl-4 stagger cont reveal-1"
+             style="margin-bottom: 30px;">
+
+        <a class="link" href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}" title="More details">
+
+            <figure style="display: block;padding: 10px;margin-bottom: 5px;background: rgba(0,0,0,.7);">
+                <div class="" style="">
+                    <img class="image" {% if projet.filename %}
+                        src="{{ vich_uploader_asset(projet, 'imageFile') | imagine_filter('thumb') }}"
+                    {% else %}
+                        src="{{ 'images/projets/empty.jpg' | imagine_filter('thumb') }}"
+                    {% endif %} alt="July 2019" style="width: 100%;height: auto">
+                </div>
+            </figure>
+
+            <div class="middle">
+                <div class="text"><i class="fas fa-download"></i></div>
+            </div>
+        </a>
+
+        <div class="info" style="background: rgba(0,0,0,.7);padding: 0 10px;min-height: 41px;">
+
+            <div class="row"
+                 style=" display: flex;flex-wrap: wrap;margin-right: -15px;margin-left: -15px;">
+
+                <div class="col-12" style="flex: 0 0 100%;max-width: 100%;">
+
+                    <div class="info__content" style="display: flex;align-items: center;width: 100%;">
+
+                        <h1 style="font-size: 1rem; margin-top: 0; padding-top: 0; margin-bottom: 0;text-transform: uppercase;flex-grow: 1;">
+                            <a id ='title' href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}">{{ projet.title }}</h1>
+                        <div class="info__content__buttons" style="align-self: flex-end;">
+                            {% for tag in projet.tags %}
+                                <div class="style"
+                                     style="padding-left: 10px;color: #eee;line-height: 41px;display: inline-block;vertical-align: top;max-width: none!important;{% if tag.id == 1 %} color:red {% endif %}{% if tag.id == 2 %} color:orange {% endif %}{% if tag.id == 3 %} color:#8ee800 {% endif %}">
+                                    <div>{{ tag.name }}</div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="info infos_bis"
+             style="background: rgba(0,0,0,.7);padding: 0 10px;min-height: 41px;">
+
+            <div class="row"
+                 style=" display: flex;flex-wrap: wrap;margin-right: -15px;margin-left: -15px;">
+
+                <div class="col-12" style="flex: 0 0 100%;max-width: 100%;">
+
+                    <div class="info__content" style="display: flex;align-items: center;width: 100%;">
+
+                        {% set difference = date(projet.createdAt|date('Y/m/d')).diff(date('now'|date('Y/m/d'))) %}
+                        {% set leftDays = difference.days %}
+
+                        <h1 style="font-size: 1rem; margin-top: 0; padding-top: 0; margin-bottom: 0;flex-grow: 1;">
+
+                            {% if app.request.locale in ['fr','fr_BE','fr_BJ','fr_BF','fr_BI','fr_CM','fr_CA','fr_CF','fr_TD','fr_KM',
+                                'fr_CG', 'fr_CD','fr_CI','fr_DJ','fr_GQ','fr_FR','fr_GA','fr_GP','fr_GN','fr_LU','fr_MG','fr_ML','fr_MQ',
+                                'fr_MC','fr_NE','fr_RW','fr_RE','fr_BL','fr_MF','fr_SN','fr_CH','fr_TG'] %}
+                                Il y a {{ leftDays }} jours {% else %}
+                                {{ leftDays }} days ago {% endif %}
+
+                        </h1>
+                        <div class="info__content__buttons" style="align-self: flex-end;">
+                            <div class="style"
+                                 style="padding-left: 10px;color: #eee;line-height: 41px;display: inline-block;vertical-align: top;max-width: none!important;">
+                                {{ projet.views }} <i class="far fa-eye"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+{% endfor %}

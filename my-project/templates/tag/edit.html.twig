@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Jumperpich | Editer Tag  {% endblock %}
+
+{% block body %}
+
+    <div class="container pt-4">
+
+        <h1 class="text-center h2home mt-4 pt-4" style="background: rgba(0,0,0,.7);padding: 20px 20px;;min-height: 41px;"> Modifier le tag </h1>
+
+        {{ include('tag/_form.html.twig', {'button_label': 'Editer'}) }}
+        {{ include('tag/_delete_form.html.twig') }}
+
+        <a href="{{ path('tag_index') }}" class="btn btnhome mt-4">Retour à la liste des tags </a>
+    </div>
+{% endblock %}
+
+
+

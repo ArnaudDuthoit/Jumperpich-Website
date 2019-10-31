@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <main class="container pt-4">
+
+        <h1 class="text-center h2home mt-4 pt-4" style="background: rgba(0,0,0,.7);padding: 20px 20px;;min-height: 41px;"> Suppression de compte </h1>
+
+        <div class="container mt-4  pb-4">
+
+                    {{ form_start(form) }}
+                    {{ form_widget(form) }}
+                    <div class="alert alert-danger" role="alert">
+                        <strong>ATTENTION!</strong> Toute suppression est definitive ! Etes vous vraiment certains de
+                        vouloir supprimer votre compte ?
+                    </div>
+                    <button class="btn btnhome"
+                            onclick="return confirm('Attention dernier avertissement ! Voulez vous vraiment supprimer votre compte ?')">
+                        Supprimer
+                    </button>
+                    {{ form_end(form) }}
+                </div>
+
+        <div class="text-center mt-4">
+            <a href="{{ path('user.projet.index') }}" class="btn btnhome">
+                ← Retour </a>
+        </div>
+    </main>
+{% endblock %}

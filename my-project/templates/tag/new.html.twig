@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau Tag | Jumperpich {% endblock %}
+
+{% block body %}
+
+    <div class="container mt-4 pt-4">
+
+        <h1 class="text-center h2home mt-4 pt-4" style="background: rgba(0,0,0,.7);padding: 20px 20px;;min-height: 41px;">Créer un nouveau tag  <a href="{{ path('tag_index') }}" class="btn btnhome">Retour à la liste</a></h1>
+
+        {{ include('tag/_form.html.twig') }}
+    </div>
+
+
+{% endblock %}
+
+

@@ -1,0 +1,103 @@
+## Home.html.twig + header.html.twig ##
+
+BIENVENUE : WELCOME
+Mises à jours du site: Update's schedule
+Me contacter: Contact me
+Les plus récents: Most Recent
+Les plus populaires: Most Popular
+Voir plus: More
+Vous etes sur le site officiel de Jumperpich: You are on the official Jumperpich's website
+Télécharge GRATUITEMENT et sans publicités tous les mixes dès maintenant: Download for FREE and without ads every mixes right now
+C'est parti: Let's go
+AOUT 2019: AUGUST 2019
+PROCHAIN MIX: NEXT MIX
+ACCUEIL: HOME
+MES AUTRES MEDIAS: SOCIAL MEDIA
+Nouveau: New
+
+## show.html.twig ##
+
+LIENS EXTERNES: EXTERNAL LINKS
+PARTAGE: SHARE
+TELECHARGEMENT: DOWNLOAD
+Publié le: Published on
+TELECHARGER: FREE DOWNLOAD
+Téléchargement indisponible: Download not available
+N'hésites pas à partager: Click here for sharing to your friends
+Bientôt disponible: Available Soon
+UN PROBLEME ? UN BUG ?: A problem ? A bug ?
+Cliquez ici pour me contacter: Click here to contact me
+Compteur de vues: View counter
+Compteur de téléchargements: Download counter
+Statistiques: Stats
+Durée: Time
+Taille: Size
+
+## footer.html.twig
+
+Tous droits réservés.: All rights reserved.
+Désign, Développement & Création par : Designed, Developed & Created by
+Mentions Legales: Legal Notice
+RGPD: GDPR
+FAQ: Q&A
+
+## index.html.twig ##
+
+TOUT: ALL
+Aucun resultat trouvé pour: No result found for
+dans la catégorie: in the category
+Rechercher: Search
+Titre du mix: Name of the mix
+
+## meta tags ##
+
+Bienvenue sur le site de Jumperpich !: Welcome on Jumperpich's website
+Télécharge GRATUITEMENT tous les mixes!: Download for FREE all the mixes!
+Bienvenue sur le site de Jumperpich ! Télécharge GRATUITEMENT tous les mixes!: Welcome on Jumperpich's website ! Download for FREE all the mixes!
+Télécharge GRATUITEMENT ce mix !: Download this mix for FREE !
+
+## contact_finish ##
+
+Formulaire envoyé ! : Form sent !
+Merci ! J'ai bien reçu ton message.: Thanks you ! I received your message
+Je t'ai envoyé un mail de confirmation.: I sent you a confirmation email.
+Redirection automatique vers l'accueil dans 5 secondes ...: Automatic redirection to the homepage in 5 seconds ...
+
+## ranking + most recent ##
+
+LES PLUS POPULAIRES ! : MOST POPULAR !
+LES PLUS RECENTS ! : MOST RECENTS !
+Retour : Back
+
+## contact ##
+
+Nom: Name
+Email: Email address
+Objet: Subject
+Message: Message
+Envoyer: Send
+Formulaire de contact: Contact form
+ICI: HERE
+Les informations envoyées par le biais de ce formulaire sont enregistrées dans un fichier informatisé pour traiter votre demande. Elles ne seront en aucun cas cédées à des tiers. Votre adresse email sera conservée uniquement durant le délai de ma réponse. Conformément à la loi « informatique et libertés », vous pouvez exercer votre droit d'accès aux données vous concernant et les faire rectifier.Consultez ma politique en matière de vie privée pour en savoir plus en cliquant: The information sent through this form are saved in a computer file to process your request.In no case they will be sold to a third parties. Your email address will be kept only during the timeframe of my answer.In accordance with the law "IT and liberties", you can exercise your right of access to your data and have them rectifier.Consult our privacy policy to know more by clicking
+Ce formulaire vous permet de me contacter.: This form allow you to contact me.
+C’est le bon endroit pour me soumettre une idée d’amélioration par exemple.: That's the good place if you want to submit me your idea
+Pour toutes les questions relatives au Site n’hésitez pas à consulter: A question about the site ? Go to the
+la page FAQ.: Q&A page
+Blocage de spam?: Spam blocker?
+Si vous utilisez un logiciel de blocage de courrier indésirable, vous devez le désactiver avant de cliquer sur le bouton de soumission pour recevoir un accusé de réception. Vous devez également ajouter "jumperpich59@gmail.com" à vos adresses autorisées pour recevoir toute correspondance du service.: If you use anti-spam software, you must disable it before clicking the submit button to receive an acknowledgment. You must also add "jumperpich59@gmail.com" to your authorized addresses to receive any correspondence from the service.
+Aucun mail reçu?: No mail received?
+Vérifiez qu'il ne se trouve pas dans le dossier de "spam/courrier indésirable" de votre boite de messagerie.: Check that it is not in the "spam / junk mail" folder of your mailbox.
+
+Veuillez entrer votre nom ici: Enter your name here
+Veuillez entrer votre adresse mail ici: Enter your email adress here
+Veuillez entrer l'objet de votre message ici: Enter the subject of your message here
+Veuillez entrer votre message ici: Enter your message here
+Veuillez écrire le code de sécurité suivant: Please enter this following security code
+Veuillez entrer le code ici: Enter the security code here
+
+
+
+## RGPD ##
+
+Réglement général de la Protection des Données: General Regulation of Data Protection
+Mentions Légales: Legal Notice

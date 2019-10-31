@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container pt-4">
+
+     <meta http-equiv="refresh" content="5;url={{ path('home') }}"/>
+
+    <h1 class="text-center h2home mt-4 pt-4" style="background: rgba(0,0,0,.7);padding: 20px 20px;;min-height: 41px;"> {% trans %}Formulaire envoyé ! {% endtrans %} </h1>
+
+    <H2 class="text-center mt-4 pt-4">
+        <strong>{% trans %}Merci ! J'ai bien reçu ton message.{% endtrans %}<br>{% trans %}Je t'ai envoyé un mail de confirmation.{% endtrans %}<br>
+            - Jumperpich </strong>
+    </H2>
+
+    <H2 class="text-center mt-4 pt-4">
+        {% trans %}Redirection automatique vers l'accueil dans 5 secondes ...{% endtrans %}
+    </H2>
+
+    </div>
+
+{% endblock %}

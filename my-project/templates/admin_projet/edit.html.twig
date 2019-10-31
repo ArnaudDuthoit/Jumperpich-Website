@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container mt-4">
+        <H2 class="mt-4 h2home pt-4"><strong> Modifier le mix </strong></H2>
+
+        {{ form_start(form) }}
+
+        {{ form_widget(form) }}
+        {{ form_row(form.imageFile) }}
+        <button class="btn btnhome">Modifier</button>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

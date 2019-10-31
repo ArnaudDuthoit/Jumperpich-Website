@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<meta>
+<meta charset="UTF-8">
+
+<head>
+
+    <meta name="google-site-verification" content="12vHMcs7K81ijpw7pmzOf8-CIJdjjR_Tp95qyYPsxZw" />
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-143368877-1"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" >
+
+    <link rel="stylesheet" href="{{ asset('build/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/select2.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/style.css') }}?ver={{ "now"|date("dmY:Gi") }}">
+
+
+
+    <!-- Add metatags to <head>. -->
+    <title>{% block title %}Jumperpich | Jumperpich.com {% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="description" content="Bienvenue sur le site officiel de Jumperpich"/>
+
+    <!-- Open Graph meta -->
+    {% block OG %}
+        <meta property="og:url" content="https://www.jumperpich.com"/>
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="Jumperpich | Jumperpich.com"/>
+        <meta property="og:description"
+              content="Bienvenue sur le site officiel de Jumperpich"/>
+        <meta property="og:image"
+              content="https://www.jumperpich.com/pictures/banner.png"/>
+    {% endblock %}
+
+    <!-- Twitter Card meta -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Jumperpich | Jumperpich.com">
+    <meta name="twitter:description"
+          content="Bienvenue sur le site officiel de Jumperpich">
+    <meta name="twitter:creator" content="@arnaudduthoit">
+    <meta name="twitter:url" content="https://www.jumperpich.com"/>
+
+
+    <script src="{{ asset('build/ressources.js') }}"></script>
+
+    <script src="{{ asset('build/cookieconsent.min.js') }}" async></script>
+    <script src="{{ asset('build/cookieconsent.js') }}" async ></script>
+
+</head>
+
+<body>
+
+
+{% include 'header.html.twig' %}
+
+<div class="contenu mt-4 pt-4" style='min-height: 600px'>
+
+    {% block body %}{% endblock %}
+
+    <a id="back-to-top" href="#" class="btn btnhome btn-lg back-to-top" role="button" data-toggle="tooltip" data-placement="left"><i class="fas fa-arrow-up"></i> </a>
+
+</div>
+
+
+{% include 'footer.html.twig' %}
+
+
+
+<script src="{{ asset('build/app.js') }}?ver={{ "now"|date("dmY:Gi") }}" async></script>
+
+
+{% block javascripts %}{% endblock %}
+
+</body>
+</html>
