@@ -24,12 +24,12 @@
 
     <div class="mt-4 container-fluid filter reveal" style="padding-top: 83px">
 
-        <div class="container rounded filter ">
+        <div class="container filter ">
 
             <h1 class="text-center h2home reveal-1" style="background: rgba(0,0,0,.7);padding: 20px 20px;;min-height: 41px;">MIXES </h1>
 
             <div class="box sticky-top sticky-offset text-center reveal-2 mt-4"
-                 style="background: rgba(0,0,0,.7);padding: 20px;color:grey">
+                 style="background: rgba(0,0,0,.7);padding: 20px;color:grey;border: solid white 4px">
                 <li class="form-check form-check-inline {% if current_tag is null %}active{% endif %} ">
                     <button class="btn filter" id="tag_all" style="color:white">{% trans %}TOUT{% endtrans %}</button>
                 </li>
@@ -110,7 +110,7 @@
                                         <div class="info__content__buttons" style="align-self: flex-end;">
                                             {% for tag in projet.tags %}
                                                 <div class="style"
-                                                     style="padding-left: 10px;color: #eee;line-height: 41px;display: inline-block;vertical-align: top;max-width: none!important;{% if tag.id == 1 %} color:red {% endif %}{% if tag.id == 2 %} color:orange {% endif %}{% if tag.id == 3 %} color:#8ee800 {% endif %}">
+                                                     style="padding-left: 10px;line-height: 41px;display: inline-block;vertical-align: top;max-width: none!important;color:{% if tag.id == 1 %}red{% endif %}{% if tag.id == 2 %}orange{% endif %}{% if tag.id == 3 %}#8ee800{% endif %}">
                                                     <div>{{ tag.name }}</div>
                                                 </div>
                                             {% endfor %}

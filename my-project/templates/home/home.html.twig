@@ -165,9 +165,10 @@
             </div>
         {% endfor %}
 
-        <div class="jumbotron jumbotron-fluid reveal" style="background: #000 url('{{ asset('pictures/Background_header.jpg') }}') center no-repeat;min-height: 100vh">
+        <div class="jumbotron jumbotron-fluid reveal" style="background: #000 url('{{ asset('pictures/Background_header.jpg') }}') center no-repeat fixed ;min-height: 100vh;">
 
-            <div class="container text-white h2header text-center" style="font-family: 'toronto_subwayregular',Helvetica,Arial, sans-serif;font-weight: normal;text-transform: uppercase;text-align: center;color:#fff !important;text-shadow: 0px 0px 5px #fff;">
+            <div class="container text-white h2header text-center"
+                 style="font-family: 'toronto_subwayregular',Helvetica,Arial, sans-serif;font-weight: normal;text-transform: uppercase;text-align: center;color:#fff !important;text-shadow: 0 0 5px #fff;">
 
                 <h1 class="display-4 reveal-1">{% trans %}BIENVENUE {% endtrans %}</h1>
                 <p class="lead reveal-2">{% trans %}Vous etes sur le site officiel de Jumperpich{% endtrans %} ! </p>
@@ -188,7 +189,7 @@
         <div class="container reveal" id="new">
 
             <h1 class="text-center h2home reveal-1"
-                style="background: rgba(0,0,0,.7);padding: 20px 20px;;min-height: 41px;"> {% trans %}Nouveau{% endtrans %}</h1>
+                style="background: rgba(0,0,0,.7);padding: 20px 20px;min-height: 41px;"> {% trans %}Nouveau{% endtrans %}</h1>
 
             <div class="row justify-content-center my-4 pt-4 reveal-2"
                  style="display: flex;flex-wrap: wrap;margin-right: -15px;margin-left: -15px;">
@@ -197,12 +198,12 @@
                     {% set rank = rank + 1 %}
                     {% if rank == 1 %}
                         <article class="mix col-12 col-md-6 col-lg-4 col-xl-4 stagger cont reveal-3"
-                                 style="">
+                                 style="padding: 0">
                             <a class="link" href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}"
                                title="More details">
 
-                                <figure style="display: block;padding: 10px;margin-bottom: 5px;background: rgba(0,0,0,.7);">
-                                    <div class="" style="">
+                                <figure style="display: block;padding: 10px;margin-bottom: 5px;background: rgba(0,0,0,.7);border: solid 4px white">
+                                    <div>
                                         <img class="image" {% if projet.filename %}
                                             src="{{ vich_uploader_asset(projet, 'imageFile') | imagine_filter('thumb') }}"
                                         {% else %}
@@ -233,7 +234,7 @@
                                             <div class="info__content__buttons" style="align-self: flex-end;">
                                                 {% for tag in projet.tags %}
                                                     <div class="style"
-                                                         style="padding-left: 10px;color: #eee;line-height: 41px;display: inline-block;vertical-align: top;max-width: none!important;{% if tag.id == 1 %} color:red {% endif %}{% if tag.id == 2 %} color:orange {% endif %}{% if tag.id == 3 %} color:#8ee800 {% endif %}">
+                                                         style="padding-left: 10px;line-height: 41px;display: inline-block;vertical-align: top;max-width: none!important;color:{% if tag.id == 1 %}red{% endif %}{% if tag.id == 2 %}orange{% endif %}{% if tag.id == 3 %}#8ee800{% endif %}">
                                                         <div>{{ tag.name }}</div>
                                                     </div>
                                                 {% endfor %}
@@ -385,54 +386,55 @@
                 {% set rank = 0 %}
                 {% for projet in last %}
                     {% set rank = rank + 1 %}
-                    <article class="mix col-12 col-md-6 col-lg-4 col-xl-4 stagger cont reveal-3"
-                             style="margin-bottom: 30px;">
+                    {% for tag in projet.tags %}
+                        <article class="mix col-12 col-md-6 col-lg-4 col-xl-4 stagger cont reveal-3"
+                        style="padding-left:0;margin-bottom: 30px;border-left: solid 4px {% if tag.id == 1 %}red {% endif %}{% if tag.id == 2 %}orange{% endif %}{% if tag.id == 3 %} #8ee800 {% endif %};">
+                    {% endfor %}
+                    <a class="link" href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}"
+                       aria-label="Read more about {{ projet.title }}">
 
-                        <a class="link" href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}"
-                           aria-label="Read more about {{ projet.title }}">
-
-                            <figure style="display: block;padding: 10px;margin-bottom:5px;background: rgba(0,0,0,.7);">
-                                <!-- {% if rank == 1 %}
+                        <figure style="display: block;margin-bottom:5px;background: rgba(0,0,0,.7);">
+                            <!-- {% if rank == 1 %}
                                     DETERMINE LE MIX LE PLUS RECENT
                                 {% endif %} -->
-                                <div>
-                                    <img class="image" {% if projet.filename %}
-                                        src="{{ vich_uploader_asset(projet, 'imageFile') | imagine_filter('thumb') }}"
-                                    {% else %}
-                                        src="{{ 'images/projets/empty.jpg' | imagine_filter('thumb') }}"
-                                    {% endif %} alt="{{ projet.title }}" style="width: 100%;height: auto">
-                                </div>
-                            </figure>
-
-                            <div class="middle">
-                                <div class="text"><i class="fas fa-download"></i></div>
+                            <div>
+                                <img class="image" {% if projet.filename %}
+                                    src="{{ vich_uploader_asset(projet, 'imageFile') | imagine_filter('thumb') }}"
+                                {% else %}
+                                    src="{{ 'images/projets/empty.jpg' | imagine_filter('thumb') }}"
+                                {% endif %} alt="{{ projet.title }}" style="width: 100%;height: auto">
                             </div>
-                        </a>
+                        </figure>
 
-                        <div class="info" style="background: rgba(0,0,0,.7);padding: 0 10px;min-height: 41px;">
+                        <div class="middle">
+                            <div class="text"><i class="fas fa-download"></i></div>
+                        </div>
+                    </a>
 
-                            <div class="row"
-                                 style=" display: flex;flex-wrap: wrap;margin-right: -15px;margin-left: -15px;">
+                    <div class="info" style="background: rgba(0,0,0,.7);padding: 0 10px;min-height: 41px;">
 
-                                <div class="col-12" style="flex: 0 0 100%;max-width: 100%;">
+                        <div class="row"
+                             style=" display: flex;flex-wrap: wrap;margin-right: -15px;margin-left: -15px;">
 
-                                    <div class="info__content" style="display: flex;align-items: center;width: 100%;">
+                            <div class="col-12" style="flex: 0 0 100%;max-width: 100%;">
 
-                                        <h1 style="font-size: 1rem; margin-top: 0; padding-top: 0; margin-bottom: 0;text-transform: uppercase;flex-grow: 1;">
-                                            <a href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}"
-                                               aria-label="Read more about {{ projet.title }}">{{ projet.title }}</h1>
-                                        <div class="info__content__buttons" style="align-self: flex-end;">
-                                            {% for tag in projet.tags %}
-                                                <div class="style"
-                                                     style="padding-left: 10px;color: #eee;line-height: 41px;display: inline-block;vertical-align: top;max-width: none!important;{% if tag.id == 1 %} color:red {% endif %}{% if tag.id == 2 %} color:orange {% endif %}{% if tag.id == 3 %} color:#8ee800 {% endif %}">
-                                                    <div>{{ tag.name }}</div>
-                                                </div>
-                                            {% endfor %}
-                                        </div>
+                                <div class="info__content" style="display: flex;align-items: center;width: 100%;">
+
+                                    <h1 style="font-size: 1rem; margin-top: 0; padding-top: 0; margin-bottom: 0;text-transform: uppercase;flex-grow: 1;">
+                                        <a href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}"
+                                           aria-label="Read more about {{ projet.title }}">{{ projet.title }}</h1>
+                                    <div class="info__content__buttons" style="align-self: flex-end;">
+                                        {% for tag in projet.tags %}
+                                            <div class="style"
+                                                 style="padding-left: 10px;line-height: 41px;display: inline-block;vertical-align: top;max-width: none!important;color:{% if tag.id == 1 %}red{% endif %}{% if tag.id == 2 %}orange{% endif %}{% if tag.id == 3 %}#8ee800{% endif %}">
+                                                <div>{{ tag.name }}</div>
+                                            </div>
+                                        {% endfor %}
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
                     </article>
                 {% endfor %}
 
@@ -484,7 +486,7 @@
                                         <div class="info__content__buttons" style="align-self: flex-end;">
                                             {% for tag in projet.tags %}
                                                 <div class="style"
-                                                     style="padding-left: 10px;line-height: 41px;display: inline-block;vertical-align: top;max-width: none!important;{% if tag.id == 1 %} color:red {% endif %}{% if tag.id == 2 %} color:orange {% endif %}{% if tag.id == 3 %} color:#8ee800 {% endif %}">
+                                                     style="padding-left: 10px;line-height: 41px;display: inline-block;vertical-align: top;max-width: none!important;color:{% if tag.id == 1 %}red{% endif %}{% if tag.id == 2 %}orange{% endif %}{% if tag.id == 3 %}#8ee800{% endif %}">
                                                     <div>{{ tag.name }}</div>
                                                 </div>
                                             {% endfor %}
