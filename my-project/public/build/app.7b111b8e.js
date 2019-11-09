@@ -1,3 +1,8 @@
+window.addEventListener('load', function () {
+        document.getElementById('loading').parentNode.removeChild(document.getElementById('loading'));
+});
+
+
 function BackToTop() {
     $(document).ready(function () {
         $(window).scroll(function () {
@@ -15,6 +20,24 @@ function BackToTop() {
     })
 }
 
+
+function GoToPodcast() {
+    $(document).ready(function () {
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 50) {
+                $('#go-to-podcast').fadeOut()
+            } else {
+                $('#go-to-podcast').fadeIn()
+            }
+        });
+        $('#go-to-podcast').click(function () {
+            $('body,html').animate({scrollTop: window.pageYOffset + $(window).height()}, 800);
+            return false;
+        });
+    })
+}
+
+
 function gtags() {
     window.dataLayer = window.dataLayer || [];
 
@@ -31,6 +54,7 @@ function Select2() {
 }
 
 BackToTop();
+GoToPodcast();
 Select2();
 gtags();
 const ratio = .1;
