@@ -17,49 +17,6 @@
 
     <style>
 
-        .middle {
-            transition: .5s ease;
-            opacity: 0.9;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            -ms-transform: translate(-50%, -50%);
-            text-align: center;
-        }
-
-        .cont:hover .image {
-            opacity: 0.3;
-        }
-
-        .cont:hover .middle {
-            opacity: 1;
-        }
-
-        .text {
-            color: #fff;
-            opacity: 1;
-            font-size: 6rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .mix .link:hover .text {
-            opacity: .7;
-            text-shadow: 0 0 5px rgba(0, 0, 0, .7);
-            font-size: 7rem;
-        }
-
-        .image {
-            opacity: 1;
-            display: block;
-            width: 100%;
-            height: auto;
-            transition: .5s ease;
-            backface-visibility: hidden;
-        }
-
         .musicplayer.open {
             height: 120px;
             border-top: 1px solid #eee;
@@ -121,20 +78,42 @@
             overflow: hidden;
         }
 
-        .musicplayerpush.open {
-            height: 120px;
+
+
+        .btn-default {
+            color: #333;
+            background-color: #fff;
+            border-color: #ccc;
         }
 
-        .musicplayerpush {
-            transition: height .5s ease;
+        .btn-default:hover {
+            color: #333;
+            background-color: #E6E6E6;
+            border-color: #ccc;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-bottom: 0;
+            font-weight: normal;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            touch-action: manipulation;
+            cursor: pointer;
+            background-image: none;
+            font-size: 1.5em;
+            border-radius: 4px;
+            user-select: none;
         }
 
     </style>
 
-    <div class="container rounded ">
+    <div class="container-fluid" style="padding-top: 83px">
 
         {% for message in app.flashes('report') %}
-            <div class="fixed-top alert alert-warning alert-dismissible fade show col-md-4 col-md-offset-4" align="center" role="alert">
+            <div class="fixed-top alert alert-warning alert-dismissible fade show col-md-4 col-md-offset-4"
+                 align="center" role="alert">
                 <strong>Warning !</strong> {{ message }}
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -142,148 +121,145 @@
             </div>
         {% endfor %}
 
+        <div id="loading">
+            <img src="http://www.jaystyle.fr/wp-content/themes/jaystyle/images/loader.gif" alt="Website Loader">
+        </div>
 
-        <div class="container my-4">
+        <div class="container my-4 text-center">
+            <div class="Blog-meta my-4" style="font-weight: 600;font-style: normal;letter-spacing: .03em;text-transform: uppercase;color:rgba(189,189,189,.64);">
+                {{ projet.createdAt | date('d/m/Y') }} - {% for tag in projet.tags %}{{ tag.name }}{% endfor %}
+            </div>
 
+            <h6><abbr>{{ projet.title }}</abbr></h6>
 
-            <h1 class="text-center h2home"
-                style="background: rgba(0,0,0,.7);padding: 20px 20px;;min-height: 41px;">{{ projet.title }} </h1>
+            <div class="Blog-Image row" id="{{ projet.filename }}">
+                {% if projet.filename %}
+                    <img src="{{ vich_uploader_asset(projet, 'imageFile') | imagine_filter('medium') }}"
+                         alt="{{ projet.title }}"
+                         class="mx-auto d-block" style="width: 50vh; height: auto;">
+                {% else %}
+                    <img src="{{ 'images/projets/empty.jpg' | imagine_filter('medium') }}" alt="{{ projet.title }}"
+                         class="mx-auto d-block" style="width: 50vh; height: auto;">
+                {% endif %}
+            </div>
 
+            <div class="container" id="play__button">
 
-            <div class="row mt-4">
+                <div class="row justify-content-center">
+                    <div class="p-2">
+                        <div id="openplayer">
+                            <div class="btn btn__custom" role="button">
+                                <i class="fa fa-play"></i>
+                                <span>Play</span>
+                            </div>
+                        </div>
+                    </div>
 
-                <div class="col-md-4 mix cont link">
-                    <span style="position: absolute;top: 90%;left: 50%;transform:translate(-50%, -50%);background: rgba(0,0,0,.7);color:white">{{ projet.createdAt | date('d/m/Y') }}
-                                </span>
-                    {% if projet.filename %}
-                        <img src="{{ vich_uploader_asset(projet, 'imageFile') | imagine_filter('medium') }}" alt=""
-                             class="card-img-top image">
+                </div>
+            </div>
+
+            <div class="container my-4 py-4" id="tracklist">
+
+                <h6><abbr>Tracklist</abbr></h6>
+
+                <div class="BlogItem-tracklist text-center" style="color:#242424;">
+                    {{ projet.description | nl2br }}
+                </div>
+
+            </div>
+
+            <div class="container my-4 pt-4" id="download">
+
+                <h6><abbr>Download</abbr></h6>
+
+                <div class="caption mx-4 py-4">
+
+                    {% if projet.mp3filename %}
+                        <a class="btn btn-default" role="button" target="_blank"
+                           href="{{ path('downloadcount', {'mp3filename' : projet.mp3filename}) }}">
+                            <img alt="Télécharger" src="{{ 'pictures/Download-icon.png' | imagine_filter('medium') }}"
+                                 style="display: block;max-width: 100%;height: auto;margin-right: auto;margin-left: auto;">
+                            Télécharger
+                            <small> ({{ projet.filesize }} Mo)</small>
+                        </a>
                     {% else %}
-                        <img src="{{ 'images/projets/empty.jpg' | imagine_filter('medium') }}" alt=""
-                             class="card-img-top image"
-                             style="width: 100%; height: auto;">
+                        <div class="text-center">
+                            {% trans %}Téléchargement indisponible{% endtrans %}...
+                        </div>
                     {% endif %}
 
+                </div>
+
+
+            </div>
+
+            {% if projet.soundcloud is not null or projet.ytblink is not null %}
+                <div class="container my-4 py-4">
+
+                    <h6><abbr>STREAM</abbr></h6>
+
+                    <div class="row justify-content-center">
+
+                        {% if projet.soundcloud %}
+                            <div class="p-2 mx-auto">
+                                <a href="{{ projet.soundcloud }}" target="_blank" rel="noopener">
+                                    <i class="fab fa-soundcloud"></i>
+                                </a>
+                            </div>
+                        {% elseif projet.ytblink %}
+                            <div class="p-2 mx-auto">
+                                <a href="{{ projet.ytblink }}" target="_blank" rel="noopener">
+                                    <i class="fab fa-youtube"></i>
+                                </a>
+                            </div>
+
+                        {% endif %}
+                    </div>
 
                     {% if projet.mixcloud %}
 
-                    <div class="middle" id="openplayer">
-                        <div class="text" title="Open music player"><i class="fas fa-play"></i></div>
-                    </div>
+                        <app-musicplayer class="">
+                            <div class="musicplayer fixed-bottom" id="player">
+                                <div class="flexy">
+                                    <!---->
+                                    {{ projet.mixcloud | raw }}
+                                    <!---->
+                                    <a class="link" download="" target="_blank" title="Download"
+                                       href="{{ path('downloadcount', {'mp3filename' : projet.mp3filename}) }}">
+                                        <i class="fas fa-download"></i></a></div>
+                                <a id="closePlayer" class="closeBtn" href="#" title="Close music player">
+                                    <i class="fas fa-times"></i></a></div>
+
+                        </app-musicplayer>
 
                     {% endif %}
 
                 </div>
+            {% endif %}
 
-                <div class="col-md-8 text-center my-auto">
-                    <div class="container mt-4">
-                        <h1>
-                            <p class="property">{{ projet.filelength }} <i class="fas fa-hourglass-half"></i>
-                                ~ {{ projet.filesize }} Mo </p>
+            <div class="container my-4 py-4 text-center" id="share">
 
-                            <p class="property">{{ projet.downloadcount }} <i class="fas fa-download"></i></p>
+                <h6><abbr>SHARE</abbr></h6>
 
-                            {% if projet.mp3filename %}
-                                <a href="{{ path('downloadcount', {'mp3filename' : projet.mp3filename}) }}"
-                                   class="btn"
-                                   data-no-swup id="download_link" style="font-size:1.5rem">
-                                    <i class="fas fa-download"></i> {% trans %}TELECHARGEMENT{% endtrans %}
-                                </a>
-                            {% else %}
-                                <div class="text-center">
-                                    {% trans %}Téléchargement indisponible{% endtrans %}...
-                                </div>
-                            {% endif %}
-                        </h1>
+                <div class="my-4 pt-4">
+
+                    <div class="social-media-buttons" style="text-align: center;">
+
+                        <div class="logo-social"><a
+                                    href="https://www.facebook.com/dialog/share?app_id=377287179598756&display=popup&href=https://www.jumperpich.com{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}"
+                                    target="blank"><img
+                                        src="http://jaystyle.fr/wp-content/themes/jaystyle/images/facebook.jpg"
+                                        style="width:87%" alt="Facebook"></a></div>
+
+                        <div class="logo-social"><a
+                                    href="https://twitter.com/share?url=https://www.jumperpich.com{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}"
+                                    target="blank"><img
+                                        src="http://jaystyle.fr/wp-content/themes/jaystyle/images/twitter.jpg"
+                                        style="width:87%" alt="Twitter"></a></div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div class="container my-4">
-            <h1 class="text-center h2home" style="background: rgba(0,0,0,.7);padding: 20px 20px;;min-height: 41px;">
-                TRACKLIST </h1>
-            <div class="row mt-4">
-                <div class="col-lg-12 text-center">
-                    {{ projet.description | nl2br }}
-                </div>
-            </div>
-        </div>
-
-        <div class="container my-4">
-
-            <h1 class="text-center h2home"
-                style="background: rgba(0,0,0,.7);padding: 20px 20px;;min-height: 41px;">{% trans %}LIENS EXTERNES{% endtrans %}</h1>
-
-            <div class="row pt-4 pb-4 justify-content-center">
-
-                {% if projet.soundcloud %}
-
-                    <div class="text-center px-4">
-                        <a class="fab fa-soundcloud px-4"
-                           href="{{ projet.soundcloud }}" target="_blank" rel="noopener">
-                        </a>
-                        <div style="display:block"> SOUNDCLOUD</div>
-                    </div>
-
-                {% endif %}
-                {% if projet.ytblink %}
-                    <div class="text-center px-4">
-                        <a class="fab fa-youtube px-4"
-                           href="{{ projet.ytblink }}" target="_blank" rel="noopener"></a>
-                        <div style="display:block"> YOUTUBE</div>
-                    </div>
-                {% endif %}
-            </div>
-        </div>
-
-        <div class="container my-4">
-            <h1 class="text-center h2home"
-                style="background: rgba(0,0,0,.7);padding: 20px 20px;;min-height: 41px;">{% trans %}PARTAGE{% endtrans %}</h1>
-            <div class="row pt-4 pb-4 justify-content-center">
-
-                <div class="text-center px-4">
-                    <a class="fab fa-twitter-square px-4"
-                       href="https://twitter.com/share?url=https://www.jumperpich.com{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}"
-                       target="_blank" rel="noopener">
-                    </a>
-                    <div style="display:block"> TWITTER</div>
-                </div>
-                <div class="text-center px-4">
-                    <a class="fab fa-facebook-square px-4"
-                       href="https://www.facebook.com/dialog/share?app_id=377287179598756&display=popup&href=https://www.jumperpich.com{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}"
-                       target="_blank" rel="noopener"></a>
-                    <div style="display:block"> FACEBOOK</div>
-                </div>
-            </div>
-
-        </div>
-
-        {% if projet.mixcloud %}
-
-            <app-musicplayer class="">
-                <div class="musicplayer fixed-bottom" id="player">
-                    <div class="flexy">
-                        <!---->
-                        {{ projet.mixcloud | raw }}
-                        <!---->
-                        <a class="link" download="" target="_blank" title="Download"
-                           href="{{ path('downloadcount', {'mp3filename' : projet.mp3filename}) }}">
-                            <i class="fas fa-download"></i></a></div>
-                    <a id="closePlayer" class="closeBtn" href="#" title="Close music player">
-                        <i class="fas fa-times"></i></a></div>
-
-            </app-musicplayer>
-
-        {% endif %}
-
-        <div class="text-center mt-4">
-            {% set referer = app.request.headers.get('referer') %}
-
-            <a href="{{ referer }}" class="btn btnhome f_size">
-                ← {% trans %}Retour{% endtrans %}  </a>
-        </div>
-
     </div>
 
     <script>
