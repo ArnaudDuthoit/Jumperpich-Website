@@ -3,6 +3,7 @@ window.addEventListener('load', function () {
 });
 
 
+
 function BackToTop() {
     $(document).ready(function () {
         $(window).scroll(function () {
@@ -74,7 +75,7 @@ document.querySelectorAll('.reveal').forEach(function (r) {
 });
 counter = function () {
     var value = $('#form_message').val();
-    if (value.length == 0) {
+    if (value.length === 0) {
         $('#text').html("Message " + "(" + 0 + "/255)");
         return
     }
@@ -84,7 +85,7 @@ counter = function () {
         document.getElementById('text').style.color = 'red'
     }
     if (value.length < 240) {
-        document.getElementById('text').style.color = 'white'
+        document.getElementById('text').style.color = 'black'
     }
 };
 $(document).ready(function () {
@@ -96,5 +97,75 @@ $(document).ready(function () {
     $('#form_message').focus(counter)
 });
 
+$('button').click(function () {
+    $('button').not($(this)).css('color', 'grey');
+    $(this).css('color', 'white');
+});
 
+
+$("#tag_all").on("click", function () {
+    recupTag_all();
+});
+
+$("#tag_1").on("click", function () {
+    recupTag_1();
+});
+
+$("#tag_2").on("click", function () {
+    recupTag_2();
+});
+
+$("#tag_3").on("click", function () {
+    recupTag_3();
+});
+
+function recupTag_all() {
+    $.ajax({
+        url: "/api/getmixtag",
+        data: {
+            'tag': null
+        },
+        success: function ($result) {
+            $("#spawn").hide().html($result).fadeIn('slow');
+            //document.getElementById('row').innerHTML = $result;
+        }
+    });
+}
+
+
+function recupTag_1() {
+    $.ajax({
+        url: "/api/getmixtag",
+        data: {
+            'tag': 1
+        },
+        success: function ($result) {
+            $("#spawn").hide().html($result).fadeIn('slow');
+        }
+    })
+}
+
+function recupTag_2() {
+    $.ajax({
+        url: "/api/getmixtag",
+        data: {
+            'tag': 2
+        },
+        success: function ($result) {
+            $("#spawn").hide().html($result).fadeIn('slow');
+        }
+    });
+}
+
+function recupTag_3() {
+    $.ajax({
+        url: "/api/getmixtag",
+        data: {
+            'tag': 3
+        },
+        success: function ($result) {
+            $("#spawn").hide().html($result).fadeIn('slow');
+        }
+    });
+}
 

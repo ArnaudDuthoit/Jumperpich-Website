@@ -15,101 +15,7 @@
 
 {% block body %}
 
-    <style>
-
-        .musicplayer.open {
-            height: 120px;
-            border-top: 1px solid #eee;
-        }
-
-        .musicplayer {
-            height: 0;
-            background-color: #25292c;
-            transition: height .5s ease;
-        }
-
-        .fixed-bottom {
-            position: fixed;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            z-index: 1030;
-        }
-
-        .musicplayer .flexy {
-            display: flex;
-            width: 100%;
-        }
-
-        .musicplayer iframe {
-            height: 120px;
-        }
-
-        iframe {
-            width: 100%;
-        }
-
-        .musicplayer .link {
-            height: 120px;
-            line-height: 120px;
-            margin: 0 20px 20px;
-            color: #eee;
-        }
-
-        .musicplayer.open .closeBtn {
-            height: 41px;
-            top: -41px;
-            opacity: 1;
-        }
-
-        .musicplayer .closeBtn {
-            border: 1px solid #eee;
-            border-bottom: none;
-            position: absolute;
-            right: 20px;
-            width: 41px;
-            height: 0;
-            text-align: center;
-            background-color: #25292c;
-            color: #fff;
-            display: block;
-            line-height: 41px;
-            transition: all .5s ease;
-            overflow: hidden;
-        }
-
-
-
-        .btn-default {
-            color: #333;
-            background-color: #fff;
-            border-color: #ccc;
-        }
-
-        .btn-default:hover {
-            color: #333;
-            background-color: #E6E6E6;
-            border-color: #ccc;
-        }
-
-        .btn {
-            display: inline-block;
-            margin-bottom: 0;
-            font-weight: normal;
-            text-align: center;
-            white-space: nowrap;
-            vertical-align: middle;
-            touch-action: manipulation;
-            cursor: pointer;
-            background-image: none;
-            font-size: 1.5em;
-            border-radius: 4px;
-            user-select: none;
-        }
-
-    </style>
-
-    <div class="container-fluid" style="padding-top: 83px">
+    <div class="container-fluid main">
 
         {% for message in app.flashes('report') %}
             <div class="fixed-top alert alert-warning alert-dismissible fade show col-md-4 col-md-offset-4"
@@ -122,11 +28,11 @@
         {% endfor %}
 
         <div id="loading">
-            <img src="http://www.jaystyle.fr/wp-content/themes/jaystyle/images/loader.gif" alt="Website Loader">
+            <img src="{{ asset('pictures/loader.gif') }}" alt="Website Loader">
         </div>
 
         <div class="container my-4 text-center">
-            <div class="Blog-meta my-4" style="font-weight: 600;font-style: normal;letter-spacing: .03em;text-transform: uppercase;color:rgba(189,189,189,.64);">
+            <div class="Blog-meta my-4">
                 {{ projet.createdAt | date('d/m/Y') }} - {% for tag in projet.tags %}{{ tag.name }}{% endfor %}
             </div>
 
@@ -136,10 +42,10 @@
                 {% if projet.filename %}
                     <img src="{{ vich_uploader_asset(projet, 'imageFile') | imagine_filter('medium') }}"
                          alt="{{ projet.title }}"
-                         class="mx-auto d-block" style="width: 50vh; height: auto;">
+                         class="mx-auto d-block h-auto" style="width: 50vh">
                 {% else %}
                     <img src="{{ 'images/projets/empty.jpg' | imagine_filter('medium') }}" alt="{{ projet.title }}"
-                         class="mx-auto d-block" style="width: 50vh; height: auto;">
+                         class="mx-auto d-block height-auto" style="width: 50vh">
                 {% endif %}
             </div>
 
@@ -162,7 +68,7 @@
 
                 <h6><abbr>Tracklist</abbr></h6>
 
-                <div class="BlogItem-tracklist text-center" style="color:#242424;">
+                <div class="BlogItem-tracklist text-center">
                     {{ projet.description | nl2br }}
                 </div>
 
@@ -178,7 +84,7 @@
                         <a class="btn btn-default" role="button" target="_blank"
                            href="{{ path('downloadcount', {'mp3filename' : projet.mp3filename}) }}">
                             <img alt="Télécharger" src="{{ 'pictures/Download-icon.png' | imagine_filter('medium') }}"
-                                 style="display: block;max-width: 100%;height: auto;margin-right: auto;margin-left: auto;">
+                                 class="d-block mw-100 h-auto mr-auto ml-auto">
                             Télécharger
                             <small> ({{ projet.filesize }} Mo)</small>
                         </a>
@@ -243,19 +149,13 @@
 
                 <div class="my-4 pt-4">
 
-                    <div class="social-media-buttons" style="text-align: center;">
+                    <div class="social-media-buttons text-center">
 
-                        <div class="logo-social"><a
-                                    href="https://www.facebook.com/dialog/share?app_id=377287179598756&display=popup&href=https://www.jumperpich.com{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}"
-                                    target="blank"><img
-                                        src="http://jaystyle.fr/wp-content/themes/jaystyle/images/facebook.jpg"
-                                        style="width:87%" alt="Facebook"></a></div>
+                        <div class="logo-social"><a href="https://www.facebook.com/dialog/share?app_id=377287179598756&display=popup&href=https://www.jumperpich.com{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}" target="blank">
+                                <img src="{{ asset('pictures/facebook.jpg') }}" style="width:87%" alt="Facebook"></a></div>
 
-                        <div class="logo-social"><a
-                                    href="https://twitter.com/share?url=https://www.jumperpich.com{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}"
-                                    target="blank"><img
-                                        src="http://jaystyle.fr/wp-content/themes/jaystyle/images/twitter.jpg"
-                                        style="width:87%" alt="Twitter"></a></div>
+                        <div class="logo-social"><a href="https://twitter.com/share?url=https://www.jumperpich.com{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}" target="blank">
+                                <img src="{{ asset('pictures/twitter.jpg') }}" style="width:87%" alt="Twitter"></a></div>
                     </div>
                 </div>
             </div>

@@ -5,61 +5,36 @@
 
 {% block body %}
 
-    <style>
 
-        .form-check-label {
-
-            padding: 10px;
-        }
-
-        @media (max-width: 767.98px) {
-
-            .infos_bis {
-                display: none
-            }
-
-            .info {
-                border:none;
-            }
-
-        }
-
-    </style>
-
-    <div class="container-fluid" style="padding-top: 83px;min-height:100vh">
+    <div class="container-fluid main">
 
         <div id="loading">
-            <img src="http://www.jaystyle.fr/wp-content/themes/jaystyle/images/loader.gif" alt="Website Loader">
+            <img src="{{ asset('pictures/loader.gif') }}" alt="Website Loader">
         </div>
 
         <div class="container-fluid">
 
             <div id="podcast" class="parallax-one"
-                 style="background: #000 url(http://www.jaystyle.fr/wp-content/themes/jaystyle/images/parallax/3.jpg) center no-repeat fixed ;margin: 0 0 0 0;height: 300px;width: 100%;border-top: 0 solid #a19faa;border-bottom: 0 solid #a19faa;position: relative;display: flex;align-items: center;justify-content: center;">
+                 style="background: #000 url('{{ asset('pictures/parallax3.jpg') }}') center no-repeat fixed">
                 <div class="quote1-pattern" id="parallax-one"
-                     style="width: 100%;height: 300px;margin: 0 auto;position: absolute;top: 0;left: 0;z-index: 10;background: url(http://www.jaystyle.fr/wp-content/themes/jaystyle/images/patterns/services-banner.png);">
+                     style="background: url('{{ asset('pictures/services-banner.png') }}');">
                     <div class="quote1-shape"></div>
                 </div>
-                <div class="row" style="margin: 0;">
+                <div class="row m-0">
                     <div class="twelve columns parallax-container">
-                        <h1 class="parallax-title"><img
-                                    src="http://jaystyle.fr/wp-content/themes/jaystyle/images/podcasts.PNG"></h1>
+                        <h1 class="parallax-title"><img src="{{ asset('pictures/podcasts.PNG') }}"></h1>
                     </div>
                 </div>
             </div>
 
-            <div class="container my-4 py-4  text-center " id="filter">
+            <div class="container my-4 py-4 text-center" id="filter">
 
-            <h6><abbr>
-
-                    <button class="btn" id="tag_all" style="color:white">{% trans %}TOUT{% endtrans %}</button>
-
-                    {% for tag in tags %}
-
-                        <button class="btn" id="tag_{{ tag.id }}" style="color: grey">{{ tag.name }} </button>
-
-                    {% endfor %}
-                </abbr></h6>
+                <h6><abbr>
+                        <button class="btn" id="tag_all" style="color:white">{% trans %}TOUT{% endtrans %}</button>
+                        {% for tag in tags %}
+                            <button class="btn" id="tag_{{ tag.id }}" style="color:grey">{{ tag.name }} </button>
+                        {% endfor %}
+                    </abbr></h6>
             </div>
 
             <!--<div class="form-check form-check-inline">
@@ -95,18 +70,17 @@
             <div class="row reveal-2 text-center" id="spawn">
 
                 {% for projet in projets %}
-                    <article class="mix col-12 col-md-6 col-lg-4 col-xl-4 stagger cont reveal-1"
-                             style="margin-bottom: 30px;text-shadow:0.2rem 0.2rem 1rem #fff">
+                    <article class="mix col-12 col-md-6 col-lg-4 col-xl-4 stagger cont reveal-1 article">
                         <a class="link" href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}"
                            title="More details">
 
-                            <figure style="display: block;padding: 10px;margin-bottom: 5px;background: #2c2c2c;">
-                                <div class="" style="">
-                                    <img class="image" {% if projet.filename %}
+                            <figure class="d-block figure">
+                                <div>
+                                    <img class="image w-100 h-auto" {% if projet.filename %}
                                         src="{{ vich_uploader_asset(projet, 'imageFile') | imagine_filter('thumb') }}"
                                     {% else %}
                                         src="{{ 'images/projets/empty.jpg' | imagine_filter('thumb') }}"
-                                    {% endif %} alt="No thumbnail" style="width: 100%;height: auto">
+                                    {% endif %} alt="No thumbnail">
                                 </div>
                             </figure>
 
@@ -115,23 +89,20 @@
                             </div>
                         </a>
 
-                        <div class="info" style="background: #2c2c2c;padding: 0 10px;min-height: 41px;border-bottom: 2px dotted #fff;">
+                        <div class="info infos divider">
 
-                            <div class="row"
-                                 style=" display: flex;flex-wrap: wrap;margin-right: -15px;margin-left: -15px;">
+                            <div class="row flex-wrap m15">
 
-                                <div class="col-12" style="flex: 0 0 100%;max-width: 100%;">
+                                <div class="col-12 mw-100 info_flex">
 
-                                    <div class="info__content" style="display: flex;align-items: center;width: 100%;">
+                                    <div class="info__content d-flex align-items-center w-100">
 
-                                        <h1 style="font-size: 1rem; margin-top: 0; padding-top: 0; margin-bottom: 0;text-transform: uppercase;flex-grow: 1;">
-                                            <a id='title'
-                                               href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}">{{ projet.title }}</a>
+                                        <h1 class="mt-0 pt-0 mb-0 text-uppercase flex-grow-1" style="font-size: 1rem">
+                                            <a id='title' href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}">{{ projet.title }}</a>
                                         </h1>
-                                        <div class="info__content__buttons" style="align-self: flex-end;">
+                                        <div class="info__content__buttons align-self-end">
                                             {% for tag in projet.tags %}
-                                                <div class="style"
-                                                     style="padding-left: 10px;line-height: 41px;display: inline-block;vertical-align: top;max-width: none!important;color:{% if tag.id == 1 %}red{% endif %}{% if tag.id == 2 %}orange{% endif %}{% if tag.id == 3 %}#8ee800{% endif %}">
+                                                <div class="style tag" style="color:{% if tag.id == 1 %}red{% endif %}{% if tag.id == 2 %}orange{% endif %}{% if tag.id == 3 %}#8ee800{% endif %}">
                                                     <div>{{ tag.name }}</div>
                                                 </div>
                                             {% endfor %}
@@ -140,19 +111,18 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="info infos_bis" style="background: #2c2c2c;padding: 0 10px;min-height: 41px;">
+                        <div class="info infos_bis infos">
 
-                            <div class="row" style=" display: flex;flex-wrap: wrap;margin-right: -15px;margin-left: -15px;">
+                            <div class="row flex-wrap m15">
 
-                                <div class="col-12" style="flex: 0 0 100%;max-width: 100%;">
+                                <div class="col-12 info_flex mw-100">
 
-                                    <div class="info__content" style="display: flex;align-items: center;width: 100%;">
-
+                                    <div class="info__content d-flex align-items-center w-100">
 
                                         {% set difference = date(projet.createdAt|date('Y/m/d')).diff(date('now'|date('Y/m/d'))) %}
                                         {% set leftDays = difference.days %}
 
-                                        <h1 style="font-size: 1rem; margin-top: 0; padding-top: 0; margin-bottom: 0;flex-grow: 1;">
+                                        <h1 class="mt-0 pt-0 mb-0 flex-grow-1" style="font-size: 1rem">
 
                                             {% if app.request.locale in ['fr','fr_BE','fr_BJ','fr_BF','fr_BI','fr_CM','fr_CA','fr_CF','fr_TD','fr_KM',
                                                 'fr_CG', 'fr_CD','fr_CI','fr_DJ','fr_GQ','fr_FR','fr_GA','fr_GP','fr_GN','fr_LU','fr_MG','fr_ML','fr_MQ',
@@ -161,9 +131,8 @@
                                                 {{ leftDays }} days ago {% endif %}
 
                                         </h1>
-                                        <div class="info__content__buttons" style="align-self: flex-end;">
-                                            <div class="style"
-                                                 style="padding-left: 10px;color: #eee;line-height: 41px;display: inline-block;vertical-align: top;max-width: none!important;">
+                                        <div class="info__content__buttons align-self-end">
+                                            <div class="style tag_bis">
                                                 {{ projet.views }} <i class="far fa-eye"></i>
                                             </div>
                                         </div>
@@ -173,9 +142,7 @@
                         </div>
                     </article>
                 {% endfor %}
-
             </div>
-
 
             <div class="container">
                 <div class="pagination mt-4" id="paginate_float">
@@ -184,83 +151,5 @@
             </div>
         </div>
     </div>
-
-
-
-    <script>
-
-        $('button').click(function () {
-            $('button').not($(this)).css('color', 'grey');
-            $(this).css('color', 'white');
-        });
-
-
-        $("#tag_all").on("click", function () {
-            recupTag_all();
-        });
-
-        $("#tag_1").on("click", function () {
-            recupTag_1();
-        });
-
-        $("#tag_2").on("click", function () {
-            recupTag_2();
-        });
-
-        $("#tag_3").on("click", function () {
-            recupTag_3();
-        });
-
-        function recupTag_all() {
-            $.ajax({
-                url: "/api/getmixtag",
-                data: {
-                    'tag': null
-                },
-                success: function ($result) {
-                    $("#spawn").hide().html($result).fadeIn('slow');
-                    //document.getElementById('row').innerHTML = $result;
-                }
-            });
-        }
-
-
-        function recupTag_1() {
-            $.ajax({
-                url: "/api/getmixtag",
-                data: {
-                    'tag': 1
-                },
-                success: function ($result) {
-                    $("#spawn").hide().html($result).fadeIn('slow');
-                }
-            })
-        }
-
-        function recupTag_2() {
-            $.ajax({
-                url: "/api/getmixtag",
-                data: {
-                    'tag': 2
-                },
-                success: function ($result) {
-                    $("#spawn").hide().html($result).fadeIn('slow');
-                }
-            });
-        }
-
-        function recupTag_3() {
-            $.ajax({
-                url: "/api/getmixtag",
-                data: {
-                    'tag': 3
-                },
-                success: function ($result) {
-                    $("#spawn").hide().html($result).fadeIn('slow');
-                }
-            });
-        }
-
-    </script>
 
 {% endblock %}

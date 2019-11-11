@@ -5,108 +5,6 @@
 
 {% block body %}
 
-    <style>
-
-
-        * {
-            transition: all .125s ease-in-out;
-        }
-
-        .middle {
-            transition: .5s ease;
-            opacity: 0;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            -ms-transform: translate(-50%, -50%);
-            text-align: center;
-        }
-
-        .cont:hover .image {
-            opacity: 0.3;
-        }
-
-        .cont:hover .middle {
-            opacity: 1;
-        }
-
-        .text {
-            color: #fff;
-            opacity: 1;
-            font-size: 3rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .mix .link:hover .text {
-            opacity: .7;
-            text-shadow: 0 0 5px rgba(0, 0, 0, .7);
-            font-size: 5.1rem;
-        }
-
-        .image {
-            opacity: 1;
-            display: block;
-            width: 100%;
-            height: auto;
-            transition: .5s ease;
-            backface-visibility: hidden;
-        }
-
-        @media (max-width: 767.98px) {
-            .mix {
-                display: flex;
-                width: 100%;
-                margin-bottom: 15px;
-            }
-
-            .mix .link {
-                max-width: 25%;
-                display: block;
-                position: relative;
-            }
-
-            .info__content__buttons {
-                display: none
-            }
-
-            .info {
-                width: 100%;
-
-            }
-
-            .info__content {
-                position: relative;
-                float: left;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-            }
-
-            .info > .row {
-                position: relative;
-                float: left;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-            }
-
-            .middle {
-                opacity: 0;
-                text-shadow: 0 0 5px #000;
-                font-size: 1.5rem;
-            }
-
-            figure {
-                margin-bottom: 0 !important;
-            }
-
-        }
-
-    </style>
-
 
     <div class="container-fluid">
 
@@ -130,7 +28,7 @@
         {% endfor %}
 
         <div id="loading">
-            <img src="http://www.jaystyle.fr/wp-content/themes/jaystyle/images/loader.gif" alt="Website Loader">
+            <img src="{{ asset('pictures/loader.gif') }}" alt="Website Loader">
         </div>
 
 
@@ -138,8 +36,8 @@
 
             <div class="container text-white h2header text-center" style="font-family: 'toronto_subwayregular',Helvetica,Arial, sans-serif;font-weight: normal;text-transform: uppercase;text-align: center;color:#fff !important;text-shadow: 0 0 5px #fff;">
 
-                <h1 class="display-4 reveal-1" style="font-size: 5vw">{% trans %}JUMPERPICH {% endtrans %}</h1>
-
+                <h1 class="display-4 reveal-1" style="font-size: 5vw">{% trans %}WELCOME{% endtrans %}.</h1>
+               
                 <div class="homepage-text">
                     <div class="bottom-icon reveal-2">
                         <a id="go-to-podcast" href="#" class="btn btn__custom btn-lg" role="button"
@@ -149,16 +47,13 @@
             </div>
         </div>
 
-        <div id="podcast" class="parallax-one reveal "
-             style="background: #000 url(http://www.jaystyle.fr/wp-content/themes/jaystyle/images/parallax/3.jpg) center no-repeat fixed ;margin: 0 0 0 0;height: 300px;width: 100%;border-top: 0 solid #a19faa;border-bottom: 0 solid #a19faa;position: relative;display: flex;align-items: center;justify-content: center;">
-            <div class="quote1-pattern" id="parallax-one"
-                 style="width: 100%;height: 300px;margin: 0 auto;position: absolute;top: 0;left: 0;z-index: 10;background: url(http://www.jaystyle.fr/wp-content/themes/jaystyle/images/patterns/services-banner.png);">
+        <div id="podcast" class="parallax-one reveal m-0" style="background: #000 url('{{ asset('pictures/parallax3.jpg') }}') center no-repeat fixed">
+            <div class="quote1-pattern" id="parallax-one" style="background: url('{{ asset('pictures/services-banner.png') }}');">
                 <div class="quote1-shape"></div>
             </div>
-            <div class="row" style="margin: 0;">
+            <div class="row m-0">
                 <div class="twelve columns parallax-container">
-                    <h1 class="parallax-title"><img
-                                src="http://jaystyle.fr/wp-content/themes/jaystyle/images/podcasts.PNG"></h1>
+                    <h1 class="parallax-title"><img src="{{ asset('pictures/podcasts.PNG') }}"></h1>
                 </div>
             </div>
         </div>
@@ -167,28 +62,26 @@
 
             <h6><abbr class="reveal-1">Les plus Recents</abbr></h6>
 
-            <div class="row my-4 pt-4 reveal-2"
-                 style="display: flex;flex-wrap: wrap;margin-right: -15px;margin-left: -15px;">
+            <div class="row my-4 pt-4 reveal-2 d-flex flex-wrap m15">
                 {% set rank = 0 %}
                 {% for projet in last %}
                     {% set rank = rank + 1 %}
                     {% for tag in projet.tags %}
-                        <article class="mix col-12 col-md-6 col-lg-4 col-xl-4 stagger cont reveal-3"
-                        style="margin-bottom: 30px;text-shadow:0.2rem 0.2rem 1rem #fff">
+                        <article class="mix col-12 col-md-6 col-lg-4 col-xl-4 stagger cont reveal-3 article">
                     {% endfor %}
                     <a class="link" href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}"
                        aria-label="Read more about {{ projet.title }}">
 
-                        <figure style="display: block;padding: 10px;margin-bottom: 5px;background: #2c2c2c;">
+                        <figure class="d-block figure">
                             <!-- {% if rank == 1 %}
                                     DETERMINE LE MIX LE PLUS RECENT
                                 {% endif %} -->
                             <div>
-                                <img class="image" {% if projet.filename %}
+                                <img class="image w-100 h-auto" {% if projet.filename %}
                                     src="{{ vich_uploader_asset(projet, 'imageFile') | imagine_filter('thumb') }}"
                                 {% else %}
                                     src="{{ 'images/projets/empty.jpg' | imagine_filter('thumb') }}"
-                                {% endif %} alt="{{ projet.title }}" style="width: 100%;height: auto">
+                                {% endif %} alt="{{ projet.title }}">
                             </div>
                         </figure>
 
@@ -197,22 +90,20 @@
                         </div>
                     </a>
 
-                    <div class="info" style="background: #2c2c2c;padding: 0 10px;min-height: 41px;">
+                    <div class="info infos">
 
-                        <div class="row"
-                             style=" display: flex;flex-wrap: wrap;margin-right: -15px;margin-left: -15px;">
+                        <div class="row flex-wrap m15">
 
-                            <div class="col-12" style="flex: 0 0 100%;max-width: 100%;">
+                            <div class="col-12 mw-100 info_flex" style="">
 
-                                <div class="info__content" style="display: flex;align-items: center;width: 100%;">
+                                <div class="info__content d-flex align-items-center w-100">
 
-                                    <h1 style="font-size: 1rem; margin-top: 0; padding-top: 0; margin-bottom: 0;text-transform: uppercase;flex-grow: 1;">
+                                    <h1 class="mt-0 pt-0 mb-0 text-uppercase flex-grow-1" style="font-size: 1rem">
                                         <a href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}"
                                            aria-label="Read more about {{ projet.title }}">{{ projet.title }}</h1>
-                                    <div class="info__content__buttons" style="align-self: flex-end;">
+                                    <div class="info__content__buttons align-self-end">
                                         {% for tag in projet.tags %}
-                                            <div class="style"
-                                                 style="padding-left: 10px;line-height: 41px;display: inline-block;vertical-align: top;max-width: none!important;color:{% if tag.id == 1 %}red{% endif %}{% if tag.id == 2 %}orange{% endif %}{% if tag.id == 3 %}#8ee800{% endif %}">
+                                            <div class="style d-inline-block tag" style="color:{% if tag.id == 1 %}red{% endif %}{% if tag.id == 2 %}orange{% endif %}{% if tag.id == 3 %}#8ee800{% endif %}">
                                                 <div>{{ tag.name }}</div>
                                             </div>
                                         {% endfor %}
@@ -227,7 +118,7 @@
             </div>
 
             <div class="text-center mt-4">
-                <a href="{{ path('lastest') }}" class="btn btn__custom f_size">
+                <a href="{{ path('lastest') }}" class="btn btn__custom">
                     {% trans %}VOIR TOUT{% endtrans %} → </a>
             </div>
         </div>
@@ -236,22 +127,20 @@
 
             <h6><abbr class="reveal-1">Les plus Populaires</abbr></h6>
 
-            <div class="row my-4 pt-4 reveal-2"
-                 style="display: flex;flex-wrap: wrap;margin-right: -15px;margin-left: -15px;">
+            <div class="row my-4 pt-4 reveal-2 flew-wrap m15">
                 {% for projet in views %}
-                    <article class="mix col-12 col-md-6 col-lg-4 col-xl-4 stagger reveal-3 cont"
-                             style="margin-bottom: 30px;text-shadow:0.2rem 0.2rem 1rem #fff">
+                    <article class="mix col-12 col-md-6 col-lg-4 col-xl-4 stagger reveal-3 cont">
 
                         <a class="link" href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}"
                            aria-label="Read more about {{ projet.title }}">
 
-                            <figure style="display: block;padding: 10px;margin-bottom: 5px;background: #2c2c2c;">
+                            <figure class="d-block figure">
                                 <div>
-                                    <img class="image" {% if projet.filename %}
+                                    <img class="image w-100 h-auto" {% if projet.filename %}
                                         src="{{ vich_uploader_asset(projet, 'imageFile') | imagine_filter('thumb') }}"
                                     {% else %}
                                         src="{{ 'images/projets/empty.jpg' | imagine_filter('thumb') }}"
-                                    {% endif %} alt="{{ projet.title }}" style="width: 100%;height: auto">
+                                    {% endif %} alt="{{ projet.title }}">
                                 </div>
                             </figure>
 
@@ -260,18 +149,16 @@
                             </div>
                         </a>
 
-                        <div class="info" style="background:#2c2c2c;padding: 0 10px;min-height: 41px;">
-                            <div class="row"
-                                 style=" display: flex;flex-wrap: wrap;margin-right: -15px;margin-left: -15px;">
-                                <div class="col-12" style="flex: 0 0 100%;max-width: 100%;">
-                                    <div class="info__content" style="display: flex;align-items: center;width: 100%;">
-                                        <h1 style="font-size: 1rem; margin-top: 0; padding-top: 0; margin-bottom: 0;text-transform: uppercase;flex-grow: 1;">
+                        <div class="info infos">
+                            <div class="row flex-wrap m15">
+                                <div class="col-12 mw-100 info_flex">
+                                    <div class="info__content d-flex align-items-center w-100">
+                                        <h1 class="mt-0 pt-0 mb-0 text-uppercase flex-grow-1" style="font-size: 1rem">
                                             <a href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}"
                                                aria-label="Read more about {{ projet.title }}">{{ projet.title }}</h1>
-                                        <div class="info__content__buttons" style="align-self: flex-end;">
+                                        <div class="info__content__buttons align-self-end">
                                             {% for tag in projet.tags %}
-                                                <div class="style"
-                                                     style="padding-left: 10px;line-height: 41px;display: inline-block;vertical-align: top;max-width: none!important;color:{% if tag.id == 1 %}red{% endif %}{% if tag.id == 2 %}orange{% endif %}{% if tag.id == 3 %}#8ee800{% endif %}">
+                                                <div class="style d-inline-block tag" style="color:{% if tag.id == 1 %}red{% endif %}{% if tag.id == 2 %}orange{% endif %}{% if tag.id == 3 %}#8ee800{% endif %}">
                                                     <div>{{ tag.name }}</div>
                                                 </div>
                                             {% endfor %}
@@ -287,7 +174,7 @@
             </div>
 
             <div class="text-center mt-4">
-                <a href="{{ path('ranking') }}" class="btn btn__custom f_size">
+                <a href="{{ path('ranking') }}" class="btn btn__custom">
                     {% trans %}VOIR TOUT{% endtrans %} → </a>
             </div>
         </div>
@@ -298,19 +185,13 @@
 
             <div class="my-4 pt-4 reveal-2">
 
-                <div class="social-media-buttons" style="text-align: center;">
+                <div class="social-media-buttons text-center">
 
-                    <div class="logo-social"><a href="https://www.facebook.com/JumperpichMusic" target="blank"><img
-                                    src="http://jaystyle.fr/wp-content/themes/jaystyle/images/facebook.jpg"
-                                    style="width:87%" alt="Facebook"></a></div>
+                    <div class="logo-social"><a href="https://www.facebook.com/JumperpichMusic" target="blank"><img src="{{ asset('pictures/facebook.jpg') }}" style="width:87%" alt="Facebook"></a></div>
 
-                    <div class="logo-social"><a href="https://www.youtube.com/user/JumperPichMusic" target="blank"><img
-                                    src="http://jaystyle.fr/wp-content/themes/jaystyle/images/youtube.jpg"
-                                    style="width:87%" alt="YouTube"></a></div>
+                    <div class="logo-social"><a href="https://www.youtube.com/user/JumperPichMusic" target="blank"><img src="{{ asset('pictures/youtube.jpg') }}" style="width:87%" alt="YouTube"></a></div>
 
-                    <div class="logo-social"><a href="https://soundcloud.com/jumperpich" target="blank"><img
-                                    src="http://jaystyle.fr/wp-content/themes/jaystyle/images/soundcloud.jpg"
-                                    style="width:87%" alt="Soundcloud"></a></div>
+                    <div class="logo-social"><a href="https://soundcloud.com/jumperpich" target="blank"><img src="{{ asset('pictures/soundcloud.jpg') }}" style="width:87%" alt="Soundcloud"></a></div>
 
                 </div>
 
