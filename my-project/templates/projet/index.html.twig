@@ -18,36 +18,54 @@
                 display: none
             }
 
+            .info {
+                border:none;
+            }
+
         }
 
     </style>
 
-    <div class="mt-4 container-fluid filter reveal" style="padding-top: 83px">
+    <div class="mt-4 container-fluid reveal" style="padding-top: 83px;min-height:100vh">
 
-        <div class="container filter ">
+        <div class="container-fluid">
 
-            <h1 class="text-center h2home reveal-1" style="background: rgba(0,0,0,.7);padding: 20px 20px;;min-height: 41px;">MIXES </h1>
-
-            <div class="box sticky-top sticky-offset text-center reveal-2 mt-4"
-                 style="background: rgba(0,0,0,.7);padding: 20px;color:grey;border: solid white 4px">
-                <li class="form-check form-check-inline {% if current_tag is null %}active{% endif %} ">
-                    <button class="btn filter" id="tag_all" style="color:white">{% trans %}TOUT{% endtrans %}</button>
-                </li>
-                {% for tag in tags %}
-                    <li class="form-check form-check-inline {% if current_tag == tag.id %} active{% endif %}">
-                        <button class="btn filter" id="tag_{{ tag.id }}" style="color: grey">{{ tag.name }} </button>
-                    </li>
-                {% endfor %}
-
-
-                <!--<div class="form-check form-check-inline">
-                    <div class="form-inline">
-                <input type="search" id="name" name="name" onkeyup="recupValeur(this.value);" placeholder="Rechercher">
+            <div id="podcast" class="parallax-one reveal"
+                 style="background: #000 url(http://www.jaystyle.fr/wp-content/themes/jaystyle/images/parallax/3.jpg) center no-repeat fixed ;margin: 0 0 0 0;height: 300px;width: 100%;border-top: 0 solid #a19faa;border-bottom: 0 solid #a19faa;position: relative;display: flex;align-items: center;justify-content: center;">
+                <div class="quote1-pattern" id="parallax-one"
+                     style="width: 100%;height: 300px;margin: 0 auto;position: absolute;top: 0;left: 0;z-index: 10;background: url(http://www.jaystyle.fr/wp-content/themes/jaystyle/images/patterns/services-banner.png);">
+                    <div class="quote1-shape"></div>
+                </div>
+                <div class="row" style="margin: 0;">
+                    <div class="twelve columns parallax-container">
+                        <h1 class="parallax-title"><img
+                                    src="http://jaystyle.fr/wp-content/themes/jaystyle/images/podcasts.PNG"></h1>
                     </div>
-                </div> -->
+                </div>
+            </div>
+
+            <div class="container my-4 py-4 reveal text-center " id="filter">
+
+            <h6><abbr class="reveal-1">
+
+                    <button class="btn" id="tag_all" style="color:white">{% trans %}TOUT{% endtrans %}</button>
+
+                    {% for tag in tags %}
+
+                        <button class="btn" id="tag_{{ tag.id }}" style="color: grey">{{ tag.name }} </button>
+
+                    {% endfor %}
+                </abbr></h6>
+            </div>
+
+            <!--<div class="form-check form-check-inline">
+                <div class="form-inline">
+            <input type="search" id="name" name="name" onkeyup="recupValeur(this.value);" placeholder="Rechercher">
+                </div>
+            </div> -->
 
 
-                <!-- <div class="form-check form-check-inline" id="form">
+            <!-- <div class="form-check form-check-inline" id="form">
                         <div class="form-inline">
                             {{ form_start(form) }}
                             {{ form_widget(form.projectname) }}
@@ -58,11 +76,10 @@
                         </div>
                         {{ form_end(form) }}
                     </div> -->
-            </div>
 
         </div>
 
-        <div class="container mt-4 rounded pt-2 pb-4" style="min-height:100vh">
+        <div class="container mt-4 rounded pt-2 pb-4">
             {% if projets | length == 0 %}
                 <div class="container mt-4">{% trans %}Aucun resultat trouvé pour{% endtrans %}
                     <b>{{ NameSearch }}</b>
@@ -75,11 +92,11 @@
 
                 {% for projet in projets %}
                     <article class="mix col-12 col-md-6 col-lg-4 col-xl-4 stagger cont reveal-1"
-                             style="margin-bottom: 30px;">
+                             style="margin-bottom: 30px;text-shadow:0.2rem 0.2rem 1rem #fff">
                         <a class="link" href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}"
                            title="More details">
 
-                            <figure style="display: block;padding: 10px;margin-bottom: 5px;background: rgba(0,0,0,.7);">
+                            <figure style="display: block;padding: 10px;margin-bottom: 5px;background: #2c2c2c;">
                                 <div class="" style="">
                                     <img class="image" {% if projet.filename %}
                                         src="{{ vich_uploader_asset(projet, 'imageFile') | imagine_filter('thumb') }}"
@@ -94,7 +111,7 @@
                             </div>
                         </a>
 
-                        <div class="info" style="background: rgba(0,0,0,.7);padding: 0 10px;min-height: 41px;">
+                        <div class="info" style="background: #2c2c2c;padding: 0 10px;min-height: 41px;border-bottom: 2px dotted #fff;">
 
                             <div class="row"
                                  style=" display: flex;flex-wrap: wrap;margin-right: -15px;margin-left: -15px;">
@@ -119,11 +136,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="info infos_bis"
-                             style="background: rgba(0,0,0,.7);padding: 0 10px;min-height: 41px;">
+                        <div class="info infos_bis" style="background: #2c2c2c;padding: 0 10px;min-height: 41px;">
 
-                            <div class="row"
-                                 style=" display: flex;flex-wrap: wrap;margin-right: -15px;margin-left: -15px;">
+                            <div class="row" style=" display: flex;flex-wrap: wrap;margin-right: -15px;margin-left: -15px;">
 
                                 <div class="col-12" style="flex: 0 0 100%;max-width: 100%;">
 
@@ -175,22 +190,6 @@
             $(this).css('color', 'white');
         });
 
-        function recupValeur() {
-
-            $.ajax({
-                url: "/api/getmix",
-                data: {
-                    'name': document.getElementById('name').value
-                },
-                success: function ($result) {
-                    document.getElementById('spawn').innerHTML = $result;
-                    $('button').css('color', 'grey');
-                    $('#tag_all').css('color', 'white');
-
-                }
-            });
-
-        }
 
         $("#tag_all").on("click", function () {
             recupTag_all();

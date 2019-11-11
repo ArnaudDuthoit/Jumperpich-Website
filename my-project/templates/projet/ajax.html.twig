@@ -5,19 +5,18 @@
 {% endif %} -->
 
 {% for projet in projets %}
-
     <article class="mix col-12 col-md-6 col-lg-4 col-xl-4 stagger cont reveal-1"
-             style="margin-bottom: 30px;">
+             style="margin-bottom: 30px;text-shadow:0.2rem 0.2rem 1rem #fff">
+        <a class="link" href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}"
+           title="More details">
 
-        <a class="link" href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}" title="More details">
-
-            <figure style="display: block;padding: 10px;margin-bottom: 5px;background: rgba(0,0,0,.7);">
+            <figure style="display: block;padding: 10px;margin-bottom: 5px;background: #2c2c2c;">
                 <div class="" style="">
                     <img class="image" {% if projet.filename %}
                         src="{{ vich_uploader_asset(projet, 'imageFile') | imagine_filter('thumb') }}"
                     {% else %}
                         src="{{ 'images/projets/empty.jpg' | imagine_filter('thumb') }}"
-                    {% endif %} alt="July 2019" style="width: 100%;height: auto">
+                    {% endif %} alt="No thumbnail" style="width: 100%;height: auto">
                 </div>
             </figure>
 
@@ -26,7 +25,7 @@
             </div>
         </a>
 
-        <div class="info" style="background: rgba(0,0,0,.7);padding: 0 10px;min-height: 41px;">
+        <div class="info" style="background: #2c2c2c;padding: 0 10px;min-height: 41px;border-bottom: 2px dotted #fff;">
 
             <div class="row"
                  style=" display: flex;flex-wrap: wrap;margin-right: -15px;margin-left: -15px;">
@@ -36,11 +35,13 @@
                     <div class="info__content" style="display: flex;align-items: center;width: 100%;">
 
                         <h1 style="font-size: 1rem; margin-top: 0; padding-top: 0; margin-bottom: 0;text-transform: uppercase;flex-grow: 1;">
-                            <a id ='title' href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}">{{ projet.title }}</h1>
+                            <a id='title'
+                               href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}">{{ projet.title }}</a>
+                        </h1>
                         <div class="info__content__buttons" style="align-self: flex-end;">
                             {% for tag in projet.tags %}
                                 <div class="style"
-                                     style="padding-left: 10px;color: #eee;line-height: 41px;display: inline-block;vertical-align: top;max-width: none!important;{% if tag.id == 1 %} color:red {% endif %}{% if tag.id == 2 %} color:orange {% endif %}{% if tag.id == 3 %} color:#8ee800 {% endif %}">
+                                     style="padding-left: 10px;line-height: 41px;display: inline-block;vertical-align: top;max-width: none!important;color:{% if tag.id == 1 %}red{% endif %}{% if tag.id == 2 %}orange{% endif %}{% if tag.id == 3 %}#8ee800{% endif %}">
                                     <div>{{ tag.name }}</div>
                                 </div>
                             {% endfor %}
@@ -49,15 +50,14 @@
                 </div>
             </div>
         </div>
-        <div class="info infos_bis"
-             style="background: rgba(0,0,0,.7);padding: 0 10px;min-height: 41px;">
+        <div class="info infos_bis" style="background: #2c2c2c;padding: 0 10px;min-height: 41px;">
 
-            <div class="row"
-                 style=" display: flex;flex-wrap: wrap;margin-right: -15px;margin-left: -15px;">
+            <div class="row" style=" display: flex;flex-wrap: wrap;margin-right: -15px;margin-left: -15px;">
 
                 <div class="col-12" style="flex: 0 0 100%;max-width: 100%;">
 
                     <div class="info__content" style="display: flex;align-items: center;width: 100%;">
+
 
                         {% set difference = date(projet.createdAt|date('Y/m/d')).diff(date('now'|date('Y/m/d'))) %}
                         {% set leftDays = difference.days %}
@@ -82,5 +82,5 @@
             </div>
         </div>
     </article>
-
 {% endfor %}
+
