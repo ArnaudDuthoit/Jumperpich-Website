@@ -26,11 +26,15 @@
 
     </style>
 
-    <div class="mt-4 container-fluid reveal" style="padding-top: 83px;min-height:100vh">
+    <div class="container-fluid" style="padding-top: 83px;min-height:100vh">
+
+        <div id="loading">
+            <img src="http://www.jaystyle.fr/wp-content/themes/jaystyle/images/loader.gif" alt="Website Loader">
+        </div>
 
         <div class="container-fluid">
 
-            <div id="podcast" class="parallax-one reveal"
+            <div id="podcast" class="parallax-one"
                  style="background: #000 url(http://www.jaystyle.fr/wp-content/themes/jaystyle/images/parallax/3.jpg) center no-repeat fixed ;margin: 0 0 0 0;height: 300px;width: 100%;border-top: 0 solid #a19faa;border-bottom: 0 solid #a19faa;position: relative;display: flex;align-items: center;justify-content: center;">
                 <div class="quote1-pattern" id="parallax-one"
                      style="width: 100%;height: 300px;margin: 0 auto;position: absolute;top: 0;left: 0;z-index: 10;background: url(http://www.jaystyle.fr/wp-content/themes/jaystyle/images/patterns/services-banner.png);">
@@ -44,9 +48,9 @@
                 </div>
             </div>
 
-            <div class="container my-4 py-4 reveal text-center " id="filter">
+            <div class="container my-4 py-4  text-center " id="filter">
 
-            <h6><abbr class="reveal-1">
+            <h6><abbr>
 
                     <button class="btn" id="tag_all" style="color:white">{% trans %}TOUT{% endtrans %}</button>
 
@@ -88,7 +92,7 @@
                     {% endfor %}
                 </div>
             {% endif %}
-            <div class="row reveal-3" id="spawn">
+            <div class="row reveal-2 text-center" id="spawn">
 
                 {% for projet in projets %}
                     <article class="mix col-12 col-md-6 col-lg-4 col-xl-4 stagger cont reveal-1"

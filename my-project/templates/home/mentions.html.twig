@@ -4,13 +4,28 @@
 
 {% block body %}
 
-    <div class="container mt-4 pt-4 pb-4">
+    <style>
+        a {
+            color:grey!important;
+        }
+
+    </style>
+
+
+    <div class="container-fluid" style="padding-top: 83px;min-height:100vh">
+
+    <div id="loading">
+        <img src="http://www.jaystyle.fr/wp-content/themes/jaystyle/images/loader.gif" alt="Website Loader">
+    </div>
+
+    <div class="container my-4 py-4 reveal text-center" id="mentions_legales">
+
 
         {% if app.request.locale in ['fr','fr_BE','fr_BJ','fr_BF','fr_BI','fr_CM','fr_CA','fr_CF','fr_TD','fr_KM',
             'fr_CG', 'fr_CD','fr_CI','fr_DJ','fr_GQ','fr_FR','fr_GA','fr_GP','fr_GN','fr_LU','fr_MG','fr_ML','fr_MQ',
             'fr_MC','fr_NE','fr_RW','fr_RE','fr_BL','fr_MF','fr_SN','fr_CH','fr_TG'] %}
 
-            <h2 class="text-center mt-4">MENTIONS LEGALES</h2>
+            <h6><abbr class="reveal-1">Mentions légales</abbr></h6>
             <h3>INFORMATIONS EDITORIALES</h3>
             <p><strong>Site</strong> : <a href='https://www.jumperpich.com/mentions'
                                           title='Arnaud Jumperpich Duthoit - www.jumperpich.com/mentions'>www.jumperpich.com/mentions</a><br/>
@@ -205,7 +220,7 @@
                 <li>mentionner la source qui pointera grâce à un lien hypertexte directement sur le contenu visé</li>
             </ul>
             Les sites qui font le choix de pointer vers <a href='https://www.jumperpich.com/mentions'
-                                                           title='Arnaud Jumperpich Duthoit - www.jumperpich.com/mentions'>www.jumperpich.com/mentions</a> engagent leur responsabilité dès lors qu'ils porteraient atteinte à l'image du site public.</p>
+                                                           title='Arnaud Jumperpich Duthoit - www.jumperpich.com/mentions'>www.jumperpich.com/mentions</a> engagent leur responsabilité dès lors qu'ils porteraient atteinte à l'image du site public.
             <h3>DROIT APPLICABLE ET ATTRIBUTION DE JURIDICTION</h3>
             <p>Tout litige en relation avec l’utilisation du site <a href='https://www.jumperpich.com/mentions'
                                                                      title='Arnaud Jumperpich Duthoit - www.jumperpich.com/mentions'>www.jumperpich.com/mentions</a>
@@ -223,7 +238,7 @@
 
         {% else %}
 
-            <h2 class="text-center mt-4">LEGAL NOTICE</h2>
+            <h6><abbr class="reveal-1">LEGAL NOTICE</abbr></h6>
             <h3>EDITORIAL INFORMATION</h3>
             <p><strong>Site</strong> : <a href='https://www.jumperpich.com/mentions'
                                           title='Arnaud Jumperpich Duthoit - www.jumperpich.com/mentions'>www.jumperpich.com/mentions</a><br/>
@@ -420,5 +435,6 @@
         {% endif %}
 
 
+    </div>
     </div>
 {% endblock %}

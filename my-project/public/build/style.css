@@ -133,6 +133,18 @@ abbr {
 }
 
 
+.panel-body > p {
+    color : black;
+}
+
+.panel-body > ul {
+    color : grey;
+}
+
+#mentions_legales {
+    color:black;
+}
+
 
 /* Custom scrollbar */
 
@@ -257,7 +269,8 @@ a:hover {
 
 .accordion-section .panel-default > .panel-heading {
     border: solid 2px #fff;
-    background: black;
+    text-shadow:0.2rem 0.2rem 1rem #fff;
+    background: #2c2c2c;
     padding: 0
 }
 
@@ -271,7 +284,6 @@ a:hover {
     font-style: normal;
     font-size: 3rem;
     content: " - ";
-    color: #1f7de2;
     float: right;
     margin-top: -12px
 }

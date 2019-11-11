@@ -136,7 +136,7 @@ class HomeController extends AbstractController
                 'reload' => true,
                 'as_url' => true
             ))
-            ->add('Save', SubmitType::class, array('label' => 'Envoyer', 'attr' => array('class' => 'btn btnhome', 'style' => 'margin-top:15px')))
+            ->add('Save', SubmitType::class, array('label' => 'Envoyer', 'attr' => array('class' => 'btn btn__custom', 'style' => 'margin-top:15px')))
             ->getForm();
         # Handle form response
         $form->handleRequest($request);

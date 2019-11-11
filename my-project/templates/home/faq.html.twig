@@ -5,13 +5,23 @@
 
 {% block body %}
 
+    <div class="container-fluid" style="padding-top: 83px;min-height:100vh">
+
+    <div id="loading">
+        <img src="http://www.jaystyle.fr/wp-content/themes/jaystyle/images/loader.gif" alt="Website Loader">
+    </div>
+
+    <div class="container my-4 py-4 reveal text-center" id="FAQ">
+
+
+
     {% if app.request.locale in ['fr','fr_BE','fr_BJ','fr_BF','fr_BI','fr_CM','fr_CA','fr_CF','fr_TD','fr_KM',
         'fr_CG', 'fr_CD','fr_CI','fr_DJ','fr_GQ','fr_FR','fr_GA','fr_GP','fr_GN','fr_LU','fr_MG','fr_ML','fr_MQ',
         'fr_MC','fr_NE','fr_RW','fr_RE','fr_BL','fr_MF','fr_SN','fr_CH','fr_TG'] %}
 
         <section class="accordion-section clearfix mt-4" aria-label="Question Accordions">
-            <div class="container pt-4" style="min-height: 700px">
-                <h1 class="text-center h2home mt-4 pt-4" style="background: rgba(0,0,0,.7);padding: 20px 20px;;min-height: 41px;"> Questions Réponses ! </h1>
+            <div class="container pt-4" style="min-height:100vh">
+                <h6><abbr class="reveal-1">Questions Réponses</abbr></h6>
                 <div class="panel-group mt-4 pt-4" id="accordion" role="tablist" aria-multiselectable="true">
                     <div class="panel panel-default">
                         <div class="panel-heading p-3 mb-3" role="tab" id="heading0">
@@ -100,19 +110,12 @@
                                 <ul>
                                     Vous pouvez consulter l’intégralité du contenu présent sur le site sans vous
                                     inscrire.
-                                    Par ailleurs, nous développons régulièrement de nouvelles
-                                    fonctionnalités pour les visiteurs : création d’alertes, système de
-                                    notifications, possibilité de suivre d’autres membres et de les contacter via
-                                    messagerie
-                                    privée… Tout sera fait pour que les membres puissent personnaliser au maximum leur
-                                    expérience sur le site.
 
                                 </ul>
                                 <p>L’inscription aura-t-elle un coût ?</p>
                                 <ul>
                                     Non. La création d’un compte sur le site et l’utilisation de l’ensemble des
-                                    fonctionnalités
-                                    est et restera entièrement gratuite.
+                                    fonctionnalités est et restera entièrement gratuite.
                                 </ul>
 
                             </div>
@@ -141,19 +144,19 @@
 
                                     Le contenu de la page “Les plus populaires” et "les plus vus" est généré
                                     automatiquement.
-                                    Pour cette raison, il est possible que certains des deals mis
+                                    Pour cette raison, il est possible que certains des mixes mis
                                     en avant soient orientés par un nombre de visites accrus de certaines pages.
 
                                 </ul>
                                 <p>Où trouver tous les Mixes d’un seul Genre ?</p>
                                 <ul>
-                                    Pour la plupart des genre, une page a été créée qui rassemble tous les Mixes
+                                    Pour la plupart des genres, une page a été créée qui rassemble tous les Mixes
                                     qui le concerne.
                                     Vous pouvez également accéder à un Genre spécifique de plusieurs façons :
 
                                     Via le menu, en sélectionnant un Mix affiché parmi les plus populaires, ou en
                                     cliquant sur "Voir tout" pour afficher la liste complète.
-                                    Via la barre de recherche en cherchant par Genre précis.
+
                                 </ul>
                             </div>
                         </div>
@@ -330,7 +333,6 @@
 
                                     Via the menu, selecting a Mix displayed among the most popular, or in
                                     clicking on "View All" to display the complete list.
-                                    Via the search bar by searching by Specific style.
                                 </ul>
                             </div>
                         </div>
