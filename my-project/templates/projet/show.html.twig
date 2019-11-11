@@ -56,7 +56,7 @@
                         <div id="openplayer">
                             <div class="btn btn__custom" role="button">
                                 <i class="fa fa-play"></i>
-                                <span>Play</span>
+                                <span>{% trans %}Lire{% endtrans %}</span>
                             </div>
                         </div>
                     </div>
@@ -76,7 +76,7 @@
 
             <div class="container my-4 pt-4" id="download">
 
-                <h6><abbr>Download</abbr></h6>
+                <h6><abbr>{% trans %}Téléchargement{% endtrans %}</abbr></h6>
 
                 <div class="caption mx-4 py-4">
 
@@ -85,7 +85,7 @@
                            href="{{ path('downloadcount', {'mp3filename' : projet.mp3filename}) }}">
                             <img alt="Télécharger" src="{{ 'pictures/Download-icon.png' | imagine_filter('medium') }}"
                                  class="d-block mw-100 h-auto mr-auto ml-auto">
-                            Télécharger
+                            {% trans %}Télécharger{% endtrans %}
                             <small> ({{ projet.filesize }} Mo)</small>
                         </a>
                     {% else %}
@@ -124,7 +124,7 @@
 
                     {% if projet.mixcloud %}
 
-                        <app-musicplayer class="">
+                        <app-musicplayer>
                             <div class="musicplayer fixed-bottom" id="player">
                                 <div class="flexy">
                                     <!---->
@@ -145,7 +145,7 @@
 
             <div class="container my-4 py-4 text-center" id="share">
 
-                <h6><abbr>SHARE</abbr></h6>
+                <h6><abbr>{% trans %}Partager{% endtrans %}</abbr></h6>
 
                 <div class="my-4 pt-4">
 

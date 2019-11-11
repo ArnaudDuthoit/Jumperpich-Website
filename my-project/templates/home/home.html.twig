@@ -34,12 +34,12 @@
 
         <div class="jumbotron jumbotron-fluid reveal" style="background: #000 url('{{ asset('pictures/Background_header.jpg') }}') center no-repeat fixed ;min-height: 100vh;">
 
-            <div class="container text-white h2header text-center" style="font-family: 'toronto_subwayregular',Helvetica,Arial, sans-serif;font-weight: normal;text-transform: uppercase;text-align: center;color:#fff !important;text-shadow: 0 0 5px #fff;">
+            <div class="container text-white header text-center">
 
-                <h1 class="display-4 reveal-1" style="font-size: 5vw">{% trans %}WELCOME{% endtrans %}.</h1>
+                <h1 class="display-4 reveal-1" style="font-size: 5vw">{% trans %}BIENVENUE{% endtrans %}.</h1>
                
-                <div class="homepage-text">
-                    <div class="bottom-icon reveal-2">
+                <div class="homepage-text reveal-2">
+                    <div class="bottom-icon">
                         <a id="go-to-podcast" href="#" class="btn btn__custom btn-lg" role="button"
                            data-toggle="tooltip" data-placement="left"><i class="fas fa-arrow-down"></i> </a>
                     </div>
@@ -60,7 +60,7 @@
 
         <div class="container my-4 py-4 reveal text-center" id="recent">
 
-            <h6><abbr class="reveal-1">Les plus Recents</abbr></h6>
+            <h6><abbr class="reveal-1">{% trans %}Les plus récents{% endtrans %}</abbr></h6>
 
             <div class="row my-4 pt-4 reveal-2 d-flex flex-wrap m15">
                 {% set rank = 0 %}
@@ -94,7 +94,7 @@
 
                         <div class="row flex-wrap m15">
 
-                            <div class="col-12 mw-100 info_flex" style="">
+                            <div class="col-12 mw-100 info_flex">
 
                                 <div class="info__content d-flex align-items-center w-100">
 
@@ -125,11 +125,11 @@
 
         <div class="container my-4 py-4 reveal text-center" id="popular">
 
-            <h6><abbr class="reveal-1">Les plus Populaires</abbr></h6>
+            <h6><abbr class="reveal-1">{% trans %}Les plus populaires{% endtrans %}</abbr></h6>
 
             <div class="row my-4 pt-4 reveal-2 flew-wrap m15">
                 {% for projet in views %}
-                    <article class="mix col-12 col-md-6 col-lg-4 col-xl-4 stagger reveal-3 cont">
+                    <article class="mix col-12 col-md-6 col-lg-4 col-xl-4 stagger reveal-3 cont article">
 
                         <a class="link" href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}"
                            aria-label="Read more about {{ projet.title }}">

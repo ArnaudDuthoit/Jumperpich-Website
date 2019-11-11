@@ -678,11 +678,14 @@ a:hover {
     position: relative;
 }
 
-.h2header {
-    font-weight: 400;
-    font-style: normal;
+.header {
+    font-family: 'toronto_subwayregular',Helvetica,Arial, sans-serif;
     text-transform: uppercase;
     text-align: center;
+    color:#fff !important;
+    text-shadow: 0 0 5px #fff;
+    font-weight: 400;
+    font-style: normal;
     margin-top: 40vh; /* poussé de la moitié de hauteur de viewport */
     transform: translateY(-50%); /* tiré de la moitié de sa propre hauteur */
 }
@@ -980,6 +983,10 @@ a:hover {
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+    }
+
+    #back-to-top {
+        display:none;
     }
 }
 

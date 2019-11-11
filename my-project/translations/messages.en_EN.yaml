@@ -5,33 +5,16 @@ Mises à jours du site: Update's schedule
 Me contacter: Contact me
 Les plus récents: Most Recent
 Les plus populaires: Most Popular
-Voir plus: More
-Vous etes sur le site officiel de Jumperpich: You are on the official Jumperpich's website
-Télécharge GRATUITEMENT et sans publicités tous les mixes dès maintenant: Download for FREE and without ads every mixes right now
-C'est parti: Let's go
-AOUT 2019: AUGUST 2019
-PROCHAIN MIX: NEXT MIX
+VOIR TOUT: VIEW ALL
 ACCUEIL: HOME
-MES AUTRES MEDIAS: SOCIAL MEDIA
-Nouveau: New
+
 
 ## show.html.twig ##
 
-LIENS EXTERNES: EXTERNAL LINKS
-PARTAGE: SHARE
-TELECHARGEMENT: DOWNLOAD
-Publié le: Published on
-TELECHARGER: FREE DOWNLOAD
-Téléchargement indisponible: Download not available
-N'hésites pas à partager: Click here for sharing to your friends
-Bientôt disponible: Available Soon
-UN PROBLEME ? UN BUG ?: A problem ? A bug ?
-Cliquez ici pour me contacter: Click here to contact me
-Compteur de vues: View counter
-Compteur de téléchargements: Download counter
-Statistiques: Stats
-Durée: Time
-Taille: Size
+Téléchargement: Download
+Télécharger: Download
+Partager: Share
+Lire: Play
 
 ## footer.html.twig
 
@@ -58,15 +41,16 @@ Télécharge GRATUITEMENT ce mix !: Download this mix for FREE !
 
 ## contact_finish ##
 
-Formulaire envoyé ! : Form sent !
-Merci ! J'ai bien reçu ton message.: Thanks you ! I received your message
-Je t'ai envoyé un mail de confirmation.: I sent you a confirmation email.
-Redirection automatique vers l'accueil dans 5 secondes ...: Automatic redirection to the homepage in 5 seconds ...
+Formulaire envoyé: Form sent
+Merci ! J'ai bien reçu ton message: Thanks you ! I received your message
+Je t'ai envoyé un mail de confirmation: I sent you a confirmation email
+Retourner à l'accueil: Back to the homepage
+
 
 ## ranking + most recent ##
 
-LES PLUS POPULAIRES ! : MOST POPULAR !
-LES PLUS RECENTS ! : MOST RECENTS !
+Les plus Populaires : Most popular
+Les plus Récents: Most recents
 Retour : Back
 
 ## contact ##

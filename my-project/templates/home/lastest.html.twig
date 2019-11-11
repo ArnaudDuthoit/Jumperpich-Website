@@ -6,30 +6,29 @@
 
 
 
-    <div class="container-fluid" style="padding-top: 83px;min-height:100vh">
+    <div class="container-fluid main">
 
         <div id="loading">
-            <img src="http://www.jaystyle.fr/wp-content/themes/jaystyle/images/loader.gif" alt="Website Loader">
+            <img src="{{ asset('pictures/loader.gif') }}" alt="Website Loader">
         </div>
 
         <div class="container my-4 py-4 reveal text-center" id="recent">
 
-            <h6><abbr class="reveal-1">Les plus Recents</abbr></h6>
+            <h6><abbr class="reveal-1">{% trans %}Les plus Récents{% endtrans %}</abbr></h6>
 
             <div class="row mt-4 reveal-2">
                 {% for projet in lastest %}
-                    <article class="mix col-12 col-md-6 col-lg-4 col-xl-4 stagger cont reveal-1"
-                             style="margin-bottom: 30px;text-shadow:0.2rem 0.2rem 1rem #fff">
+                    <article class="mix col-12 col-md-6 col-lg-4 col-xl-4 stagger cont reveal-1 article">
                         <a class="link" href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}"
                            title="More details">
 
-                            <figure style="display: block;padding: 10px;margin-bottom: 5px;background: #2c2c2c;">
-                                <div class="" style="">
-                                    <img class="image" {% if projet.filename %}
+                            <figure class="d-block figure">
+                                <div>
+                                    <img class="image w-100 h-auto" {% if projet.filename %}
                                         src="{{ vich_uploader_asset(projet, 'imageFile') | imagine_filter('thumb') }}"
                                     {% else %}
                                         src="{{ 'images/projets/empty.jpg' | imagine_filter('thumb') }}"
-                                    {% endif %} alt="No thumbnail" style="width: 100%;height: auto">
+                                    {% endif %} alt="No thumbnail">
                                 </div>
                             </figure>
 
@@ -38,23 +37,20 @@
                             </div>
                         </a>
 
-                        <div class="info" style="background: #2c2c2c;padding: 0 10px;min-height: 41px;border-bottom: 2px dotted #fff;">
+                        <div class="info info infos divider">
 
-                            <div class="row"
-                                 style=" display: flex;flex-wrap: wrap;margin-right: -15px;margin-left: -15px;">
+                            <div class="row flex-wrap m15">
 
-                                <div class="col-12" style="flex: 0 0 100%;max-width: 100%;">
+                                <div class="col-12 mw-100 info_flex">
 
-                                    <div class="info__content" style="display: flex;align-items: center;width: 100%;">
+                                    <div class="info__content d-flex align-items-center w-100">
 
-                                        <h1 style="font-size: 1rem; margin-top: 0; padding-top: 0; margin-bottom: 0;text-transform: uppercase;flex-grow: 1;">
-                                            <a id='title'
-                                               href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}">{{ projet.title }}</a>
+                                        <h1 class="mt-0 pt-0 mb-0 text-uppercase flex-grow-1" style="font-size: 1rem">
+                                            <a id='title' href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}">{{ projet.title }}</a>
                                         </h1>
-                                        <div class="info__content__buttons" style="align-self: flex-end;">
+                                        <div class="info__content__buttons align-self-end">
                                             {% for tag in projet.tags %}
-                                                <div class="style"
-                                                     style="padding-left: 10px;line-height: 41px;display: inline-block;vertical-align: top;max-width: none!important;color:{% if tag.id == 1 %}red{% endif %}{% if tag.id == 2 %}orange{% endif %}{% if tag.id == 3 %}#8ee800{% endif %}">
+                                                <div class="style tag" style="color:{% if tag.id == 1 %}red{% endif %}{% if tag.id == 2 %}orange{% endif %}{% if tag.id == 3 %}#8ee800{% endif %}">
                                                     <div>{{ tag.name }}</div>
                                                 </div>
                                             {% endfor %}
@@ -63,22 +59,21 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="info infos_bis" style="background: #2c2c2c;padding: 0 10px;min-height: 41px;">
+                        <div class="info infos_bis infos">
 
-                            <div class="row" style=" display: flex;flex-wrap: wrap;margin-right: -15px;margin-left: -15px;">
+                            <div class="row flex-wrap m15">
 
-                                <div class="col-12" style="flex: 0 0 100%;max-width: 100%;">
+                                <div class="col-12 info_flex mw-100">
 
-                                    <div class="info__content" style="display: flex;align-items: center;width: 100%;">
+                                    <div class="info__content d-flex align-items-center w-100">
 
 
-                                        <h1 style="font-size: 1rem; margin-top: 0; padding-top: 0; margin-bottom: 0;flex-grow: 1;">
+                                        <h1 class="mt-0 pt-0 mb-0 flex-grow-1" style="font-size: 1rem">
                                             {{ projet.createdAt | date('d/m/Y') }}
 
                                         </h1>
-                                        <div class="info__content__buttons" style="align-self: flex-end;">
-                                            <div class="style"
-                                                 style="padding-left: 10px;color: #eee;line-height: 41px;display: inline-block;vertical-align: top;max-width: none!important;">
+                                        <div class="info__content__buttons align-self-end">
+                                            <div class="style tag_bis">
                                                 {{ projet.views }} <i class="far fa-eye"></i>
                                             </div>
                                         </div>
@@ -90,7 +85,7 @@
                 {% endfor %}
             </div>
             <div class="text-center mt-4">
-                <a href="{{ path('home') }}" class="btn btn__custom f_size">
+                <a href="{{ path('home') }}" class="btn btn__custom">
                     ← {% trans %}Retour{% endtrans %}  </a>
             </div>
         </div>
