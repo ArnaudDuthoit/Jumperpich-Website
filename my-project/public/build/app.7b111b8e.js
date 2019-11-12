@@ -2,7 +2,7 @@ window.addEventListener('load', function () {
         document.getElementById('loading').parentNode.removeChild(document.getElementById('loading'));
 });
 
-
+var headerHeight = $("#nav").height();
 
 function BackToTop() {
     $(document).ready(function () {
@@ -32,11 +32,12 @@ function GoToPodcast() {
             }
         });
         $('#go-to-podcast').click(function () {
-            $('body,html').animate({scrollTop: window.pageYOffset + $(window).height()}, 800);
+            $('body,html').animate({scrollTop: $(window).height() - headerHeight}, 800);
             return false;
         });
     })
 }
+
 
 
 function gtags() {

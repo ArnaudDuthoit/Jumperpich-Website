@@ -193,10 +193,8 @@ abbr {
 .bottom-icon {
     width: 48px;
     height: 48px;
-    margin: 0 auto;
     line-height: 1em;
-    margin-top: 35%;
-    padding: 12px 7px;
+    margin: 35% auto 0;
     font-size: 14px;
     direction: ltr;
 }
@@ -789,6 +787,10 @@ a:hover {
 
 }
 
+.nav-link:hover {
+    color:white!important;
+}
+
 @media (prefers-reduced-motion: reduce) {
     .reveal [class*="reveal-"] {
         opacity: 1;!important;
@@ -970,7 +972,7 @@ a:hover {
         transform: translate(-50%, -50%);
     }
     .middle {
-        opacity: .2;
+        opacity: 0;
         text-shadow: 0 0 5px #000;
         font-size: 1.5rem;
     }
@@ -984,9 +986,12 @@ a:hover {
         left: 50%;
         transform: translate(-50%, -50%);
     }
-
     #back-to-top {
-        display:none;
+        display:none!important;
+    }
+
+    h6 {
+        border:none;
     }
 }
 
