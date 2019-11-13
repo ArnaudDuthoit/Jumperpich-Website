@@ -27,9 +27,9 @@
                 </div>
             </div>
 
-            <div class="container my-4 py-4 text-center" id="filter">
+            <div class="container my-4 py-4 text-center reveal" id="filter">
 
-                <h6><abbr>
+                <h6 class="reveal-1"><abbr>
                         <button class="btn" id="tag_all" style="color:white">{% trans %}TOUT{% endtrans %}</button>
                         {% for tag in tags %}
                             <button class="btn" id="tag_{{ tag.id }}" style="color:grey">{{ tag.name }} </button>

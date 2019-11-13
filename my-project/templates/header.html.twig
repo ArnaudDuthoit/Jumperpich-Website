@@ -1,4 +1,16 @@
 <div class="site-header fixed-top">
+    <div class="d-flex justify-content-center background_navbar">
+        <div class="nav-item px-2{% if current_menu is defined and current_menu == 'home' %} active current{% endif %}">
+            <a CLASS="nav-link" href="{{ path('home') }}">{% trans %}ACCUEIL{% endtrans %}</a></div>
+        <div class="nav-item px-2{% if current_menu is defined and current_menu == 'mixes' %} active current{% endif %}">
+            <a CLASS="nav-link" href="{{ path('projet.index') }}">MIXES</a></div>
+        <div class="nav-item px-2{% if current_menu is defined and current_menu == 'contact' %} active current{% endif %}">
+            <a CLASS="nav-link" href="{{ path('contact') }}">CONTACT</a></div>
+    </div>
+</div>
+
+
+<!-- <div class="site-header fixed-top">
 
     <nav class="navbar navbar-expand-lg background_navbar" id="main-nav">
 
@@ -55,8 +67,8 @@
 
 
                 {% if app.request.locale in ['fr','fr_BE','fr_BJ','fr_BF','fr_BI','fr_CM','fr_CA','fr_CF','fr_TD','fr_KM',
-                    'fr_CG', 'fr_CD','fr_CI','fr_DJ','fr_GQ','fr_FR','fr_GA','fr_GP','fr_GN','fr_LU','fr_MG','fr_ML','fr_MQ',
-                    'fr_MC','fr_NE','fr_RW','fr_RE','fr_BL','fr_MF','fr_SN','fr_CH','fr_TG'] %}
+    'fr_CG', 'fr_CD','fr_CI','fr_DJ','fr_GQ','fr_FR','fr_GA','fr_GP','fr_GN','fr_LU','fr_MG','fr_ML','fr_MQ',
+    'fr_MC','fr_NE','fr_RW','fr_RE','fr_BL','fr_MF','fr_SN','fr_CH','fr_TG'] %}
 
                     <div class="dropdown open">
                         <button class="btn dropdown-toggle"
@@ -92,5 +104,5 @@
         </div>
     </nav>
 
-</div>
+</div>-->
 

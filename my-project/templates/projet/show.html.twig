@@ -15,7 +15,7 @@
 
 {% block body %}
 
-    <div class="container-fluid main">
+    <div class="container-fluid main reveal">
 
         {% for message in app.flashes('report') %}
             <div class="fixed-top alert alert-warning alert-dismissible fade show col-md-4 col-md-offset-4"
@@ -31,14 +31,14 @@
             <img src="{{ asset('pictures/loader.gif') }}" alt="Website Loader">
         </div>
 
-        <div class="container my-4 text-center">
+        <div class="container my-4 text-center reveal-1">
             <div class="Blog-meta my-4">
                 {{ projet.createdAt | date('d/m/Y') }} - {% for tag in projet.tags %}{{ tag.name }}{% endfor %}
             </div>
 
-            <h6><abbr>{{ projet.title }}</abbr></h6>
+            <h6 class="reveal-2"><abbr>{{ projet.title }}</abbr></h6>
 
-            <div class="Blog-Image row" id="{{ projet.filename }}">
+            <div class="Blog-Image row reveal-3" id="{{ projet.filename }}">
                 {% if projet.filename %}
                     <img src="{{ vich_uploader_asset(projet, 'imageFile') | imagine_filter('medium') }}"
                          alt="{{ projet.title }}"
@@ -68,7 +68,7 @@
 
             <div class="container my-4 py-4" id="tracklist">
 
-                <h6><abbr>Tracklist</abbr></h6>
+                <h6 class="reveal-3"><abbr>Tracklist</abbr></h6>
 
                 <div class="BlogItem-tracklist text-center">
                     {{ projet.description | nl2br }}
@@ -78,7 +78,7 @@
 
             <div class="container my-4 pt-4" id="download">
 
-                <h6><abbr>{% trans %}Téléchargement{% endtrans %}</abbr></h6>
+                <h6 class="reveal-4"><abbr>{% trans %}Téléchargement{% endtrans %}</abbr></h6>
 
                 <div class="caption mx-4 py-4">
 
@@ -104,7 +104,7 @@
             {% if projet.soundcloud is not null or projet.ytblink is not null %}
                 <div class="container my-4 py-4">
 
-                    <h6><abbr>STREAM</abbr></h6>
+                    <h6 class="reveal-5"><abbr>STREAM</abbr></h6>
 
                     <div class="row justify-content-center">
 
@@ -147,7 +147,7 @@
 
             <div class="container my-4 py-4 text-center" id="share">
 
-                <h6><abbr>{% trans %}Partager{% endtrans %}</abbr></h6>
+                <h6 class="reveal-6"><abbr>{% trans %}Partager{% endtrans %}</abbr></h6>
 
                 <div class="my-4 pt-4">
 

@@ -9,7 +9,24 @@
         <a href="{{ path('mentions') }}">{% trans %}Mentions Legales{% endtrans %} |</a>
         <a href="{{ path('RGPD') }}">{% trans %}RGPD{% endtrans %} |</a>
         <a href="{{ path('faq') }}">{% trans %}FAQ{% endtrans %} |</a>
-        <a href="{{ path('contact') }}">{% trans %}Me contacter{% endtrans %}</a>
+        <a href="{{ path('contact') }}">{% trans %}Me contacter{% endtrans %} |</a>
+
+<!-- Langue -->
+
+            {% if app.request.locale in ['fr','fr_BE','fr_BJ','fr_BF','fr_BI','fr_CM','fr_CA','fr_CF','fr_TD','fr_KM',
+                'fr_CG', 'fr_CD','fr_CI','fr_DJ','fr_GQ','fr_FR','fr_GA','fr_GP','fr_GN','fr_LU','fr_MG','fr_ML','fr_MQ',
+                'fr_MC','fr_NE','fr_RW','fr_RE','fr_BL','fr_MF','fr_SN','fr_CH','fr_TG'] %}
+            <a href="{{ path('switch_language_english') }}"> <img
+                        src="{{ asset('pictures/flags/en.png') }}" width="35" height='35'
+                        alt="english"></a>
+
+            {% else %}
+
+            <a  href="{{ path('switch_language_fr') }}"> <img
+                        src="{{ asset('pictures/flags/fr.png') }}" width="35" height='35'
+                        alt="french"></a>
+
+            {% endif %}
         </p>
     </div>
 </footer>

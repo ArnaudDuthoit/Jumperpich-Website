@@ -2,10 +2,6 @@ window.addEventListener('load', function () {
         document.getElementById('loading').parentNode.removeChild(document.getElementById('loading'));
 });
 
-var headerHeight = $("#nav").height();
-
-$(".main").css("padding-top", headerHeight) ;
-
 
 function BackToTop() {
     $(document).ready(function () {
