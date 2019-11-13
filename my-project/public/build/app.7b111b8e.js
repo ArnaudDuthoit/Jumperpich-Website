@@ -4,6 +4,9 @@ window.addEventListener('load', function () {
 
 var headerHeight = $("#nav").height();
 
+$(".main").css("padding-top", headerHeight) ;
+
+
 function BackToTop() {
     $(document).ready(function () {
         $(window).scroll(function () {
@@ -32,7 +35,7 @@ function GoToPodcast() {
             }
         });
         $('#go-to-podcast').click(function () {
-            $('body,html').animate({scrollTop: $(window).height() - headerHeight}, 800);
+            $('body,html').animate({scrollTop: $(window).height()}, 800);
             return false;
         });
     })

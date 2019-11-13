@@ -6,23 +6,25 @@
 
 {% for projet in projets %}
     <article class="mix col-12 col-md-6 col-lg-4 col-xl-4 stagger cont reveal-1 article">
-        <a class="link" href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}"
+
+        <a href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}"
            title="More details">
 
             <figure class="d-block figure">
-                <div>
-                    <img class="image w-100 h-auto" {% if projet.filename %}
-                        src="{{ vich_uploader_asset(projet, 'imageFile') | imagine_filter('thumb') }}"
-                    {% else %}
-                        src="{{ 'images/projets/empty.jpg' | imagine_filter('thumb') }}"
-                    {% endif %} alt="No thumbnail">
+
+                <img class="image w-100 h-auto" {% if projet.filename %} src="{{ vich_uploader_asset(projet, 'imageFile') | imagine_filter('thumb') }}"
+                {% else %} src="{{ 'images/projets/empty.jpg' | imagine_filter('thumb') }}"
+                {% endif %} alt="No thumbnail">
+
+                <div class="middle">
+                    <i class="far fa-play-circle text"></i>
                 </div>
+
             </figure>
 
-            <div class="middle">
-                <div class="text"><i class="fas fa-download"></i></div>
-            </div>
         </a>
+
+
 
         <div class="info infos divider">
 
@@ -48,12 +50,11 @@
         </div>
         <div class="info infos_bis infos">
 
-            <div class="row row flex-wrap m15">
+            <div class="row flex-wrap m15">
 
                 <div class="col-12 info_flex mw-100">
 
                     <div class="info__content d-flex align-items-center w-100">
-
 
                         {% set difference = date(projet.createdAt|date('Y/m/d')).diff(date('now'|date('Y/m/d'))) %}
                         {% set leftDays = difference.days %}

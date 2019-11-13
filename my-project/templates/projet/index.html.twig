@@ -71,23 +71,25 @@
 
                 {% for projet in projets %}
                     <article class="mix col-12 col-md-6 col-lg-4 col-xl-4 stagger cont reveal-1 article">
-                        <a class="link" href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}"
+
+                        <a href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}"
                            title="More details">
 
                             <figure class="d-block figure">
-                                <div>
-                                    <img class="image w-100 h-auto" {% if projet.filename %}
-                                        src="{{ vich_uploader_asset(projet, 'imageFile') | imagine_filter('thumb') }}"
-                                    {% else %}
-                                        src="{{ 'images/projets/empty.jpg' | imagine_filter('thumb') }}"
+
+                                    <img class="image w-100 h-auto" {% if projet.filename %} src="{{ vich_uploader_asset(projet, 'imageFile') | imagine_filter('thumb') }}"
+                                    {% else %} src="{{ 'images/projets/empty.jpg' | imagine_filter('thumb') }}"
                                     {% endif %} alt="No thumbnail">
-                                </div>
+
+                                    <div class="middle">
+                                        <i class="far fa-play-circle text"></i>
+                                    </div>
+
                             </figure>
 
-                            <div class="middle">
-                                <div class="text"><i class="fas fa-download"></i></div>
-                            </div>
-                        </a>
+                            </a>
+
+
 
                         <div class="info infos divider">
 

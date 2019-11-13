@@ -6,7 +6,7 @@
 
 
 
-<div class="container-fluid" style="padding-top: 83px;min-height:100vh">
+<div class="container-fluid main">
 
     <div id="loading">
         <img src="{{ asset('pictures/loader.gif') }}" alt="Website Loader">
@@ -19,25 +19,27 @@
         <div class="row mt-4 reveal-2">
             {% for projet in views %}
                 <article class="mix col-12 col-md-6 col-lg-4 col-xl-4 stagger cont reveal-1 article">
-                    <a class="link" href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}"
+
+                    <a href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}"
                        title="More details">
 
                         <figure class="d-block figure">
-                            <div>
-                                <img class="image w-100 h-auto" {% if projet.filename %}
-                                    src="{{ vich_uploader_asset(projet, 'imageFile') | imagine_filter('thumb') }}"
-                                {% else %}
-                                    src="{{ 'images/projets/empty.jpg' | imagine_filter('thumb') }}"
-                                {% endif %} alt="No thumbnail">
+
+                            <img class="image w-100 h-auto" {% if projet.filename %} src="{{ vich_uploader_asset(projet, 'imageFile') | imagine_filter('thumb') }}"
+                            {% else %} src="{{ 'images/projets/empty.jpg' | imagine_filter('thumb') }}"
+                            {% endif %} alt="No thumbnail">
+
+                            <div class="middle">
+                                <i class="far fa-play-circle text"></i>
                             </div>
+
                         </figure>
 
-                        <div class="middle">
-                            <div class="text"><i class="fas fa-download"></i></div>
-                        </div>
                     </a>
 
-                    <div class="info info infos divider">
+
+
+                    <div class="info infos divider">
 
                         <div class="row flex-wrap m15">
 
@@ -68,8 +70,11 @@
                                 <div class="info__content d-flex align-items-center w-100">
 
 
-                                    <h1 class="mt-0 pt-0 mb-0 flex-grow-1" style="font-size: 1rem">{{ projet.views }} <i class="far fa-eye"></i></h1>
+                                    <h1 class="mt-0 pt-0 mb-0 flex-grow-1" style="font-size: 1rem">
+                                        <a href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}"
+                                           title="More details"> {{ projet.views }} <i class="far fa-eye"></i> </a>
 
+                                    </h1>
                                     <div class="info__content__buttons align-self-end">
                                         <div class="style tag_bis">
                                             {{ projet.createdAt | date('Y') }}
