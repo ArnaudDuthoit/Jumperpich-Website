@@ -2,11 +2,28 @@
 
 {% block body %}
 
-    <main class="container pt-4">
 
-        <h1 class="text-center h2home mt-4 pt-4" style="background: rgba(0,0,0,.7);padding: 20px 20px;;min-height: 41px;"> Suppression de compte </h1>
+    <div class="container-fluid">
 
-        <div class="container mt-4  pb-4">
+        <div id="loading">
+            <img src="{{ asset('pictures/loader.gif') }}" alt="Website Loader">
+        </div>
+
+
+        <div class="container main">
+
+
+            <!-- Vertical navbar -->
+            {{ include('vertical_nav.html.twig') }}
+            <!-- End vertical navbar -->
+            <!-- Page content holder -->
+
+            <div class="page-content p-5 " id="content">
+
+                <h6 class="text-center "><abbr>Suppression de Compte</abbr></h6>
+
+
+                <div class="container mt-4 pt-4 pb-4 text-dark shadow rounded">
 
                     {{ form_start(form) }}
                     {{ form_widget(form) }}
@@ -14,16 +31,14 @@
                         <strong>ATTENTION!</strong> Toute suppression est definitive ! Etes vous vraiment certains de
                         vouloir supprimer votre compte ?
                     </div>
-                    <button class="btn btnhome"
+                    <button class="btn btn__custom"
                             onclick="return confirm('Attention dernier avertissement ! Voulez vous vraiment supprimer votre compte ?')">
                         Supprimer
                     </button>
                     {{ form_end(form) }}
                 </div>
 
-        <div class="text-center mt-4">
-            <a href="{{ path('user.projet.index') }}" class="btn btnhome">
-                ← Retour </a>
+            </div>
         </div>
-    </main>
+    </div>
 {% endblock %}

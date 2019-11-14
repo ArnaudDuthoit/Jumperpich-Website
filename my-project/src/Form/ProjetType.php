@@ -18,29 +18,32 @@ class ProjetType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title')
-            ->add('description')
+            ->add('title',null,['label'  => 'Titre'])
+            ->add('description',null,['label' =>'Tracklist'])
             ->add('tags', EntityType::class,[
                 'class'=> Tag::class,
                 'required' => false,
                 'choice_label' => 'name',
+                'label' => 'Genre',
                 'multiple' => true,
             ])
             ->add('imageFile', FileType::class, [
-                'required' => false
+                'required' => false,
+                'label' => 'Image'
             ])
-            ->add('YTB_link')
+            ->add('YTB_link',null,['label' => "Lien Youtube"])
             ->add('mp3File', FileType::class,[
                 'required' => false,
+                'label' => 'Fichier MP3',
                 'constraints' => [
                     new File([
                         'maxSize' => '300M',
                     ])
             ]])
-            ->add('soundcloud')
-            ->add('mixcloud')
-            ->add('fileLength')
-            ->add('fileSize')
+            ->add('soundcloud',null,['label' => 'Lien Soundcloud'])
+            ->add('mixcloud',null,['label' => 'Lien Mixcloud (iFrame)'])
+            ->add('fileLength',null,['label' => 'Durée (Optionnel)'])
+            ->add('fileSize',null,['label' => 'Taille (en Mo)'])
         ;
     }
 

@@ -5,97 +5,58 @@
 {% block body %}
 
 
-    <style>
-        /* Default table styles */
-        table {
-            border-collapse: collapse;
-            text-align: left;
-            width: 100%;
-        }
-        table tr {
-            border: 1px solid
-        }
-        table th, table td {
-            padding: 10px 20px;
-        }
-        table td span {
+    <div class="container-fluid">
 
-            color: #ffffff;
-            display: none;
-            font-size: 10px;
-            font-weight: bold;
-            padding: 5px;
-            position: absolute;
-            text-transform: uppercase;
-            top: 0;
-            left: 0;
-        }
-
-        /* Simple CSS for flexbox table on mobile */
-        @media(max-width: 800px) {
-            table thead {
-                left: -9999px;
-                position: absolute;
-                visibility: hidden;
-            }
-            table tr {
-                border: 0;
-                display: flex;
-                flex-direction: row;
-                flex-wrap: wrap;
-                margin-bottom: 40px;
-            }
-            table td {
-                border: 1px solid;
-                margin: 0 -1px -1px 0;
-                padding-top: 35px;
-                position: relative;
-                width: 50%;
-            }
-            table td span {
-                display: block;
-                background: red;
-            }
-        }
-    </style>
-
-    <div class="container mt-4 pt-4">
-
-        <h1 class="text-center h2home mt-4 pt-4" style="background: rgba(0,0,0,.7);padding: 20px 20px;;min-height: 41px;"> Gestion des tags <a href="{{ path('tag_new') }}" class="btn btnhome">Ajouter un nouveau tag</a> </h1>
-
-
-        <div class="mt-4">
-            <table class="text-center">
-                <thead>
-                <tr>
-                    <th>Nom</th>
-                    <th><i class="fas fa-wrench"></i></th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for tag in tags %}
-                    <tr>
-                        <td><span><i class="fas fa-headphones-alt"></i></span>
-                            <b>{{ tag.name }}</b>
-                        </td>
-
-                        <td><span><i class="fas fa-wrench"></i></span>
-
-                            <a href="{{ path('tag_edit', {'id': tag.id}) }}"
-                               class="btn btn-primary"><i class="far fa-edit"></i></a>
-                        </td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
+        <div id="loading">
+            <img src="{{ asset('pictures/loader.gif') }}" alt="Website Loader">
         </div>
 
+        <div class="container main">
+
+            <!-- Vertical navbar -->
+            {{ include('vertical_nav.html.twig') }}
+            <!-- End vertical navbar -->
+            <!-- Page content holder -->
+
+            <div class="page-content p-5 text-center" id="content">
+
+                <h6><abbr>Gestions des tags</abbr></h6>
 
 
-        <div class="pagination">
-            {{ knp_pagination_render(tags) }}
+                <div class="mt-4">
+                    <table class="text-center text-dark">
+                        <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th><i class="fas fa-wrench"></i></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for tag in tags %}
+                            <tr>
+                                <td><span><i class="fas fa-headphones-alt"></i></span>
+                                    <b>{{ tag.name }}</b>
+                                </td>
+
+                                <td><span><i class="fas fa-wrench"></i></span>
+
+                                    <a href="{{ path('tag_edit', {'id': tag.id}) }}"
+                                       class="btn btn-primary"><i class="far fa-edit"></i></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="pagination">
+                    {{ knp_pagination_render(tags) }}
+                </div>
+
+                <a href="{{ path('tag_new') }}" class="btn btn__custom mt-4">Ajouter un nouveau tag</a>
+
+
+            </div>
         </div>
-
     </div>
-
 {% endblock %}

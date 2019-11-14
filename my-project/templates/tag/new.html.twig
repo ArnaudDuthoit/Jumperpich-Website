@@ -4,13 +4,31 @@
 
 {% block body %}
 
-    <div class="container mt-4 pt-4">
+    <div class="container-fluid">
 
-        <h1 class="text-center h2home mt-4 pt-4" style="background: rgba(0,0,0,.7);padding: 20px 20px;;min-height: 41px;">Créer un nouveau tag  <a href="{{ path('tag_index') }}" class="btn btnhome">Retour à la liste</a></h1>
+        <div id="loading">
+            <img src="{{ asset('pictures/loader.gif') }}" alt="Website Loader">
+        </div>
 
-        {{ include('tag/_form.html.twig') }}
+        <div class="container main">
+
+
+            <!-- Vertical navbar -->
+            {{ include('vertical_nav.html.twig') }}
+            <!-- End vertical navbar -->
+            <!-- Page content holder -->
+
+            <div class="page-content p-5 text-center" id="content">
+
+                <h6><abbr>Creation nouveau Tag</abbr></h6>
+
+                {{ include('tag/_form.html.twig') }}
+
+                <a href="{{ path('tag_index') }}" class="btn btn__custom mt-4">Retour à la liste</a>
+            </div>
+
+        </div>
     </div>
-
 
 {% endblock %}
 

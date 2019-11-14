@@ -36,6 +36,8 @@
                 {{ projet.createdAt | date('d/m/Y') }} - {% for tag in projet.tags %}{{ tag.name }}{% endfor %}
             </div>
 
+            {{ dump() }}
+
             <h6><abbr>{{ projet.title }}</abbr></h6>
 
             <div class="row" id="{{ projet.filename }}">
