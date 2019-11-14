@@ -52,10 +52,10 @@
              style="background: #000 url('{{ asset('pictures/parallax3.jpg') }}') center no-repeat fixed">
             <div class="quote1-pattern" id="parallax-one"
                  style="background: url('{{ asset('pictures/services-banner.png') }}');">
-                <div class="quote1-shape"></div>
+
             </div>
             <div class="row m-0">
-                <div class="twelve columns parallax-container">
+                <div>
                     <h1 class="parallax-title"><img src="{{ asset('pictures/podcasts.PNG') }}"></h1>
                 </div>
             </div>
@@ -102,7 +102,7 @@
                                             </a> </h1>
                                         <div class="info__content__buttons align-self-end">
                                             {% for tag in projet.tags %}
-                                                <div class="style d-inline-block tag"
+                                                <div class="d-inline-block tag"
                                                      style="color:{% if tag.id == 1 %}red{% endif %}{% if tag.id == 2 %}orange{% endif %}{% if tag.id == 3 %}#8ee800{% endif %}">
                                                     <div>{{ tag.name }}</div>
                                                 </div>
@@ -127,7 +127,7 @@
 
             <h6><abbr>{% trans %}Les plus populaires{% endtrans %}</abbr></h6>
 
-            <div class="row my-4 pt-4 flew-wrap m15">
+            <div class="row my-4 pt-4 flex-wrap m15">
 
                 {% for projet in views %}
 
@@ -161,7 +161,7 @@
                                             <a href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}" aria-label="Read more about {{ projet.title }}">{{ projet.title }}</a></h1>
                                         <div class="info__content__buttons align-self-end">
                                             {% for tag in projet.tags %}
-                                                <div class="style d-inline-block tag" style="color:{% if tag.id == 1 %}red{% endif %}{% if tag.id == 2 %}orange{% endif %}{% if tag.id == 3 %}#8ee800{% endif %}">
+                                                <div class="d-inline-block tag" style="color:{% if tag.id == 1 %}red{% endif %}{% if tag.id == 2 %}orange{% endif %}{% if tag.id == 3 %}#8ee800{% endif %}">
                                                     <div>{{ tag.name }}</div>
                                                 </div>
                                             {% endfor %}
@@ -188,7 +188,7 @@
 
             <div class="my-4 pt-4">
 
-                <div class="social-media-buttons text-center">
+                <div class="text-center">
 
                     <div class="logo-social"><a href="https://www.facebook.com/JumperpichMusic" target="blank"><img
                                     src="{{ asset('pictures/facebook.jpg') }}" style="width:87%" alt="Facebook"></a>

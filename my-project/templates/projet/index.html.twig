@@ -5,7 +5,6 @@
 
 {% block body %}
 
-
     <div class="container-fluid main">
 
         <div id="loading">
@@ -18,10 +17,9 @@
                  style="background: #000 url('{{ asset('pictures/parallax3.jpg') }}') center no-repeat fixed">
                 <div class="quote1-pattern" id="parallax-one"
                      style="background: url('{{ asset('pictures/services-banner.png') }}');">
-                    <div class="quote1-shape"></div>
                 </div>
                 <div class="row m-0">
-                    <div class="twelve columns parallax-container">
+                    <div>
                         <h1 class="parallax-title"><img src="{{ asset('pictures/podcasts.PNG') }}"></h1>
                     </div>
                 </div>
@@ -104,7 +102,7 @@
                                         </h1>
                                         <div class="info__content__buttons align-self-end">
                                             {% for tag in projet.tags %}
-                                                <div class="style tag" style="color:{% if tag.id == 1 %}red{% endif %}{% if tag.id == 2 %}orange{% endif %}{% if tag.id == 3 %}#8ee800{% endif %}">
+                                                <div class="tag" style="color:{% if tag.id == 1 %}red{% endif %}{% if tag.id == 2 %}orange{% endif %}{% if tag.id == 3 %}#8ee800{% endif %}">
                                                     <div>{{ tag.name }}</div>
                                                 </div>
                                             {% endfor %}
@@ -113,7 +111,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="info infos_bis infos">
+                        <div class="info infos">
 
                             <div class="row flex-wrap m15">
 
@@ -134,7 +132,7 @@
 
                                         </h1>
                                         <div class="info__content__buttons align-self-end">
-                                            <div class="style tag_bis">
+                                            <div class="tag_bis">
                                                 {{ projet.views }} <i class="far fa-eye"></i>
                                             </div>
                                         </div>

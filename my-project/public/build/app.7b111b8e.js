@@ -1,7 +1,39 @@
+// Disparition Page loading une fois le DOM chargé //
 window.addEventListener('load', function () {
         document.getElementById('loading').parentNode.removeChild(document.getElementById('loading'));
 });
 
+// Nettoyeur de classes inutilsées (https://github.com/philipwalton/html-inspector) //
+
+/*
+HTMLInspector.rules.extend("unused-classes", function(config) {
+    config.whitelist.push(/^sf\-/);
+    return config
+});
+
+HTMLInspector.rules.extend("unused-classes", function(config) {
+    config.whitelist.push(/^far/);
+    return config
+});
+
+HTMLInspector.rules.extend("unused-classes", function(config) {
+    config.whitelist.push(/^clear-fix/);
+    return config
+});
+
+HTMLInspector.rules.extend("unused-classes", function(config) {
+    config.whitelist.push(/^fas/);
+    return config
+});
+
+HTMLInspector.rules.extend("unused-classes", function(config) {
+    config.whitelist.push(/^fa\-/);
+    return config
+});
+
+HTMLInspector.inspect(["unused-classes"]); */
+
+// Retour au top //
 
 function BackToTop() {
     $(document).ready(function () {
@@ -20,7 +52,7 @@ function BackToTop() {
     })
 }
 
-
+// Aller a la section Podcast /
 function GoToPodcast() {
     $(document).ready(function () {
         $(window).scroll(function () {
@@ -38,7 +70,7 @@ function GoToPodcast() {
 }
 
 
-
+// Google Analytics //
 function gtags() {
     window.dataLayer = window.dataLayer || [];
 
@@ -50,6 +82,7 @@ function gtags() {
     gtag('config', 'UA-143368877-1')
 }
 
+// Menu déroulant Select1 //
 function Select2() {
     $('select').select2()
 }
@@ -58,6 +91,9 @@ BackToTop();
 GoToPodcast();
 Select2();
 gtags();
+
+
+// Intersect Observer pour animation apparition au scroll //
 const ratio = .1;
 const options = {root: null, rootMargin: '0px', threshold: .1};
 const handleIntersect = function (entries, observer) {
@@ -73,6 +109,10 @@ const observer = new IntersectionObserver(handleIntersect, options);
 document.querySelectorAll('.reveal').forEach(function (r) {
     observer.observe(r)
 });
+
+
+// Counter caracteres form contact //
+
 counter = function () {
     var value = $('#form_message').val();
     if (value.length === 0) {
@@ -97,11 +137,13 @@ $(document).ready(function () {
     $('#form_message').focus(counter)
 });
 
+
+// Tri index Ajax //
+
 $('button').click(function () {
     $('button').not($(this)).css('color', 'grey');
     $(this).css('color', 'white');
 });
-
 
 $("#tag_all").on("click", function () {
     recupTag_all();
@@ -131,7 +173,6 @@ function recupTag_all() {
         }
     });
 }
-
 
 function recupTag_1() {
     $.ajax({
