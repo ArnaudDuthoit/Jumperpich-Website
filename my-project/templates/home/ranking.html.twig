@@ -12,13 +12,13 @@
         <img src="{{ asset('pictures/loader.gif') }}" alt="Website Loader">
     </div>
 
-    <div class="container my-4 py-4 reveal text-center" id="recent">
+    <div class="container my-4 py-4 text-center" id="recent">
 
-        <h6 class="reveal-1"><abbr >{% trans %}Les plus Populaires{% endtrans %}</abbr></h6>
+        <h6><abbr >{% trans %}Les plus Populaires{% endtrans %}</abbr></h6>
 
-        <div class="row mt-4 reveal-2">
+        <div class="row mt-4">
             {% for projet in views %}
-                <article class="mix col-12 col-md-6 col-lg-4 col-xl-4 stagger cont reveal-1 article">
+                <article class="mix col-12 col-md-6 col-lg-4 col-xl-4 article">
 
                     <a href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}"
                        title="More details">

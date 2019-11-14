@@ -32,14 +32,14 @@
         </div>
 
 
-        <div class="m-0 jumbotron jumbotron-fluid reveal"
+        <div class="m-0 jumbotron jumbotron-fluid "
              style="background: #000 url('{{ asset('pictures/Background_header.jpg') }}') center no-repeat fixed ;min-height: 100vh;">
 
             <div class="container text-white header text-center">
 
-                <h1 class="reveal-1" style="font-size: 6vh">{% trans %}BIENVENUE{% endtrans %}.</h1>
+                <h1 style="font-size: 6vh">{% trans %}BIENVENUE{% endtrans %}.</h1>
 
-                <div class="homepage-text reveal-2">
+                <div class="homepage-text">
                     <div class="bottom-icon">
                         <a id="go-to-podcast" href="#" class="btn btn__custom btn-lg" role="button"
                            data-toggle="tooltip" data-placement="left"><i class="fas fa-arrow-down"></i> </a>
@@ -48,7 +48,7 @@
             </div>
         </div>
 
-        <div id="podcast" class="parallax-one reveal m-0"
+        <div id="podcast" class="parallax-one m-0"
              style="background: #000 url('{{ asset('pictures/parallax3.jpg') }}') center no-repeat fixed">
             <div class="quote1-pattern" id="parallax-one"
                  style="background: url('{{ asset('pictures/services-banner.png') }}');">
@@ -61,15 +61,15 @@
             </div>
         </div>
 
-        <div class="container my-4 py-4 reveal text-center" id="recent">
+        <div class="container my-4 py-4 text-center" id="recent">
 
-            <h6 class="reveal-1"><abbr >{% trans %}Les plus récents{% endtrans %}</abbr></h6>
+            <h6><abbr >{% trans %}Les plus récents{% endtrans %}</abbr></h6>
 
-            <div class="row my-4 pt-4 reveal-2 d-flex flex-wrap m15">
+            <div class="row my-4 pt-4 d-flex flex-wrap m15">
 
                 {% for projet in last %}
 
-                    <article class="mix col-12 col-md-6 col-lg-4 col-xl-4 stagger cont reveal-3 article">
+                    <article class="mix col-12 col-md-6 col-lg-4 col-xl-4 article">
 
                         <a href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}"
                            aria-label="Read more about {{ projet.title }}">
@@ -123,15 +123,15 @@
             </div>
         </div>
 
-        <div class="container my-4 py-4 reveal text-center" id="popular">
+        <div class="container my-4 py-4 text-center" id="popular">
 
-            <h6 class="reveal-1"><abbr>{% trans %}Les plus populaires{% endtrans %}</abbr></h6>
+            <h6><abbr>{% trans %}Les plus populaires{% endtrans %}</abbr></h6>
 
-            <div class="row my-4 pt-4 reveal-2 flew-wrap m15">
+            <div class="row my-4 pt-4 flew-wrap m15">
 
                 {% for projet in views %}
 
-                    <article class="mix col-12 col-md-6 col-lg-4 col-xl-4 stagger reveal-3 cont article">
+                    <article class="mix col-12 col-md-6 col-lg-4 col-xl-4 article">
 
                         <a href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}"
                            aria-label="Read more about {{ projet.title }}">
@@ -182,11 +182,11 @@
             </div>
         </div>
 
-        <div class="container my-4 py-4 reveal text-center" id="social">
+        <div class="container my-4 py-4 text-center" id="social">
 
-            <h6 class="reveal-1"><abbr>SOCIAL MEDIAL</abbr></h6>
+            <h6><abbr>SOCIAL MEDIAL</abbr></h6>
 
-            <div class="my-4 pt-4 reveal-2">
+            <div class="my-4 pt-4">
 
                 <div class="social-media-buttons text-center">
 

@@ -27,9 +27,9 @@
                 </div>
             </div>
 
-            <div class="container my-4 py-4 text-center reveal" id="filter">
+            <div class="container my-4 py-4 text-center" id="filter">
 
-                <h6 class="reveal-1"><abbr>
+                <h6><abbr>
                         <button class="btn" id="tag_all" style="color:white">{% trans %}TOUT{% endtrans %}</button>
                         {% for tag in tags %}
                             <button class="btn" id="tag_{{ tag.id }}" style="color:grey">{{ tag.name }} </button>
@@ -67,10 +67,10 @@
                     {% endfor %}
                 </div>
             {% endif %}
-            <div class="row reveal-2 text-center" id="spawn">
+            <div class="row text-center" id="spawn">
 
                 {% for projet in projets %}
-                    <article class="mix col-12 col-md-6 col-lg-4 col-xl-4 stagger cont reveal-1 article">
+                    <article class="mix col-12 col-md-6 col-lg-4 col-xl-4 article">
 
                         <a href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}"
                            title="More details">

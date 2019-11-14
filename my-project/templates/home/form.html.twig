@@ -23,7 +23,7 @@
         </div>
     </div>
     
-    <div class="container mt-4 text-dark">
+    <div class="container mt-4 text-dark shadow p-3 mb-5 bg-white rounded">
 
             <div class="col text-center">
                 {% trans %}Ce formulaire vous permet de me contacter.{% endtrans %}<br><br>
@@ -33,11 +33,6 @@
 
                 {% trans %}Pour toutes les questions relatives au Site n’hésitez pas à consulter{% endtrans %}
                 <a href="{{ path('faq') }}" style="color:#FF69B4">{% trans %}la page FAQ.{% endtrans %}</a> <br><br>
-                {% trans %}Blocage de spam?{% endtrans %}<br>
-                {% trans %}Si vous utilisez un logiciel de blocage de courrier indésirable, vous devez le désactiver avant de cliquer sur le bouton de soumission pour recevoir un accusé de réception. Vous devez également ajouter "jumperpich59@gmail.com" à vos adresses autorisées pour recevoir toute correspondance du service.{% endtrans %}<br><br>
-
-                {% trans %}Aucun mail reçu?{% endtrans %}<br>
-                {% trans %}Vérifiez qu'il ne se trouve pas dans le dossier de "spam/courrier indésirable" de votre boite de messagerie.{% endtrans %}
             </div>
             <div class="col mt-4">
                 {{form_start(form)}}

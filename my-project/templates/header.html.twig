@@ -1,5 +1,5 @@
-<div class="site-header fixed-top">
-    <div class="d-flex justify-content-center background_navbar">
+
+    <div class="d-flex justify-content-center background_navbar fixed-top">
         <div class="nav-item px-2{% if current_menu is defined and current_menu == 'home' %} active current{% endif %}">
             <a CLASS="nav-link" href="{{ path('home') }}">{% trans %}ACCUEIL{% endtrans %}</a></div>
         <div class="nav-item px-2{% if current_menu is defined and current_menu == 'mixes' %} active current{% endif %}">
@@ -7,8 +7,6 @@
         <div class="nav-item px-2{% if current_menu is defined and current_menu == 'contact' %} active current{% endif %}">
             <a CLASS="nav-link" href="{{ path('contact') }}">CONTACT</a></div>
     </div>
-</div>
-
 
 <!-- <div class="site-header fixed-top">
 
