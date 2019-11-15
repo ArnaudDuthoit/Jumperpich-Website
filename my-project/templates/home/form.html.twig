@@ -35,6 +35,7 @@
             </div>
             <div class="col mt-4">
                 {{form_start(form)}}
+                <input id="recaptchaToken" name="recaptchaToken" type="hidden">
                 {{form_widget(form)}}
                 {{form_end(form)}}
                 <small>{% trans %}Les informations envoyées par le biais de ce formulaire sont enregistrées dans un fichier informatisé pour traiter votre demande. Elles ne seront en aucun cas cédées à des tiers. Votre adresse email sera conservée uniquement durant le délai de ma réponse. Conformément à la loi « informatique et libertés », vous pouvez exercer votre droit d'accès aux données vous concernant et les faire rectifier.Consultez ma politique en matière de vie privée pour en savoir plus en cliquant{% endtrans %} <a href="{{ path('RGPD') }}" style="color:#FF69B4">{% trans %}ICI{% endtrans %}</a></small>
@@ -42,5 +43,17 @@
         </div>
 
 </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://www.google.com/recaptcha/api.js?render=6LfKBrEUAAAAALs0yDYX-RkVwE5TlqAAJz2GFSZA"></script>
+    <script>
+        grecaptcha.ready(function() {
+            grecaptcha.execute('6LfKBrEUAAAAALs0yDYX-RkVwE5TlqAAJz2GFSZA').then(function (token) {
+                document.getElementById('recaptchaToken').value = token;
+            });
+        });
+    </script>
 
 {% endblock %}

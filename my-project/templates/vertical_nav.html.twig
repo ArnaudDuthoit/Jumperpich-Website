@@ -31,7 +31,7 @@
                 {% if NewMessages_g.CountMessages() | length == 1 %}
                 message non lu
                 {% elseif NewMessages_g.CountMessages() | length > 1 %}
-                {{ NewMessages_g.CountMessages() | length }} messages non lus
+                messages non lus
                 {% else %}message
                 {% endif %}
             </a>

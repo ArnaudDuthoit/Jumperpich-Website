@@ -3,10 +3,10 @@
 namespace App\Controller;
 
 
-use App\Repository\ContactRepository;
 use App\Repository\ProjetRepository;
 use App\Repository\SoonRepository;
 use Gregwar\CaptchaBundle\Type\CaptchaType;
+use ReCaptcha\ReCaptcha;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -37,11 +37,10 @@ class HomeController extends AbstractController
      * Home Page
      * @Route("/", name="home")
      * @param ProjetRepository $repository
-     * @param Request $request
      * @param SoonRepository $soonRepository
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function index(ProjetRepository $repository, Request $request, SoonRepository $soonRepository)
+    public function index(ProjetRepository $repository, SoonRepository $soonRepository)
     {
 
 
@@ -112,12 +111,16 @@ class HomeController extends AbstractController
      * Contact Form Page
      * @Route("/contact", name="contact")
      * @param Request $request
-     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function createAction(Request $request)
     {
         $contact = new Contact;
+
+        $GOOGLE_RECAPTCHA_SECRET = $_ENV['GOOGLE_RECAPTCHA_SECRET'];
+
+        $recaptcha = new \ReCaptcha\ReCaptcha($GOOGLE_RECAPTCHA_SECRET);
+
 
 
         # Add form fields
@@ -141,7 +144,10 @@ class HomeController extends AbstractController
         # Handle form response
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) { #Get Data for all the inputs form
+        $recaptchaToken = $request->request->get('recaptchaToken');
+        $resp = $recaptcha->verify($recaptchaToken);
+
+        if ($form->isSubmitted() && $form->isValid() & $resp->isSuccess()) { #Get Data for all the inputs form
             $name = $form['name']->getData();
             $email = $form['email']->getData();
             $subject = $form['subject']->getData();
@@ -187,8 +193,11 @@ class HomeController extends AbstractController
 
     }
 
+    # get success response from recaptcha and return it to controller
 
-    /**
+
+
+        /**
      * General Data Protection Regulation page
      * @Route("/rgpd", name="RGPD")
      * @return \Symfony\Component\HttpFoundation\Response

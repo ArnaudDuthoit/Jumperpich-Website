@@ -11,6 +11,13 @@ body {
 
 }
 
+.back-to-top{
+    cursor:pointer;
+    position:fixed;
+    bottom:90px;
+    right:10px;
+}
+
 .mix .link:hover .middle {
     opacity: .7;
     text-shadow: 0 0 5px rgba(0, 0, 0, .7);
@@ -958,6 +965,10 @@ table td span {
     #content.active {
         margin-left: 17rem;
         width: calc(100% - 17rem);
+    }
+
+    .grecaptcha-badge{
+        visibility: collapse !important;
     }
 
 }
