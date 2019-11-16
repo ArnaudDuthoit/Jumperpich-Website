@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Jumperpich | Charts   {% endblock %}
+
+{% block body %}
+
+    <div class="container main">
+
+        <!-- Vertical navbar -->
+        {{ include('vertical_nav.html.twig') }}
+        <!-- End vertical navbar -->
+        <!-- Page content holder -->
+
+        <div class="page-content p-5 text-dark d-flex flex-column justify-content-center" id="content">
+
+            <!-- Step 1: Create the containing elements. -->
+
+            <!-- Basic Dashboard -->
+            <div class="text-center" id="embed-api-auth-container"></div>
+            <div class="d-inline-flex my-4" id="view-selector-container"></div>
+            <div id="chart-container"></div>
+
+            <!-- Interactive Charts-->
+            <div id="main-chart-container"></div>
+            <div id="breakdown-chart-container"></div>
+
+            <!-- Chart country -->
+            <div id="chart-1-container"></div>
+            <div id="view-selector-1-container"></div>
+
+
+        </div>
+    </div>
+
+
+{% endblock %}

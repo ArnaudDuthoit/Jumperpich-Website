@@ -155,4 +155,28 @@ class AdminProjetController extends AbstractController
 
     }
 
+    /**
+     * Stats basic
+     * @Route("/admin/basic_charts", name="admin.charts")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function Basic_charts()
+    {
+
+        return $this->render('admin_projet/charts.html.twig');
+
+    }
+
+    /**
+     * Stats sur l'année
+     * @Route("/admin/overview_charts", name="admin.overview_charts")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function Overview_charts()
+    {
+
+        return $this->render('admin_projet/overview_charts.html.twig');
+
+    }
+
 }
