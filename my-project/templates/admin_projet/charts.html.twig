@@ -1,36 +1,74 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Jumperpich | Charts   {% endblock %}
+{% block title %}Jumperpich | Charts {% endblock %}
 
 {% block body %}
 
-    <div class="container main">
+
+    <div class="container-fluid main">
 
         <!-- Vertical navbar -->
         {{ include('vertical_nav.html.twig') }}
         <!-- End vertical navbar -->
         <!-- Page content holder -->
 
-        <div class="page-content p-5 text-dark d-flex flex-column justify-content-center" id="content">
+        <div class="page-content p-5 text-dark" id="content">
 
             <!-- Step 1: Create the containing elements. -->
 
             <!-- Basic Dashboard -->
             <div class="text-center" id="embed-api-auth-container"></div>
-            <div class="d-inline-flex my-4" id="view-selector-container"></div>
-            <div id="chart-container"></div>
 
-            <!-- Interactive Charts-->
-            <div id="main-chart-container"></div>
-            <div id="breakdown-chart-container"></div>
+            <div class="container-fluid mt-4">
+                <div class="row">
+                    <div class="col col-example d-flex align-items-center justify-content-center">
+                        <div id="view-selector-container"></div>
+                    </div>
+                </div>
 
-            <!-- Chart country -->
-            <div id="chart-1-container"></div>
-            <div id="view-selector-1-container"></div>
-
+                <div class="row">
+                    <div class="col col-example">
+                        <div id="chart-container"></div>
+                    </div>
+                </div>
+                <div class="w-100"></div>
+                <div class="row">
+                    <div class="col">
+                        <iframe width="600" height="371" seamless frameborder="0" scrolling="no"
+                                src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSzE-n-tqIR9dXY05enOlboAFYRIsC9bGNUri11vnnZ3vWfx_9wWxwJg9f1xFpyIRAJOlDa-_NMAIci/pubchart?oid=1873318278&amp;format=interactive"></iframe>
+                    </div>
+                    <div class="col">
+                        <iframe width="600" height="371" seamless frameborder="0" scrolling="no"
+                                src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSzE-n-tqIR9dXY05enOlboAFYRIsC9bGNUri11vnnZ3vWfx_9wWxwJg9f1xFpyIRAJOlDa-_NMAIci/pubchart?oid=1353119386&amp;format=interactive"></iframe>
+                    </div>
+                    <div class="w-100"></div>
+                    <div class="col">
+                        <iframe width="600" height="371" seamless frameborder="0" scrolling="no"
+                                src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSzE-n-tqIR9dXY05enOlboAFYRIsC9bGNUri11vnnZ3vWfx_9wWxwJg9f1xFpyIRAJOlDa-_NMAIci/pubchart?oid=840231947&amp;format=interactive"></iframe>
+                    </div>
+                    <div class="col">
+                        <iframe width="600" height="371" seamless frameborder="0" scrolling="no"
+                                src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSzE-n-tqIR9dXY05enOlboAFYRIsC9bGNUri11vnnZ3vWfx_9wWxwJg9f1xFpyIRAJOlDa-_NMAIci/pubchart?oid=732460746&amp;format=interactive"></iframe>
+                    </div>
+                    <div class="w-100"></div>
+                    <div class="col">
+                        <iframe width="600" height="371" seamless frameborder="0" scrolling="no"
+                                src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSzE-n-tqIR9dXY05enOlboAFYRIsC9bGNUri11vnnZ3vWfx_9wWxwJg9f1xFpyIRAJOlDa-_NMAIci/pubchart?oid=354732079&amp;format=interactive"></iframe>
+                    </div>
+                    <div class="col">
+                        <iframe width="600" height="371" seamless frameborder="0" scrolling="no"
+                                src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSzE-n-tqIR9dXY05enOlboAFYRIsC9bGNUri11vnnZ3vWfx_9wWxwJg9f1xFpyIRAJOlDa-_NMAIci/pubchart?oid=259554399&amp;format=interactive"></iframe>
+                    </div>
+                    <div class="w-100"></div>
+                    <div class="col">
+                        <iframe width="600" height="371" seamless frameborder="0" scrolling="no"
+                                src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSzE-n-tqIR9dXY05enOlboAFYRIsC9bGNUri11vnnZ3vWfx_9wWxwJg9f1xFpyIRAJOlDa-_NMAIci/pubchart?oid=1383298086&amp;format=interactive"></iframe>
+                    </div>
+                    <div class="col">Column</div>
+                </div>
+            </div>
 
         </div>
     </div>
-
 
 {% endblock %}

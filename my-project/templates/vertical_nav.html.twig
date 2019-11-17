@@ -19,7 +19,7 @@
         <li class="nav-item">
             <a href="{{ path('admin.projet.index') }}" class="nav-link text-dark font-italic bg-light" style="{% if current_menu is defined and current_menu == 'administration' %}border-right: 5px solid blue{% endif %}">
                 <i class="fas fa-home mr-3 text-primary fa-fw"></i>
-                Home
+                Accueil
             </a>
         </li>
 
@@ -51,38 +51,31 @@
         <li class="nav-item">
             <a href="{{ path('user.new_pwd') }}" class="nav-link text-dark font-italic bg-light">
                 <i class="fas fa-key mr-3 text-primary fa-fw"></i>
-                Change Password
+                Changer mot de passe
             </a>
         </li>
         <li class="nav-item">
             <a href="{{ path('user.editprofile') }}" class="nav-link text-dark font-italic bg-light">
                 <i class="far fa-address-card mr-3 text-primary fa-fw"></i>
-                Change Informations
+                Changer informations
             </a>
         </li>
 
         <li class="nav-item">
             <a href="{{ path('user.deleteprofile') }}" class="nav-link text-dark font-italic bg-light">
                 <i class="fas fa-user-times mr-3 text-primary fa-fw"></i>
-                Delete compte
+                Supprimer compte
             </a>
         </li>
     </ul>
 
-    <p class="text-gray font-weight-bold text-uppercase px-3 small py-4 mb-0">Charts</p>
+    <p class="text-gray font-weight-bold text-uppercase px-3 small pb-4 mb-0">Charts</p>
 
     <ul class="nav flex-column bg-white mb-0">
         <li class="nav-item">
-            <a href="{{ path('admin.charts') }}" class="nav-link text-dark font-italic">
-                <i class="fa fa-area-chart mr-3 text-primary fa-fw"></i>
-                Basic Charts
-            </a>
-        </li>
-
-        <li class="nav-item">
-            <a href="{{ path('admin.overview_charts') }}" class="nav-link text-dark font-italic">
-                <i class="fa fa-area-chart mr-3 text-primary fa-fw"></i>
-               Overview Charts
+            <a href="{{ path('admin.charts') }}" class="nav-link text-dark font-italic bg-light">
+                <i class="fas fa-chart-bar mr-3 text-primary fa-fw"></i>
+                Statistiques
             </a>
         </li>
 
