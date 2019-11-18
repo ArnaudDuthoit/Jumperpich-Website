@@ -46,7 +46,8 @@ class TagController extends AbstractController
 
         return $this->render('tag/index.html.twig', [
             'tags' => $tags,
-            'current_menu' => 'admin',
+            'current_menu' => 'tags'
+
         ]);
     }
 
@@ -74,7 +75,7 @@ class TagController extends AbstractController
         return $this->render('tag/new.html.twig', [
             'tag' => $tag,
             'form' => $form->createView(),
-            'current_menu' => 'admin'
+            'current_menu' => 'tags'
         ]);
     }
 
@@ -102,7 +103,7 @@ class TagController extends AbstractController
         return $this->render('tag/edit.html.twig', [
             'tag' => $tag,
             'form' => $form->createView(),
-            'current_menu' => 'admin'
+            'current_menu' => 'tags'
         ]);
     }
 

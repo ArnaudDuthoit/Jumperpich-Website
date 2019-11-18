@@ -94,7 +94,7 @@ gtags();
 
 
 // Intersect Observer pour animation apparition au scroll //
-const ratio = .1;
+/* const ratio = .1;
 const options = {root: null, rootMargin: '0px', threshold: .1};
 const handleIntersect = function (entries, observer) {
     entries.forEach(function (entry) {
@@ -108,7 +108,7 @@ const handleIntersect = function (entries, observer) {
 const observer = new IntersectionObserver(handleIntersect, options);
 document.querySelectorAll('.reveal').forEach(function (r) {
     observer.observe(r)
-});
+}); */
 
 
 // Counter caracteres form contact //

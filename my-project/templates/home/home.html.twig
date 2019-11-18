@@ -8,6 +8,11 @@
     <div class="container-fluid main">
 
 
+        <div id="loading">
+            <img src="{{ asset('pictures/loader.gif') }}" alt="Website Loader">
+        </div>
+
+
         {% for message in app.flashes('notice') %}
             <div class="fixed-bottom alert alert-warning alert-dismissible fade show" role="alert">
                 <strong>Warning !</strong> {{ message }}
@@ -17,8 +22,7 @@
             </div>
         {% endfor %}
         {% for message in app.flashes('success') %}
-            <div class="fixed-top alert alert-success alert-dismissible fade show col-md-4 col-md-offset-4"
-                 align="center" role="alert">
+            <div class="fixed-bottom alert alert-success alert-dismissible fade show" role="alert">
                 <strong>Succès !</strong> {{ message }}
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -26,17 +30,12 @@
             </div>
         {% endfor %}
 
-        <div id="loading">
-            <img src="{{ asset('pictures/loader.gif') }}" alt="Website Loader">
-        </div>
 
-
-        <div class="m-0 jumbotron jumbotron-fluid "
-             style="background: #000 url('{{ asset('pictures/Background_header.jpg') }}') center no-repeat fixed ;min-height: 100vh;">
+        <div class="m-0 jumbotron jumbotron-fluid" style="background: #000 url('{{ asset('pictures/Background_header.jpg') }}') center no-repeat fixed ;min-height: 100vh;">
 
             <div class="container text-white header text-center">
 
-                <h1 style="font-size: 6vh">{% trans %}BIENVENUE{% endtrans %}.</h1>
+                <h1 style="font-size: 6vh">{% trans %}BIENVENUE{% endtrans %}</h1>
 
                 <div class="homepage-text">
                     <div class="bottom-icon">

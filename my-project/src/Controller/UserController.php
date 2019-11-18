@@ -221,6 +221,7 @@ class UserController extends AbstractController
 
         return $this->render('user/reset_pwd.html.twig', [
             'user' => $user,
+            'current_menu' => 'new_pwd',
             'form' => $form->createView()
         ]);
     }
@@ -246,6 +247,7 @@ class UserController extends AbstractController
         }
         return $this->render('user/editprofile.html.twig', [
             'user' => $user,
+            'current_menu' => 'editprofile',
             'form' => $form->createView()
         ]);
     }
@@ -278,6 +280,7 @@ class UserController extends AbstractController
 
         return $this->render('user/delete.html.twig', [
             'user' => $user,
+            'current_menu' => 'deleteprofile',
             'form' => $form->createView()
         ]);
     }

@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="container mt-4 transition-fade">
+    <div class="container mt-4">
         <h2> Nouveau Mix </h2>
 
         {{ form_start(form) }}
         {{ form_widget(form) }}
-        <button class="btn btnhome">Publier</button>
+        <button class="btn btn__custom">Publier</button>
         {{ form_end(form) }}
     </div>
 {% endblock %}

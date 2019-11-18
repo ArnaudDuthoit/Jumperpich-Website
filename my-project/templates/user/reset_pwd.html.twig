@@ -5,14 +5,31 @@
 
     <div class="container-fluid">
 
+
         <div id="loading">
             <img src="{{ asset('pictures/loader.gif') }}" alt="Website Loader">
         </div>
 
 
+        {% for message in app.flashes('success') %}
+            <div class="text-center fixed-bottom alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Succès !</strong> {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+        {% for message in app.flashes('error') %}
+            <div class="text-center fixed-bottom alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Erreur !</strong> {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+
+
         <div class="container main">
-
-
 
             <!-- Vertical navbar -->
             {{ include('vertical_nav.html.twig') }}
@@ -20,26 +37,6 @@
             <!-- Page content holder -->
 
             <div class="page-content p-5 " id="content">
-
-
-                {% for message in app.flashes('success') %}
-                    <div class="fixed-top alert alert-success alert-dismissible fade show col-md-4 col-md-offset-4"
-                         align="center" role="alert">
-                        <strong>Succès !</strong> {{ message }}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                {% endfor %}
-                {% for message in app.flashes('error') %}
-                    <div class="fixed-top alert alert-danger alert-dismissible fade show col-md-4 col-md-offset-4"
-                         align="center" role="alert">
-                        <strong>Erreur !</strong> {{ message }}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                {% endfor %}
 
                 <h6 class="text-center "><abbr> Modifier mot de passe</abbr></h6>
 

@@ -19,10 +19,10 @@
             <!-- End vertical navbar -->
             <!-- Page content holder -->
 
-            <div class="page-content p-5 " id="content">
+            <div class="page-content p-5" id="content">
 
                 {% for message in app.flashes('success') %}
-                    <div class="fixed-bottom alert alert-success alert-dismissible fade show" role="alert">
+                    <div class="text-center fixed-bottom alert alert-success alert-dismissible fade show" role="alert">
                         <strong>Succès !</strong> {{ message }}
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
@@ -30,8 +30,7 @@
                     </div>
                 {% endfor %}
                 {% for message in app.flashes('error') %}
-                    <div class="fixed-top alert alert-danger alert-dismissible fade show col-md-4 col-md-offset-4"
-                         align="center" role="alert">
+                    <div class="text-center fixed-bottom alert alert-success alert-dismissible fade show" role="alert">
                         <strong>Erreur !</strong> {{ message }}
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>

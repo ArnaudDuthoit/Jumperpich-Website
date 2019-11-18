@@ -163,7 +163,9 @@ class AdminProjetController extends AbstractController
     public function Basic_charts()
     {
 
-        return $this->render('admin_projet/charts.html.twig');
+        return $this->render('admin_projet/charts.html.twig', [
+            'current_menu' => 'charts'
+            ]);
 
     }
 
