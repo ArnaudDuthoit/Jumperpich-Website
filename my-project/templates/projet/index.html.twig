@@ -28,9 +28,9 @@
             <div class="container my-4 py-4 text-center" id="filter">
 
                 <h6><abbr>
-                        <button class="btn" id="tag_all" style="color:white">{% trans %}TOUT{% endtrans %}</button>
+                        <button class="btn tag_id" id="0" style="color:white">{% trans %}TOUT{% endtrans %}</button>
                         {% for tag in tags %}
-                            <button class="btn" id="tag_{{ tag.id }}" style="color:grey">{{ tag.name }} </button>
+                            <button class="btn tag_id" id="{{ tag.id }}" style="color:grey">{{ tag.name }} </button>
                         {% endfor %}
                     </abbr></h6>
             </div>
@@ -65,7 +65,7 @@
                     {% endfor %}
                 </div>
             {% endif %}
-            <div class="row text-center" id="spawn">
+            <div class="row text-center" id="mixes">
 
                 {% for projet in projets %}
                     <article class="mix col-12 col-md-6 col-lg-4 col-xl-4 article">
@@ -75,18 +75,17 @@
 
                             <figure class="d-block figure">
 
-                                    <img class="image w-100 h-auto" {% if projet.filename %} src="{{ vich_uploader_asset(projet, 'imageFile') | imagine_filter('thumb') }}"
-                                    {% else %} src="{{ 'images/projets/empty.jpg' | imagine_filter('thumb') }}"
-                                    {% endif %} alt="No thumbnail">
+                                <img class="image w-100 h-auto" {% if projet.filename %} src="{{ vich_uploader_asset(projet, 'imageFile') | imagine_filter('thumb') }}"
+                                {% else %} src="{{ 'images/projets/empty.jpg' | imagine_filter('thumb') }}"
+                                {% endif %} alt="No thumbnail">
 
-                                    <div class="middle">
-                                        <i class="far fa-play-circle text"></i>
-                                    </div>
+                                <div class="middle">
+                                    <i class="far fa-play-circle text"></i>
+                                </div>
 
                             </figure>
 
-                            </a>
-
+                        </a>
 
 
                         <div class="info infos divider">
@@ -98,11 +97,13 @@
                                     <div class="info__content d-flex align-items-center w-100">
 
                                         <h1 class="mt-0 pt-0 mb-0 text-uppercase flex-grow-1" style="font-size: 1rem">
-                                            <a id='title' href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}">{{ projet.title }}</a>
+                                            <a id='title'
+                                               href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}">{{ projet.title }}</a>
                                         </h1>
                                         <div class="info__content__buttons align-self-end">
                                             {% for tag in projet.tags %}
-                                                <div class="tag" style="color:{% if tag.id == 1 %}red{% endif %}{% if tag.id == 2 %}orange{% endif %}{% if tag.id == 3 %}#8ee800{% endif %}">
+                                                <div class="tag"
+                                                     style="color:{% if tag.id == 1 %}red{% endif %}{% if tag.id == 2 %}orange{% endif %}{% if tag.id == 3 %}#8ee800{% endif %}">
                                                     <div>{{ tag.name }}</div>
                                                 </div>
                                             {% endfor %}
@@ -124,11 +125,24 @@
 
                                         <h1 class="mt-0 pt-0 mb-0 flex-grow-1" style="font-size: 1rem">
 
-                                            {% if app.request.locale in ['fr','fr_BE','fr_BJ','fr_BF','fr_BI','fr_CM','fr_CA','fr_CF','fr_TD','fr_KM',
-                                                'fr_CG', 'fr_CD','fr_CI','fr_DJ','fr_GQ','fr_FR','fr_GA','fr_GP','fr_GN','fr_LU','fr_MG','fr_ML','fr_MQ',
-                                                'fr_MC','fr_NE','fr_RW','fr_RE','fr_BL','fr_MF','fr_SN','fr_CH','fr_TG'] %}
-                                                Il y a {{ leftDays }} jours {% else %}
-                                                {{ leftDays }} days ago {% endif %}
+                                            {% if leftDays == 0 %}
+
+                                                {% if app.request.locale in ['fr','fr_BE','fr_BJ','fr_BF','fr_BI','fr_CM','fr_CA','fr_CF','fr_TD','fr_KM',
+                                                    'fr_CG', 'fr_CD','fr_CI','fr_DJ','fr_GQ','fr_FR','fr_GA','fr_GP','fr_GN','fr_LU','fr_MG','fr_ML','fr_MQ',
+                                                    'fr_MC','fr_NE','fr_RW','fr_RE','fr_BL','fr_MF','fr_SN','fr_CH','fr_TG'] %}
+
+                                                    Aujourd'hui {% else %}
+                                                    Today {% endif %}
+
+                                                {% else %}
+                                                {% if app.request.locale in ['fr','fr_BE','fr_BJ','fr_BF','fr_BI','fr_CM','fr_CA','fr_CF','fr_TD','fr_KM',
+                                                    'fr_CG', 'fr_CD','fr_CI','fr_DJ','fr_GQ','fr_FR','fr_GA','fr_GP','fr_GN','fr_LU','fr_MG','fr_ML','fr_MQ',
+                                                    'fr_MC','fr_NE','fr_RW','fr_RE','fr_BL','fr_MF','fr_SN','fr_CH','fr_TG'] %}
+
+                                                    Il y a {{ leftDays }} jours {% else %}
+                                                    {{ leftDays }} days ago {% endif %}
+
+                                            {% endif %}
 
                                         </h1>
                                         <div class="info__content__buttons align-self-end">

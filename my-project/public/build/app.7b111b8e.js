@@ -138,75 +138,36 @@ $(document).ready(function () {
 });
 
 
-// Tri index Ajax //
+/* Tri index Ajax */
 
 $('button').click(function () {
     $('button').not($(this)).css('color', 'grey');
     $(this).css('color', 'white');
 });
 
-$("#tag_all").on("click", function () {
-    recupTag_all();
-});
 
-$("#tag_1").on("click", function () {
-    recupTag_1();
-});
+for (let i = 0; i < document.getElementsByClassName('tag_id').length; i += 1) {
+    document.getElementsByClassName('tag_id')[i].addEventListener('click', function(e) {
+        myFunc(e.target);
+    }, false);
+}
 
-$("#tag_2").on("click", function () {
-    recupTag_2();
-});
+function myFunc(elem) {
 
-$("#tag_3").on("click", function () {
-    recupTag_3();
-});
-
-function recupTag_all() {
+    if (elem.id === '0') {elem.id = '';}
     $.ajax({
         url: "/api/getmixtag",
         data: {
-            'tag': null
+            'tag': elem.id
         },
         success: function ($result) {
-            $("#spawn").hide().html($result).fadeIn('slow');
-            //document.getElementById('row').innerHTML = $result;
+            $("#mixes").hide().html($result).fadeIn('slow');
         }
     });
+
 }
 
-function recupTag_1() {
-    $.ajax({
-        url: "/api/getmixtag",
-        data: {
-            'tag': 1
-        },
-        success: function ($result) {
-            $("#spawn").hide().html($result).fadeIn('slow');
-        }
-    })
-}
 
-function recupTag_2() {
-    $.ajax({
-        url: "/api/getmixtag",
-        data: {
-            'tag': 2
-        },
-        success: function ($result) {
-            $("#spawn").hide().html($result).fadeIn('slow');
-        }
-    });
-}
 
-function recupTag_3() {
-    $.ajax({
-        url: "/api/getmixtag",
-        data: {
-            'tag': 3
-        },
-        success: function ($result) {
-            $("#spawn").hide().html($result).fadeIn('slow');
-        }
-    });
-}
+
 

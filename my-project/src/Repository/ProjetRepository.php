@@ -155,5 +155,4 @@ class ProjetRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-
 }

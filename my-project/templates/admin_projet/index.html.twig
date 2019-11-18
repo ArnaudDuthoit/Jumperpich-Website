@@ -31,7 +31,7 @@
 
             <h6><abbr>MIXES EN LIGNE </abbr></h6>
 
-            <div class="mt-4 text-dark">
+            <div class="mt-4 text-dark" id="mixes">
                 <table class="text-center">
                     <thead>
                     <tr>
@@ -58,7 +58,6 @@
                             <td><span><i class="fas fa-download"></i></span>
                                 {{ projet.downloadcount }}
                             </td>
-
 
                             <td><span><i class="fas fa-wrench"></i></span>
                                 <a href="{{ path('admin.projet.edit', {'id': projet.id, "slug": projet.slug}) }}"

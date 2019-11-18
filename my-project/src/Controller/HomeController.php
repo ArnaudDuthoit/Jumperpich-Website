@@ -12,7 +12,9 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Contact;
 use Swift_SmtpTransport;
@@ -106,7 +108,6 @@ class HomeController extends AbstractController
         }
     }
 
-
     /**
      * Contact Form Page
      * @Route("/contact", name="contact")
@@ -120,8 +121,6 @@ class HomeController extends AbstractController
         $GOOGLE_RECAPTCHA_SECRET = $_ENV['GOOGLE_RECAPTCHA_SECRET'];
 
         $recaptcha = new \ReCaptcha\ReCaptcha($GOOGLE_RECAPTCHA_SECRET);
-
-
 
         # Add form fields
         $form = $this->createFormBuilder($contact)

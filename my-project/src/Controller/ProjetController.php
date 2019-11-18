@@ -112,7 +112,7 @@ class ProjetController extends AbstractController
         $projets = $paginator->paginate(
             $this->repository->findAllActive($search),
             $request->query->getInt('page', 1), #Start page
-            3 #number of projects per page
+            99 #number of projects per page
         );
 
 

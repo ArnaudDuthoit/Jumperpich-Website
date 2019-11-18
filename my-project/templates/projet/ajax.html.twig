@@ -61,11 +61,24 @@
 
                         <h1 class="mt-0 pt-0 mb-0 flex-grow-1" style="font-size: 1rem">
 
-                            {% if app.request.locale in ['fr','fr_BE','fr_BJ','fr_BF','fr_BI','fr_CM','fr_CA','fr_CF','fr_TD','fr_KM',
-                                'fr_CG', 'fr_CD','fr_CI','fr_DJ','fr_GQ','fr_FR','fr_GA','fr_GP','fr_GN','fr_LU','fr_MG','fr_ML','fr_MQ',
-                                'fr_MC','fr_NE','fr_RW','fr_RE','fr_BL','fr_MF','fr_SN','fr_CH','fr_TG'] %}
-                                Il y a {{ leftDays }} jours {% else %}
-                                {{ leftDays }} days ago {% endif %}
+                            {% if leftDays == 0 %}
+
+                                {% if app.request.locale in ['fr','fr_BE','fr_BJ','fr_BF','fr_BI','fr_CM','fr_CA','fr_CF','fr_TD','fr_KM',
+                                    'fr_CG', 'fr_CD','fr_CI','fr_DJ','fr_GQ','fr_FR','fr_GA','fr_GP','fr_GN','fr_LU','fr_MG','fr_ML','fr_MQ',
+                                    'fr_MC','fr_NE','fr_RW','fr_RE','fr_BL','fr_MF','fr_SN','fr_CH','fr_TG'] %}
+
+                                    Aujourd'hui {% else %}
+                                    Today {% endif %}
+
+                            {% else %}
+                                {% if app.request.locale in ['fr','fr_BE','fr_BJ','fr_BF','fr_BI','fr_CM','fr_CA','fr_CF','fr_TD','fr_KM',
+                                    'fr_CG', 'fr_CD','fr_CI','fr_DJ','fr_GQ','fr_FR','fr_GA','fr_GP','fr_GN','fr_LU','fr_MG','fr_ML','fr_MQ',
+                                    'fr_MC','fr_NE','fr_RW','fr_RE','fr_BL','fr_MF','fr_SN','fr_CH','fr_TG'] %}
+
+                                    Il y a {{ leftDays }} jours {% else %}
+                                    {{ leftDays }} days ago {% endif %}
+
+                            {% endif %}
 
                         </h1>
                         <div class="info__content__buttons align-self-end">
