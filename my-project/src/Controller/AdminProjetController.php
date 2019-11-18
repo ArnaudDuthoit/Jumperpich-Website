@@ -38,14 +38,23 @@ class AdminProjetController extends AbstractController
     /**
      * Admin Home Page
      * @Route("/admin", name="admin.projet.index")
+     * @param PaginatorInterface $paginator
+     * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function index()
+    public function index(PaginatorInterface $paginator, Request $request)
     {
 
-        $projets = $this->repository->AllOrderRecent();
+        // $projets = $this->repository->AllOrderRecent();
 
         $soon = $this->soonrepository->findAll();
+
+        #find and paginate all the project with search criteria
+        $projets = $paginator->paginate(
+            $this->repository->AllOrderRecent(),
+            $request->query->getInt('page', 1), #Start page
+            9 #number of projects per page
+        );
 
         return $this->render('admin_projet/index.html.twig',[
                 'soon' => $soon,

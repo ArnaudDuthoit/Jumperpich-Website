@@ -11,7 +11,6 @@
         </div>
 
         {% for message in app.flashes('success') %}
-
                 <div class="text-center fixed-bottom alert alert-success alert-dismissible fade show" role="alert">
                     <strong>Succès !</strong> {{ message }}
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -78,7 +77,11 @@
                     {% endfor %}
                     </tbody>
                 </table>
-
+                <div class="container">
+                    <div class="pagination mt-4" id="paginate_float">
+                        {{ knp_pagination_render(projets) }}
+                    </div>
+                </div>
             </div>
 
         </div>
