@@ -128,16 +128,6 @@ class HomeController extends AbstractController
             ->add('email', EmailType::class, array('label' => 'Email', 'attr' => array('maxlength' => 255, 'class' => 'form-control', 'placeholder' => "Veuillez entrer votre adresse mail ici", 'style' => 'margin-bottom:15px')))
             ->add('subject', TextType::class, array('label' => 'Objet', 'attr' => array('maxlength' => 255, 'class' => 'form-control', 'placeholder' => "Veuillez entrer l'objet de votre message ici", 'style' => 'margin-bottom:15px')))
             ->add('message', TextareaType::class, array('label' => 'Message (0/255)', 'label_attr' => array('id' => 'text'), 'attr' => array('maxlength' => 255, 'class' => 'form-control', 'placeholder' => "Veuillez entrer votre message ici")))
-            ->add('captcha', CaptchaType::class, array(
-                'label' => "Veuillez écrire le code de sécurité suivant",
-                'attr' => array('class' => 'form-control mt-4', 'placeholder' => "Veuillez entrer le code ici"),
-                'width' => 200,
-                'height' => 50,
-                'length' => 6,
-                'background_color' => [255, 255, 255],
-                'reload' => true,
-                'as_url' => true
-            ))
             ->add('Save', SubmitType::class, array('label' => 'Envoyer', 'attr' => array('class' => 'btn btn__custom', 'style' => 'margin-top:15px')))
             ->getForm();
         # Handle form response
@@ -168,17 +158,19 @@ class HomeController extends AbstractController
             $MAILER_PASSWORD = $_ENV['MAILER_PASSWORD'];
 
 
-            $transport = (new Swift_SmtpTransport('smtp.gmail.com', 465, "ssl"))#Config SwiftMailer
+            $transport = (new Swift_SmtpTransport('mail.infomaniak.com', 587, "TLS"))#Config SwiftMailer
             ->setUsername($MAILER_USERNAME)
                 ->setPassword($MAILER_PASSWORD);
 
             $mailer = new \Swift_Mailer($transport);
 
-            $message = (new \Swift_Message ('Site Jumperpich.com'))#Config of the email
-            ->setSubject($subject)
-                ->setFrom('jumperpich59@gmail.com')
+            $message = (new \Swift_Message ('Jumperpich.com'))#Config of the email
+            ->setSubject('Re:'.$subject)
+                ->setFrom(['contact@jumperpich.com' => 'Jumperpich'])
                 ->setTo($email)
-                ->setBody($this->renderView('home/sendemail.html.twig'), 'text/html');
+                ->setBody($this->renderView('home/sendemail.html.twig', [
+                    'name' => $name
+                ]), 'text/html');
             $mailer->send($message);
 
             return $this->render('home/contact_finish.html.twig', [

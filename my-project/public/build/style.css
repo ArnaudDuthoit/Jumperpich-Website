@@ -461,9 +461,6 @@ html.is-animating .transition-fade {
     max-width: 300px
 }
 
-#paginate_float {
-    float: right
-}
 
 .accordion-section .panel-default > .panel-heading {
     border: solid 2px #fff;
@@ -473,6 +470,7 @@ html.is-animating .transition-fade {
 }
 
 .accordion-section .panel-default .panel-title a {
+    color:white;
     display: block;
     font-style: italic;
     font-size: 2vh;
