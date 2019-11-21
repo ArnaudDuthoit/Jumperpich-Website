@@ -1,27 +1,24 @@
 <!DOCTYPE html>
-<html lang="fr">
-<meta charset="UTF-8">
-
+<html lang="FR">
 <head>
-
-    <!-- HTML Meta Tags -->
-    <title>{% block title %} Jumperpich | Jumperpich.com {% endblock %}</title>
-    <meta name="description" content="♬ Bienvenue sur le site officiel de Jumperpich ♬">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <link rel="canonical" href="https://www.jumperpich.com/" />
+    <meta name="google-site-verification" content="12vHMcs7K81ijpw7pmzOf8-CIJdjjR_Tp95qyYPsxZw"/>
+    <title>{% block title %} Jumperpich | Jumperpich.com {% endblock %}</title>
+    <meta name="description" content="♬ Site Officiel de Jumperpich ♬"/>
 
-
-    <!-- Google / Search Engine Tags -->
-    <meta itemprop="name" content="♬ Jumperpich | Jumperpich.com ♬">
-    <meta itemprop="description" content="♬ Bienvenue sur le site officiel de Jumperpich ♬">
     <meta itemprop="image" content="http://www.jumperpich.com/pictures/Background_header.jpg">
 
     <!-- Facebook Meta Tags -->
-    <meta property="og:url" content="https://www.jumperpich.com">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="♬ Jumperpich | Jumperpich.com ♬">
-    <meta property="og:description" content="♬ Bienvenue sur le site officiel de Jumperpich ♬">
-    <meta property="og:image" content="http://www.jumperpich.com/pictures/Background_header.jpg">
+    {% block OG %}
+        <meta property="og:url" content="https://www.jumperpich.com">
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="Jumperpich | Jumperpich.com ">
+        <meta property="og:description" content="♬ Bienvenue sur le site officiel de Jumperpich ♬">
+        <meta property="og:image" content="http://www.jumperpich.com/pictures/Background_header.jpg">
+    {% endblock %}
+
 
     <!-- Twitter Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
@@ -30,18 +27,18 @@
     <meta name="twitter:image" content="http://www.jumperpich.com/pictures/Background_header.jpg">
 
     <!-- google-site-verification -->
-    <meta name="google-site-verification" content="12vHMcs7K81ijpw7pmzOf8-CIJdjjR_Tp95qyYPsxZw" />
+    <meta name="google-site-verification" content="12vHMcs7K81ijpw7pmzOf8-CIJdjjR_Tp95qyYPsxZw"/>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-143368877-1"></script>
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" >
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
     <script src="https://www.google.com/recaptcha/api.js?render=6LfKBrEUAAAAALs0yDYX-RkVwE5TlqAAJz2GFSZA"></script>
 
-        <!-- Stylesheets -->
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="{{ asset('build/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('build/select2.css') }}">
     <link rel="stylesheet" href="{{ asset('build/style.css') }}?ver={{ "now"|date("dmY:Gi") }}">
@@ -55,7 +52,7 @@
     <script src="{{ asset('build/basics_charts.js') }}"></script>
     <script src="{{ asset('build/ressources.js') }}"></script>
     <script src="{{ asset('build/cookieconsent.min.js') }}" async></script>
-    <script src="{{ asset('build/cookieconsent.js') }}" async ></script>
+    <script src="{{ asset('build/cookieconsent.js') }}" async></script>
 
 </head>
 
@@ -68,13 +65,13 @@
 
     {% block body %}{% endblock %}
 
-    <a id="back-to-top" href="#" class="btn__custom btn-lg back-to-top" role="button" data-toggle="tooltip" data-placement="left"><i class="fas fa-arrow-up"></i> </a>
+    <a id="back-to-top" href="#" class="btn__custom btn-lg back-to-top" role="button" data-toggle="tooltip"
+       data-placement="left"><i class="fas fa-arrow-up"></i> </a>
 
 </div>
 
 
 {% include 'footer.html.twig' %}
-
 
 
 <script src="{{ asset('build/app.js') }}?ver={{ "now"|date("dmY:Gi") }}" async></script>

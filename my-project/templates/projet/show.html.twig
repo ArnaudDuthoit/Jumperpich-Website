@@ -1,16 +1,15 @@
 {% extends 'base.html.twig' %}
-
-{% block title %} Jumperpich | {{ projet.title }}{% endblock %}
+{% block title %} {{ projet.title }} | Jumperpich {% endblock %}
 
 {% block OG %}
     <!-- Open Graph meta -->
-    <meta property="og:url" content="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}"/>
-    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="https://www.jumperpich.com/{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}"/>
+    <meta property="og:type" content="website"/>
     <meta property="og:title" content="{{ projet.title }}"/>
     <meta property="og:description"
-          content="{% trans %}Télécharge GRATUITEMENT ce mix !{% endtrans %}"/>
+          content="♬ Click for Tracklist & Download ♬"/>
     <meta property="og:image"
-          content="{{ vich_uploader_asset(projet, 'imageFile') }}"/>
+          content="https://www.jumperpich.com/{{ vich_uploader_asset(projet, 'imageFile') }}"/>
 {% endblock %}
 
 {% block body %}
@@ -24,12 +23,12 @@
 
 
         {% for message in app.flashes('report') %}
-                <div class="text-center fixed-bottom alert alert-success alert-dismissible fade show" role="alert">
-                    <strong>Warning !</strong> {{ message }}
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
+            <div class="text-center fixed-bottom alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Warning !</strong> {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
         {% endfor %}
 
         <div class="container my-4 text-center shadow rounded">
@@ -115,13 +114,13 @@
                                     <i class="fab fa-soundcloud"></i>
                                 </a>
                             </div>
-                        {% elseif projet.ytblink %}
+                        {% endif %}
+                        {% if projet.ytblink %}
                             <div class="p-2 mx-auto">
                                 <a href="{{ projet.ytblink }}" target="_blank" rel="noopener">
                                     <i class="fab fa-youtube"></i>
                                 </a>
                             </div>
-
                         {% endif %}
                     </div>
 

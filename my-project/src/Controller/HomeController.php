@@ -164,8 +164,7 @@ class HomeController extends AbstractController
 
             $mailer = new \Swift_Mailer($transport);
 
-            $message = (new \Swift_Message ('Jumperpich.com'))#Config of the email
-            ->setSubject('Re:'.$subject)
+            $message = (new \Swift_Message ('Re:'.$subject))#Config of the email
                 ->setFrom(['contact@jumperpich.com' => 'Jumperpich'])
                 ->setTo($email)
                 ->setBody($this->renderView('home/sendemail.html.twig', [
