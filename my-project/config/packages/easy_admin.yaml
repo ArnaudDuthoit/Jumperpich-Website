@@ -1,0 +1,67 @@
+easy_admin:
+    site_name: '<em style="font-size: 80%;">ADMINISTRATION</em>'
+    design:
+        form_theme:
+            - '@EasyAdmin/form/bootstrap_4.html.twig'
+            - '@VichUploader/Form/fields.html.twig'
+    entities:
+        Mixes:
+            class: App\Entity\Projet
+            list:
+                title: "Liste des Mixes"
+                fields:
+                    - { property: 'title' , label: "Titre"}
+                    - { property: 'updated_at' , label: "Update"}
+                    - { property: 'views' , label: "Page vue"}
+                    - { property: 'downloadCount' , label: "Téléchargements"}
+            new:
+                title: "Ajouter nouveau Mix"
+            form:
+                fields:
+                    - { property: "title" , label: 'Titre du Mix' , type: "text"}
+                    - { property: "description" , label: 'Tracklist' , type: "textarea"}
+                    - { property: "tags" , label: 'Style'}
+                    - { property: "imageFile" , label: 'Fichier Image' , type: "file"}
+                    - { property: "ytb_link" , label: 'Lien Youtube' , type: "text"}
+                    - { property: "mp3File" , label: 'Fichier MP3' , type: "file"}
+                    - { property: "soundcloud" , label: 'Lien Soundcloud' , type: "text"}
+                    - { property: "mixcloud" , label: 'iFrame Mixcloud' , type: "text"}
+                    - { property: "fileSize" , label: 'Taille en Mo' , type: "integer"}
+
+        Tag:
+            class: App\Entity\Tag
+            list:
+                title: "Liste des Tags"
+                fields:
+                    - { property: "id" , label: 'ID' , type: "integer"}
+                    - { property: "name" , label: 'Nom du style' , type: "text"}
+                    - { property: "projets" , label: 'Mixes' ,type: 'array'}
+            new:
+                title: "Ajouter nouveau genre"
+            form:
+                fields:
+                - { property: "name" , label: 'Titre du genre' , type: "text"}
+
+        Contact:
+            class: App\Entity\Contact
+            list:
+                title: "Liste des Messages reçus"
+
+        User:
+            class: App\Entity\User
+            list:
+                title: "Liste des Utilisateurs"
+                fields: ['email', 'username', 'role']
+            form:
+                fields:
+                    - { property: "email" , label: 'Adresse Mail' , type: "email"}
+                    - { property: "username" , label: 'Username' , type: "text"}
+
+
+    list:
+        actions:
+        # displays both the action label and a custom icon
+        - { name: 'edit', label: 'Modifier'}
+        - { name: 'delete', label: 'Supprimer'}
+        - { name: 'new', label: 'Publier'}
+

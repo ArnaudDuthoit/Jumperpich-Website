@@ -356,4 +356,9 @@ class User implements UserInterface
     {
         $this->confirm_email = $confirm_email;
     }
+
+    public function __toString()
+    {
+        return $this->username;
+    }
 }

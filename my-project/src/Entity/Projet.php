@@ -122,7 +122,6 @@ class Projet
     private $mixcloud;
 
 
-
     public function __construct()
     {
         $this->created_at = new \DateTime();
@@ -383,6 +382,17 @@ class Projet
         $this->mixcloud = $mixcloud;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->title;
+    }
+
+    public function getImage()
+    {
+        return $this->filename;
+
     }
 
 }
