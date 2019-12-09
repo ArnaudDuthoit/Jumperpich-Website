@@ -1,54 +1,52 @@
-{% extends 'base.html.twig' %}
+{% extends '@EasyAdmin/default/layout.html.twig' %}
 
-{% block body %}
+{% set _content_title = 'Jumperpich | Password ' %}
 
+{% block page_title -%}
+    {{ _content_title }}
+{%- endblock %}
 
-    <div class="container-fluid">
+{% block content_header %}
+    <h1 class="title">Changement de mot de passe</h1>
+{% endblock %}
 
+{% block main %}
 
-        <div id="loading">
-            <img src="{{ asset('pictures/loader.gif') }}" alt="Website Loader">
+    <style>
+        .form-group label {
+            text-align: left !important;
+        }
+
+        .form-control {
+            width: 50%;
+        }
+    </style>
+
+    {% for message in app.flashes('success') %}
+        <div class="text-center fixed-bottom alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Succès !</strong> {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
-
-
-        {% for message in app.flashes('success') %}
-            <div class="text-center fixed-bottom alert alert-success alert-dismissible fade show" role="alert">
-                <strong>Succès !</strong> {{ message }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        {% endfor %}
-        {% for message in app.flashes('error') %}
-            <div class="text-center fixed-bottom alert alert-success alert-dismissible fade show" role="alert">
-                <strong>Erreur !</strong> {{ message }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        {% endfor %}
-
-
-        <div class="container main">
-
-            <!-- Vertical navbar -->
-            {{ include('vertical_nav.html.twig') }}
-            <!-- End vertical navbar -->
-            <!-- Page content holder -->
-
-            <div class="page-content p-5 " id="content">
-
-                <h6 class="text-center "><abbr> Modifier mot de passe</abbr></h6>
-
-
-                <div class="container mt-4 pt-4 pb-4 text-dark shadow rounded">
-                    {{ form_start(form) }}
-                    {{ form_widget(form) }}
-                    <button class="btn btn__custom">Modifier</button>
-                    {{ form_end(form) }}
-                </div>
-
-            </div>
+    {% endfor %}
+    {% for message in app.flashes('error') %}
+        <div class="text-center fixed-bottom alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Erreur !</strong> {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
+    {% endfor %}
+
+
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <div class="form-group">
+        <button class="btn btn__custom">Modifier</button>
     </div>
+    {{ form_end(form) }}
+
+
 {% endblock %}

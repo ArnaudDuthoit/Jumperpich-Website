@@ -3,18 +3,14 @@
 namespace App\Controller;
 
 
-use App\Entity\Soon;
-use App\Form\SoonFormType;
+
 use App\Form\UserInfosType;
 use App\Form\UserResetPasswordType;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\Projet;
-use App\Form\ProjetType;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
-
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 
@@ -30,160 +26,6 @@ class UserController extends AbstractController
     public function __construct(UserRepository $repository)
     {
         $this->repository = $repository;
-    }
-
-
-    /**
-     * Display all the projects for this user
-     * @Route("/admin/account", name="user.projet.index")
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function MyAccount()
-    {
-        #Get the current user logged in
-        $user = $this->getUser();
-
-        #Get all the projects published by the user
-
-        return $this->render('user/user.html.twig', [
-            'user' => $user,
-            'current_menu' => 'settings'
-        ]);
-    }
-
-
-    /**
-     * Creating and publishing a new project
-     * @Route("/admin/new", name="user.projet.create")
-     * @param Request $request
-     * @param ObjectManager $manager
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
-     */
-    public function new(Request $request, ObjectManager $manager)
-    {
-
-        $projet = new Projet();
-
-        $form = $this->createForm(ProjetType::class, $projet);
-
-        $form->handleRequest($request);
-
-        if ($this->getUser()->getActive() == 1) { #if the user is active
-
-            if ($form->isSubmitted() && $form->isValid()) {
-
-                $user = $this->getUser();
-
-                $projet->setUser($user);
-
-                // if no title defined
-                if($projet->getTitle() !== null)
-                {
-                    $manager->persist($projet);
-                    $manager->flush();
-                    $this->addFlash("success", " Mix publié avec succès");
-                    return $this->redirectToRoute('admin.projet.index');
-                }
-                else {
-                    $this->addFlash("warning", "Veuillez entrer un titre pour votre projet ...");
-                    return $this->render('user/new.html.twig', [
-                        'current_menu' => 'new',
-                        'projet' => $projet,
-                        'form' => $form->createView()]);
-                }
-            }
-
-            return $this->render('user/new.html.twig', [
-                'current_menu' => 'new',
-                'projet' => $projet,
-                'form' => $form->createView()
-            ]);
-        }
-
-        return $this->render('user/inactif.html.twig'); #if the user is not active
-    }
-
-
-    /**
-     * Creating and publishing a new project
-     * @Route("/admin/new/soon", name="user.projet.create.soon")
-     * @param Request $request
-     * @param ObjectManager $manager
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
-     */
-    public function newSoon(Request $request, ObjectManager $manager)
-    {
-
-        $projetSoon = new Soon();
-
-        $form = $this->createForm(SoonFormType::class, $projetSoon);
-
-        $form->handleRequest($request);
-
-            if ($form->isSubmitted() && $form->isValid()) {
-
-                    $manager->persist($projetSoon);
-                    $manager->flush();
-                    $this->addFlash("success", " Prochain Mix annoncé avec succès");
-                    return $this->redirectToRoute('admin.projet.index');
-            }
-
-            return $this->render('user/soon.html.twig', [
-                'projet' => $projetSoon,
-                'form' => $form->createView()
-            ]);
-
-    }
-
-
-    /**
-     * The user editing his project page
-     * @Route("/admin/projet/{id}", name="user.projet.edit", methods="GET|POST")
-     * @param Projet $projet
-     * @param Request $request
-     * @param ObjectManager $manager
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
-     */
-    public function edit(Projet $projet, Request $request, ObjectManager $manager)
-    {
-
-        $form = $this->createForm(ProjetType::class, $projet);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $manager->flush();
-            $this->addFlash("success", " Mix modifié avec succès");
-            return $this->redirectToRoute('user.projet.index');
-        }
-
-        return $this->render('user/edit.html.twig', [
-            'projet' => $projet,
-            'form' => $form->createView()
-        ]);
-    }
-
-
-    /**
-     * Delete page of the selected project
-     * @Route("/admin/projet/{id}", name="user.projet.delete" , methods="DELETE")
-     * @param Projet $projet
-     * @param Request $request
-     * @param ObjectManager $manager
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    public function delete(Projet $projet, Request $request, ObjectManager $manager)
-    {
-
-
-        if ($this->isCsrfTokenValid('authenticate', $request->get('_token'))) { #check if the csrf token is valid
-
-            $manager->remove($projet); // Remove the project
-            $manager->flush();
-            $this->addFlash("success", " Mix supprimé avec succès");
-
-        }
-
-        return $this->redirectToRoute('user.projet.index');
-
     }
 
     /**

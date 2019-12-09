@@ -1,6 +1,42 @@
 easy_admin:
-    site_name: '<em style="font-size: 80%;">ADMINISTRATION</em>'
+    site_name: '<em>ADMINISTRATION</em>'
     design:
+        menu:
+            - { label: 'Site'}
+            - { label: 'Homepage', route: 'home', icon: 'home' , target: '_blank'}
+            - { label: 'Administration Mixes'}
+            - { entity: 'Mixes', label: 'Mixes', default: true ,icon: 'music' }
+            - { entity: 'Tag', label: 'Tags', icon: 'tag' }
+            - { label: 'Messages'}
+            - { entity: 'Contact', label: 'Messages reçus', icon: 'envelope' }
+            - { label: 'Statistiques'}
+            - { label: 'Basic Charts', route: 'admin.charts', default: true , icon: 'chart-bar' }
+            - { label: 'Account'}
+            -
+                label: 'Données Utilisateur'
+                icon: 'exclamation'
+                children:
+                -
+                    label: 'Modifier les identifiants'
+                    icon: 'user'
+                    entity: 'User'
+                -
+                    label: 'Changer mot de passe'
+                    route: 'user.new_pwd'
+                    icon: 'key'
+                -
+                    label: 'Supprimer le compte'
+                    route: 'user.deleteprofile'
+                    icon: 'trash'
+
+
+
+
+
+
+
+
+
         form_theme:
             - '@EasyAdmin/form/bootstrap_4.html.twig'
             - '@VichUploader/Form/fields.html.twig'

@@ -1,44 +1,39 @@
-{% extends 'base.html.twig' %}
+{% extends '@EasyAdmin/default/layout.html.twig' %}
 
-{% block body %}
+{% set _content_title = 'Jumperpich | Delete Account ' %}
 
+{% block page_title -%}
+    {{ _content_title }}
+{%- endblock %}
 
-    <div class="container-fluid">
+{% block content_header %}
+    <h1 class="title">Suppression Compte</h1>
+{% endblock %}
 
-        <div id="loading">
-            <img src="{{ asset('pictures/loader.gif') }}" alt="Website Loader">
-        </div>
+{% block main %}
 
+    <style>
+        .form-group label {
+            text-align: left !important;
+        }
 
-        <div class="container main">
+        .form-control {
+            width: 50%;
+        }
+    </style>
 
-
-            <!-- Vertical navbar -->
-            {{ include('vertical_nav.html.twig') }}
-            <!-- End vertical navbar -->
-            <!-- Page content holder -->
-
-            <div class="page-content p-5 " id="content">
-
-                <h6 class="text-center "><abbr>Suppression de Compte</abbr></h6>
-
-
-                <div class="container mt-4 pt-4 pb-4 text-dark shadow rounded">
-
-                    {{ form_start(form) }}
-                    {{ form_widget(form) }}
-                    <div class="alert alert-danger" role="alert">
-                        <strong>ATTENTION!</strong> Toute suppression est definitive ! Etes vous vraiment certains de
-                        vouloir supprimer votre compte ?
-                    </div>
-                    <button class="btn btn__custom"
-                            onclick="return confirm('Attention dernier avertissement ! Voulez vous vraiment supprimer votre compte ?')">
-                        Supprimer
-                    </button>
-                    {{ form_end(form) }}
-                </div>
-
-            </div>
-        </div>
+    <div class="alert alert-danger text-center" role="alert">
+        <strong>ATTENTION!</strong> Toute suppression est definitive ! Etes vous vraiment certains de
+        vouloir supprimer votre compte ?
     </div>
+
+
+{{ form_start(form) }}
+{{ form_widget(form) }}
+    <div class="form-group">
+<button class="btn btn__custom" onclick="return confirm('Attention dernier avertissement ! Voulez vous vraiment supprimer votre compte ?')">Supprimer</button>
+    </div>
+ {{ form_end(form) }}
+
+
 {% endblock %}
