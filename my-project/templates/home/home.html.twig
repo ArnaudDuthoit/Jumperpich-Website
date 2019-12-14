@@ -32,7 +32,8 @@
         {% endfor %}
 
 
-        <div class="m-0 jumbotron jumbotron-fluid" style="background: #000 url('{{ asset('pictures/Background_header.jpg') }}') center no-repeat fixed ;min-height: 100vh;">
+        <div class="jumbotron jumbotron-fluid"
+             style="background: #000 url('{{ asset('pictures/Background_header.jpg') }}') center no-repeat fixed ;min-height: 100vh;">
 
             <div class="container text-white header text-center">
 
@@ -62,7 +63,7 @@
 
         <div class="container my-4 py-4 text-center" id="recent">
 
-            <h6><abbr >{% trans %}Les plus récents{% endtrans %}</abbr></h6>
+            <h6><abbr>{% trans %}Les plus récents{% endtrans %}</abbr></h6>
 
             <div class="row my-4 pt-4 d-flex flex-wrap m15">
 
@@ -74,12 +75,23 @@
                            aria-label="Read more about {{ projet.title }}">
 
                             <figure class="d-block figure">
-                                <img class="image w-100 h-auto" {% if projet.filename %} src="{{ vich_uploader_asset(projet, 'imageFile') | imagine_filter('thumb') }}"
-                                {% else %} src="{{ 'images/projets/empty.jpg' | imagine_filter('thumb') }}"
-                                {% endif %} alt="thumb_{{ projet.title }}">
+                                <a href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}"
+                                   aria-label="Read more about {{ projet.title }}">
 
-                                <div class="middle">
-                                    <i class="far fa-play-circle text"></i>
+                                    <img class="image w-100 h-auto" {% if projet.filename %} src="{{ vich_uploader_asset(projet, 'imageFile') | imagine_filter('thumb') }}"
+                                    {% else %} src="{{ 'images/projets/empty.jpg' | imagine_filter('thumb') }}"
+                                    {% endif %} alt="thumb_{{ projet.title }}">
+
+                                    <div class="middle">
+                                        <i class="far fa-play-circle text"></i>
+                                    </div>
+                                </a>
+
+                                <div class="tag-top">
+                                    {% for tag in projet.tags %}
+                                        <h5 class="name_tag"
+                                            style="color:{% if tag.id == 1 %}red{% endif %}{% if tag.id == 2 %}orange{% endif %}{% if tag.id == 3 %}#8ee800{% endif %}">{{ tag.name }}</h5>
+                                    {% endfor %}
                                 </div>
 
                             </figure>
@@ -87,26 +99,14 @@
                         </a>
 
                         <div class="info infos">
-
                             <div class="row flex-wrap m15">
-
                                 <div class="col-12 mw-100 info_flex">
-
                                     <div class="info__content d-flex align-items-center w-100">
+                                        <h1 class="mt-0 pt-0 mb-0 text-uppercase flex-grow-1" style="font-size: 1rem">
+                                            <a href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}"
+                                               aria-label="Read more about {{ projet.title }}">{{ projet.title }}</a>
+                                        </h1>
 
-                                        <h1 class="mt-0 pt-0 mb-0 text-uppercase flex-grow-1"
-                                            style="font-size: 1rem"><a
-                                                    href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}"
-                                                    aria-label="Read more about {{ projet.title }}">{{ projet.title }}
-                                            </a> </h1>
-                                        <div class="info__content__buttons align-self-end">
-                                            {% for tag in projet.tags %}
-                                                <div class="d-inline-block tag"
-                                                     style="color:{% if tag.id == 1 %}red{% endif %}{% if tag.id == 2 %}orange{% endif %}{% if tag.id == 3 %}#8ee800{% endif %}">
-                                                    <div>{{ tag.name }}</div>
-                                                </div>
-                                            {% endfor %}
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -143,11 +143,18 @@
                                     {% else %} src="{{ 'images/projets/empty.jpg' | imagine_filter('thumb') }}"
                                     {% endif %} alt="thumb_{{ projet.title }}">
 
-                                <div class="middle">
-                                    <i class="far fa-play-circle text"></i>
+                                    <div class="middle">
+                                        <i class="far fa-play-circle text"></i>
+                                    </div>
+                                </a>
+
+                                <div class="tag-top">
+                                    {% for tag in projet.tags %}
+                                        <h5 class="name_tag"
+                                            style="color:{% if tag.id == 1 %}red{% endif %}{% if tag.id == 2 %}orange{% endif %}{% if tag.id == 3 %}#8ee800{% endif %}">{{ tag.name }}</h5>
+                                    {% endfor %}
                                 </div>
 
-                                </a>
                             </figure>
 
                         </a>
@@ -157,14 +164,10 @@
                                 <div class="col-12 mw-100 info_flex">
                                     <div class="info__content d-flex align-items-center w-100">
                                         <h1 class="mt-0 pt-0 mb-0 text-uppercase flex-grow-1" style="font-size: 1rem">
-                                            <a href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}" aria-label="Read more about {{ projet.title }}">{{ projet.title }}</a></h1>
-                                        <div class="info__content__buttons align-self-end">
-                                            {% for tag in projet.tags %}
-                                                <div class="d-inline-block tag" style="color:{% if tag.id == 1 %}red{% endif %}{% if tag.id == 2 %}orange{% endif %}{% if tag.id == 3 %}#8ee800{% endif %}">
-                                                    <div>{{ tag.name }}</div>
-                                                </div>
-                                            {% endfor %}
-                                        </div>
+                                            <a href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}"
+                                               aria-label="Read more about {{ projet.title }}">{{ projet.title }}</a>
+                                        </h1>
+
                                     </div>
                                 </div>
                             </div>

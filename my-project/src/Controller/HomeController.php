@@ -172,8 +172,9 @@ class HomeController extends AbstractController
                 ]), 'text/html');
             $mailer->send($message);
 
-            return $this->render('home/contact_finish.html.twig', [
-            ]);
+            $this->addFlash("success", "Formulaire envoyé avec succès !");
+
+            return $this->redirectToRoute('contact');
 
         }
 

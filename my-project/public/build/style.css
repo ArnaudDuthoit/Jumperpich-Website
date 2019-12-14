@@ -11,6 +11,7 @@ body {
 
 }
 
+
 .back-to-top{
     cursor:pointer;
     position:fixed;
@@ -30,6 +31,11 @@ body {
 
 .mix:hover .middle {
     opacity: 1;
+}
+
+.mix:hover .tag-top {
+    opacity: 0;
+    transition:all 0.3s linear;
 }
 
 
@@ -91,8 +97,22 @@ body {
 
 .infos {
     background: #2c2c2c;
-    padding: 0 10px;
-    min-height: 41px;
+    padding: .5rem 0;
+
+}
+
+.tag-top {
+    -webkit-font-smoothing: antialiased;
+    margin: 0;
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #2c2c2c;
+    padding: .3rem .6rem .5rem;
+    border-bottom-right-radius: 1rem;
+    font-size: .5rem;
+    text-align: center;
 }
 
 .divider {
@@ -164,6 +184,10 @@ h1 > a:hover {
     padding: 10px;
 }
 
+.name_tag {
+    position: relative;
+}
+
 h6 {
     position: relative;
     top: -35px;
@@ -173,6 +197,7 @@ h6 {
     font-family: 'toronto_subwayregular', helevtica, arial, sans-serif;
     text-transform: uppercase;
 }
+
 
 h6 abbr {
     display: inline-block;
@@ -877,6 +902,14 @@ table td span {
         display: none
     }
 
+    .date {
+        display:none;
+    }
+
+    .view {
+        display:none
+    }
+
     .info {
         width: 100%;
         border: none !important;
@@ -895,7 +928,7 @@ table td span {
         position: relative;
         float: left;
         top: 50%;
-        left: 50%;
+        left: 60%;
         transform: translate(-50%, -50%);
     }
 
