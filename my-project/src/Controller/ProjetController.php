@@ -4,26 +4,14 @@ namespace App\Controller;
 
 
 use App\Data\SearchData;
-use App\Entity\Contact;
 use App\Entity\Projet;
-use App\Entity\ProjetSearch;
-use App\Entity\Tag;
-use App\Form\ProjetSearchType;
 use App\Form\SearchForm;
 use App\Repository\ProjetRepository;
-use App\Repository\TagRepository;
 use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\ORM\EntityManager;
-use Knp\Component\Pager\PaginatorInterface;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\SearchType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Routing\Annotation\Route;
 use Vich\UploaderBundle\Handler\DownloadHandler;
 
@@ -38,48 +26,6 @@ class ProjetController extends AbstractController
     public function __construct(ProjetRepository $repository)
     {
         $this->repository = $repository;
-    }
-
-    /**
-     * Index page of all the projects (with research function)
-     * @Route("/api/getmix", name="getmix")
-     * @param Request $request
-     * @return string
-     */
-    public function getMixbyName(Request $request)
-    {
-
-        $name = $request->query->get('name');
-
-        $projets = $this->repository->findMixbyName($name);
-
-        return $this->render('projet/ajax.html.twig', [
-
-            'projets' => $projets,
-
-        ]);
-
-    }
-
-    /**
-     * Index page of all the projects (with research function)
-     * @Route("/api/getmixtag", name="getmixtag")
-     * @param Request $request
-     * @return string
-     */
-    public function getMixbyTags(Request $request)
-    {
-
-        $tag = $request->query->get('tag');
-
-        $projets = $this->repository->findMixbyTags($tag);
-
-        return $this->render('projet/ajax.html.twig', [
-
-            'projets' => $projets,
-
-        ]);
-
     }
 
     /**
@@ -101,9 +47,17 @@ class ProjetController extends AbstractController
 
         $projets = $repository->findSearch($data);
 
+        if($request->get('ajax')){
+            return new JsonResponse([
+                'content' => $this->renderview('projet/_projets.html.twig',['projets' => $projets]),
+                'pagination' => $this->renderview('projet/_pagination.html.twig',['projets' => $projets]),
+            ]);
+        }
+
         return $this->render('projet/index.html.twig', [
             'projets' => $projets,
-            'form' =>$form->createView()
+            'form' =>$form->createView(),
+            'current_menu' => 'mixes'
         ]);
 
 

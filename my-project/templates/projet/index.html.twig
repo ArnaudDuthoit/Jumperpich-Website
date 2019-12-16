@@ -5,29 +5,26 @@
 
 {% block body %}
 
-    <div class="container-fluid pt-4">
+    <div class="container-fluid pt-4 js-filter">
 
         <div id="loading">
             <img src="{{ asset('pictures/loader.gif') }}" alt="Website Loader">
         </div>
 
-        <div class="container my-4 py-4" id="filter" style="color: black;">
+        <div class="container my-4 py-4 " id="filter" style="color: black;">
 
-                    {% include 'projet/_filter.html.twig' with {form:form} only %}
+            {% include 'projet/_filter.html.twig' with {form:form} only %}
 
         </div>
 
         <div class="container mt-4 rounded pt-2 pb-4">
 
-            <div class="row text-center" id="mixes">
-
-                {% for projet in projets %}
-                    {% include 'projet/_card.html.twig' with {projet:projet} only %}
-                {% endfor %}
+            <div class="row text-center js-filter-content" id="mixes">
+                {% include 'projet/_projets.html.twig' %}
             </div>
 
-            <div>
-                {{ knp_pagination_render(projets) }}
+            <div class="js-filter-pagination">
+                {% include 'projet/_pagination.html.twig' %}
             </div>
 
         </div>

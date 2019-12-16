@@ -1,6 +1,111 @@
+let element = document.querySelector('.js-filter');
+let pagination = document.querySelector('.js-filter-pagination');
+let content = document.querySelector('.js-filter-content');
+let loader = document.querySelector('.js-loading');
+
+function Filter(element) {
+
+    if (element == null) {
+        console.log('no filter')
+    } else {
+        this.pagination = element.querySelector('.js-filter-pagination');
+        this.content = element.querySelector('.js-filter-content');
+        this.form = element.querySelector('.js-filter-form');
+        this.page = parseInt(new URLSearchParams(window.location.search).get('page') || 1);
+
+        this.bindEvents();
+    }
+}
+
+function bindEvents() {
+
+    const aClickListener = e => {
+        if (e.target.tagName === 'A') {
+            e.preventDefault();
+            this.loadURL(e.target.getAttribute('href'))
+        }
+    };
+
+
+    this.form.querySelectorAll('input[type=checkbox]').forEach(input => {
+        input.addEventListener('change', this.loadForm.bind(this))
+    });
+    this.form.querySelectorAll('input[type=text]').forEach(input => {
+        input.addEventListener('keyup', this.loadForm.bind(this))
+    });
+
+        this.pagination.addEventListener('click', aClickListener)
+}
+
+async function loadMore() {
+    const button = this.pagination.querySelector('button');
+    button.setAttribute('disabled' , "disabled");
+    this.page++ ;
+    const url = new URL(window.location.href);
+    const params = new URLSearchParams(url.search);
+    params.set('page', this.page);
+    await this.loadURL(url.pathname + '? ' + params.toString());
+    button.removeAttribute('disabled')
+}
+
+async function loadForm() {
+
+    const data = new FormData(this.form);
+    const url = new URL(this.form.getAttribute('action') || window.location.href);
+    const params = new URLSearchParams();
+    data.forEach((value, key) => {
+        params.append(key, value)
+    });
+
+    return this.loadURL(url.pathname + '?' + params.toString())
+
+}
+
+async function loadURL(url) {
+
+    showLoader();
+
+    const params = new URLSearchParams(url.split('?')[1] || '');
+    params.set('ajax', '1')
+    const response = await fetch(url.split('?')[0] + '?' + params.toString(), {
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest'
+        }
+    });
+
+    if (response.status >= 200 && response.status < 300) {
+        const data = await response.json();
+        this.content.innerHTML = data.content;
+        this.pagination.innerHTML = data.pagination;
+        params.delete('ajax');
+        history.replaceState({}, '', url.split('?')[0] + '?' + params.toString())
+    } else {
+        console.error(response)
+    }
+
+    hideLoader();
+}
+
+
+Filter(element);
+
+function showLoader() {
+    document.getElementById('loader').style.display = null;
+    document.getElementById('loader').setAttribute('aria-hidden', 'false');
+    document.querySelector('.js-filter-form').classList.add('is-loading');
+}
+
+
+function hideLoader() {
+    document.getElementById('loader').style.display = 'none';
+    document.getElementById('loader').setAttribute('aria-hidden', 'true');
+    document.querySelector('.js-filter-form').classList.remove('is-loading');
+}
+
+
 // Disparition Page loading une fois le DOM chargé //
 window.addEventListener('load', function () {
-        document.getElementById('loading').parentNode.removeChild(document.getElementById('loading'));
+    document.getElementById('loading').parentNode.removeChild(document.getElementById('loading'));
 });
 
 
@@ -107,6 +212,9 @@ $(document).ready(function () {
     $('#form_message').blur(counter);
     $('#form_message').focus(counter)
 });
+
+
+
 
 
 

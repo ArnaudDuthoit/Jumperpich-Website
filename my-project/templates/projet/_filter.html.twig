@@ -1,11 +1,48 @@
-{{ form_start(form) }}
+<style>
+    input[type=checkbox] {
+        /* Double-sized Checkboxes */
+        -ms-transform: scale(2); /* IE */
+        -moz-transform: scale(2); /* FF */
+        -webkit-transform: scale(2); /* Safari and Chrome */
+        -o-transform: scale(2); /* Opera */
+        transform: scale(2);
+        padding: 10px;
+    }
 
-<h4>Styles</h4>
+    /* Might want to wrap a span around your checkbox text */
+    .checkboxtext {
+        /* Checkbox text */
+        font-size: 110%;
+        display: inline;
+    }
 
-{{ form_row(form.Tags) }}
+    .test {
+        font-size: 1rem;
+        font-weight: 300;
+        line-height: 1.7;
+        text-align: left;
+        color: #eee;
+        direction: inherit;
+        visibility: visible;
+        box-sizing: border-box;
+        position: sticky;
+        top: 0;
+        z-index: 1020;
+        background: rgba(0, 0, 0, .7);
+        padding: 10px;
+        margin-bottom: 30px;
+    }
+</style>
 
-{{ form_row(form.q) }}
+<div class="test">
 
-<button type="submit" class="btn btn__custom">Filtrer</button>
-
-{{ form_end(form) }}
+    {{ form_start(form, {'attr': {'class' : 'js-filter-form d-flex'}}) }}
+    <div class="spinner-border js-loading" role="status" aria-hidden="true" style="display:none" id="loader">
+        <span class="sr-only">Loading ... </span>
+    </div>
+    <form class="form-inline">
+        {{ form_widget(form.Tags, {'attr': {'class': 'd-flex'}}) }}
+        {{ form_widget(form.q, {'attr': {'class' : 'form-control'}}) }}
+        {{ form_end(form) }}
+    </form>
+</div>
