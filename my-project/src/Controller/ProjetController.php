@@ -3,11 +3,13 @@
 namespace App\Controller;
 
 
+use App\Data\SearchData;
 use App\Entity\Contact;
 use App\Entity\Projet;
 use App\Entity\ProjetSearch;
 use App\Entity\Tag;
 use App\Form\ProjetSearchType;
+use App\Form\SearchForm;
 use App\Repository\ProjetRepository;
 use App\Repository\TagRepository;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -83,58 +85,28 @@ class ProjetController extends AbstractController
     /**
      * Index page of all the projects (with research function)
      * @Route("/mixes", name="projet.index")
-     * @param PaginatorInterface $paginator
+     * @param ProjetRepository $repository
      * @param Request $request
-     * @param TagRepository $tagRepository
      * @return Response
      */
-    public function index(PaginatorInterface $paginator, Request $request, TagRepository $tagRepository)
+    public function index(ProjetRepository $repository, Request $request)
     {
 
-        $tags = $tagRepository->findAll();
 
-        $search = new ProjetSearch();
+        $data = new SearchData();
+        $data->page = $request->get('page', 1);
+        $form = $this->createForm(SearchForm::class, $data);
 
-        # Handle form response
-        $form = $this->createForm(ProjetSearchType::class, $search);
         $form->handleRequest($request);
 
-        $NameSearch = $form['projectname']->getData();
-        $TagsSearch = $form['tags']->getData();
+        $projets = $repository->findSearch($data);
 
-        // $form->handleRequest($request);
-
-        #récupère le parametre (tag id) dans l'url
-        $tag = $request->query->get('tags');
-
-
-        #find and paginate all the project with search criteria
-        $projets = $paginator->paginate(
-            $this->repository->findAllActive($search),
-            $request->query->getInt('page', 1), #Start page
-            99 #number of projects per page
-        );
+        return $this->render('projet/index.html.twig', [
+            'projets' => $projets,
+            'form' =>$form->createView()
+        ]);
 
 
-
-
-        $ua = htmlentities($_SERVER['HTTP_USER_AGENT'], ENT_QUOTES, 'UTF-8');
-        if (preg_match('~MSIE|Internet Explorer~i', $ua) || (strpos($ua, 'Trident/7.0') !== false && strpos($ua, 'rv:11.0') !== false)) {
-            return $this->render('InternetExplorer.html.twig');
-        } else {
-
-            return $this->render('projet/index.html.twig', [
-                'tags' => $tags,
-                'projets' => $projets,
-                'form' => $form->createView(),
-                'NameSearch' => $NameSearch,
-                'TagsSearch' => $TagsSearch,
-                'current_tag' => $tag[0],
-                'current_menu' => 'mixes'
-
-            ]);
-
-        }
     }
 
     /**

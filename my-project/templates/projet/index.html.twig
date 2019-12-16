@@ -11,114 +11,25 @@
             <img src="{{ asset('pictures/loader.gif') }}" alt="Website Loader">
         </div>
 
-        <!-- <div class="container-fluid">
+        <div class="container my-4 py-4" id="filter" style="color: black;">
 
-            <div id="podcast" class="parallax-one"
-                 style="background: #000 url('{{ asset('pictures/parallax3.jpg') }}') center no-repeat fixed">
-                <div class="quote1-pattern" id="parallax-one"
-                     style="background: url('{{ asset('pictures/services-banner.png') }}');">
-                </div>
-                <div class="row m-0">
-                    <div>
-                        <h1 class="parallax-title"><img src="{{ asset('pictures/podcasts.PNG') }}"></h1>
-                    </div>
-                </div>
-            </div> -->
-
-            <div class="container my-4 py-4 text-center" id="filter">
-
-                <h6><abbr>
-                        <button class="btn tag_id" id="0" style="color:white">{% trans %}TOUT{% endtrans %}</button>
-                        {% for tag in tags %}
-                            <button class="btn tag_id" id="{{ tag.id }}" style="color:grey">{{ tag.name }} </button>
-                        {% endfor %}
-                    </abbr></h6>
-            </div>
-
-            <!--<div class="form-check form-check-inline">
-                <div class="form-inline">
-            <input type="search" id="name" name="name" onkeyup="recupValeur(this.value);" placeholder="Rechercher">
-                </div>
-            </div> -->
-
-
-            <!-- <div class="form-check form-check-inline" id="form">
-                        <div class="form-inline">
-                            {{ form_start(form) }}
-                            {{ form_widget(form.projectname) }}
-                            <div style="display:none">
-                                {{ form_widget(form.tags) }}
-                            </div>
-                            {{ form_widget(form.Save) }}
-                        </div>
-                        {{ form_end(form) }}
-                    </div> -->
+                    {% include 'projet/_filter.html.twig' with {form:form} only %}
 
         </div>
 
         <div class="container mt-4 rounded pt-2 pb-4">
-            {% if projets | length == 0 %}
-                <div class="container mt-4">{% trans %}Aucun resultat trouvé pour{% endtrans %}
-                    <b>{{ NameSearch }}</b>
-                    {% for tag in TagsSearch %}
-                        {% trans %}dans la catégorie{% endtrans %}    <b>{{ tag.name }}</b>
-                    {% endfor %}
-                </div>
-            {% endif %}
+
             <div class="row text-center" id="mixes">
 
                 {% for projet in projets %}
-                    <article class="mix col-12 col-md-6 col-lg-4 col-xl-4 article">
-
-                        <a href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}"
-                           aria-label="Read more about {{ projet.title }}">
-
-                            <figure class="d-block figure">
-                                <a href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}"
-                                   aria-label="Read more about {{ projet.title }}">
-
-                                    <img class="image w-100 h-auto" {% if projet.filename %} src="{{ vich_uploader_asset(projet, 'imageFile') | imagine_filter('thumb') }}"
-                                    {% else %} src="{{ 'images/projets/empty.jpg' | imagine_filter('thumb') }}"
-                                    {% endif %} alt="thumb_{{ projet.title }}">
-
-                                    <div class="middle">
-                                        <i class="far fa-play-circle text"></i>
-                                    </div>
-                                </a>
-
-                                <div class="tag-top">
-                                    {% for tag in projet.tags %}
-                                        <h5 class="name_tag"
-                                            style="color:{% if tag.id == 1 %}red{% endif %}{% if tag.id == 2 %}orange{% endif %}{% if tag.id == 3 %}#8ee800{% endif %}">{{ tag.name }}</h5>
-                                    {% endfor %}
-                                </div>
-
-                            </figure>
-
-                        </a>
-
-                        <div class="info infos">
-                            <div class="row flex-wrap m15">
-                                <div class="col-12 mw-100 info_flex">
-                                    <div class="info__content d-flex align-items-center w-100">
-                                        <h1 class="mt-0 pt-0 mb-0 text-uppercase flex-grow-1" style="font-size: 1rem">
-                                            <a href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}"
-                                               aria-label="Read more about {{ projet.title }}">{{ projet.title }}</a>
-                                        </h1>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
+                    {% include 'projet/_card.html.twig' with {projet:projet} only %}
                 {% endfor %}
             </div>
 
-            <div class="container">
-                <div class="pagination mt-4" id="paginate_float">
-                    {{ knp_pagination_render(projets) }}
-                </div>
+            <div>
+                {{ knp_pagination_render(projets) }}
             </div>
+
         </div>
     </div>
 

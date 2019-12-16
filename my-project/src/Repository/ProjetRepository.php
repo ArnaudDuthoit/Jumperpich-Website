@@ -2,11 +2,14 @@
 
 namespace App\Repository;
 
+use App\Data\SearchData;
 use App\Entity\Projet;
 use App\Entity\ProjetSearch;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
+use Knp\Component\Pager\Pagination\PaginationInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 
@@ -18,86 +21,15 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class ProjetRepository extends ServiceEntityRepository
 {
-    public function __construct(RegistryInterface $registry)
+    /**
+     * @var PaginatorInterface
+     */
+    private $paginator;
+
+    public function __construct(RegistryInterface $registry, PaginatorInterface $paginator)
     {
         parent::__construct($registry, Projet::class);
-    }
-
-
-    /**
-     * @param $name
-     * @return Query
-     */
-    public function findMixbyName($name)
-    {
-
-        $query = $this->createQueryBuilder('p');
-
-        return $query = $query
-            ->where('p.title LIKE :search')
-            ->orWhere('p.description LIKE :search')
-            ->orderBy('p.created_at', 'DESC')
-            #Add some joker at the beginning and a the end for more results
-            ->setParameter('search', '%' . $name . '%')
-            ->getQuery()
-            ->getResult();
-
-    }
-
-
-    /**
-     * @param $tag
-     * @return Query
-     */
-    public function findMixbyTags($tag)
-    {
-
-        $query = $this->createQueryBuilder('p')
-                 ->orderBy('p.created_at', 'DESC');
-
-        if ($tag != null) {
-
-            return $query = $query
-                ->andWhere(":tag MEMBER OF p.tags")
-                ->setParameter("tag", $tag)
-                ->getQuery()
-                ->getResult();
-
-        } else {
-            return $query = $query
-                ->getQuery()
-                ->getResult();
-        }
-
-    }
-
-
-    /**
-     * @param ProjetSearch $search
-     * @return Query
-     */
-    public function findAllActive(ProjetSearch $search)
-    {
-        $query = $this->createQueryBuilder('p')
-            ->orderBy('p.created_at', 'DESC');
-
-        if ($search->getProjectname()) { #Put the input search in the query.
-            $query = $query
-                ->where('p.title LIKE :search')
-                #Add some joker at the beginning and a the end for more results
-                ->setParameter('search', '%' . $search->getProjectname() . '%');
-        }
-        if ($search->getTags()->count() > 0) { #if the user select at least one tag
-
-            foreach ($search->getTags() as $tag) {
-                $query = $query
-                    ->andWhere(":tag MEMBER OF p.tags")
-                    ->setParameter("tag", $tag);
-            }
-        }
-
-
-        return $query->getQuery();
+        $this->paginator = $paginator;
     }
 
     /**
@@ -154,5 +86,49 @@ class ProjetRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+
+    /**
+     * @param SearchData $search
+     * @return PaginationInterface
+     */
+    public function findSearch(SearchData $search): PaginationInterface
+    {
+
+        $query = $this->getSearchQuery($search)->getQuery();
+
+        return $this->paginator->paginate(
+            $query,
+            $search->page,
+            3
+        );
+    }
+
+    private function getSearchQuery(SearchData $search):QueryBuilder
+    {
+        $query = $this
+            ->createQueryBuilder('p')
+            ->orderBy('p.created_at', 'DESC')
+            ->select('tag', 'p')
+            ->join('p.tags', 'tag');
+
+
+        if (!empty($search->q)){
+            $query = $query
+                ->andWhere('p.title LIKE :q')
+                ->orWhere('p.description LIKE :q')
+                ->setParameter('q', "%{$search->q}%");
+        }
+
+
+        if(!empty($search->Tags)){
+            $query = $query
+                ->andWhere('tag.id IN (:Tags)')
+                ->setParameter('Tags', $search->Tags);
+        }
+
+        return $query;
+    }
+
 
 }

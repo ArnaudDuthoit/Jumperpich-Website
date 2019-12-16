@@ -3,35 +3,6 @@ window.addEventListener('load', function () {
         document.getElementById('loading').parentNode.removeChild(document.getElementById('loading'));
 });
 
-// Nettoyeur de classes inutilsées (https://github.com/philipwalton/html-inspector) //
-
-/*
-HTMLInspector.rules.extend("unused-classes", function(config) {
-    config.whitelist.push(/^sf\-/);
-    return config
-});
-
-HTMLInspector.rules.extend("unused-classes", function(config) {
-    config.whitelist.push(/^far/);
-    return config
-});
-
-HTMLInspector.rules.extend("unused-classes", function(config) {
-    config.whitelist.push(/^clear-fix/);
-    return config
-});
-
-HTMLInspector.rules.extend("unused-classes", function(config) {
-    config.whitelist.push(/^fas/);
-    return config
-});
-
-HTMLInspector.rules.extend("unused-classes", function(config) {
-    config.whitelist.push(/^fa\-/);
-    return config
-});
-
-HTMLInspector.inspect(["unused-classes"]); */
 
 // Retour au top //
 
@@ -136,36 +107,6 @@ $(document).ready(function () {
     $('#form_message').blur(counter);
     $('#form_message').focus(counter)
 });
-
-
-/* Tri index Ajax */
-
-$('button').click(function () {
-    $('button').not($(this)).css('color', 'grey');
-    $(this).css('color', 'white');
-});
-
-
-for (let i = 0; i < document.getElementsByClassName('tag_id').length; i += 1) {
-    document.getElementsByClassName('tag_id')[i].addEventListener('click', function(e) {
-        myFunc(e.target);
-    }, false);
-}
-
-function myFunc(elem) {
-
-    if (elem.id === '0') {elem.id = '';}
-    $.ajax({
-        url: "/api/getmixtag",
-        data: {
-            'tag': elem.id
-        },
-        success: function ($result) {
-            $("#mixes").hide().html($result).fadeIn('slow');
-        }
-    });
-
-}
 
 
 
