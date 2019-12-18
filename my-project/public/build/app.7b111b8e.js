@@ -37,16 +37,6 @@ function bindEvents() {
         this.pagination.addEventListener('click', aClickListener)
 }
 
-async function loadMore() {
-    const button = this.pagination.querySelector('button');
-    button.setAttribute('disabled' , "disabled");
-    this.page++ ;
-    const url = new URL(window.location.href);
-    const params = new URLSearchParams(url.search);
-    params.set('page', this.page);
-    await this.loadURL(url.pathname + '? ' + params.toString());
-    button.removeAttribute('disabled')
-}
 
 async function loadForm() {
 
@@ -114,16 +104,15 @@ window.addEventListener('load', function () {
 function BackToTop() {
     $(document).ready(function () {
         $(window).scroll(function () {
-            if ($(this).scrollTop() > 50) {
+            if ($(this).scrollTop() > 300) {
                 $('#back-to-top').fadeIn()
             } else {
                 $('#back-to-top').fadeOut()
             }
         });
         $('#back-to-top').click(function () {
-            $('#back-to-top').tooltip('hide');
             $('body,html').animate({scrollTop: 0}, 800);
-            return !1
+            return false;
         })
     })
 }
@@ -158,14 +147,8 @@ function gtags() {
     gtag('config', 'UA-143368877-1')
 }
 
-// Menu déroulant Select1 //
-function Select2() {
-    $('select').select2()
-}
-
 BackToTop();
 GoToPodcast();
-Select2();
 gtags();
 
 

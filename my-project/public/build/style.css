@@ -386,7 +386,7 @@ abbr {
 }
 
 p > a {
-    color: grey !important;
+    color: rgb(192, 183, 183) !important;
 }
 
 #mentions_legales > a {
