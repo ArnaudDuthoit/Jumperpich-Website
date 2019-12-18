@@ -71,12 +71,13 @@ easy_admin:
                 fields:
                     - { property: "id" , label: 'ID' , type: "integer"}
                     - { property: "name" , label: 'Nom du style' , type: "text"}
-                    - { property: "projets" , label: 'Mixes' ,type: 'array'}
+                    - { property: "color" , label: 'Couleur' , type: "text"}
             new:
                 title: "Ajouter nouveau genre"
             form:
                 fields:
                 - { property: "name" , label: 'Titre du genre' , type: "text"}
+                - { property: "color" , label: 'Couleur' , type: "color" }
 
         Contact:
             class: App\Entity\Contact

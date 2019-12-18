@@ -26,13 +26,61 @@ body {
 
 .is-loading .spinner-border{
     position:absolute;
-    top:calc(50% - 1rem);
     left:calc(50% - 1rem);
     z-index:5;
+    color: #ff006f;;
 
 }
 
+.filt {
+    box-shadow: 0 2px 5px rgba(0,0,0,.5);
+}
 
+.a-filter {
+    float:left; width: 100%;
+    color: rgba(255,255,255,1);
+    background: rgba(37,40,42,1);
+}
+
+.a-filter .title {
+    font-weight: 600;
+    position: relative;
+    text-transform: uppercase;
+    padding: 1em 1.5em;
+    background: rgba(85,91,96,.25);
+}
+
+.a-filter form {
+    padding-top: 1.5em;
+    padding-right: 1.5em;
+    padding-left: 1.5em;
+}
+
+.a-filter section {
+    padding: 1.5em 0;
+}
+
+.a-filter label {
+    width: 100%;
+    font-weight: bold;
+    text-transform: uppercase;
+    line-height: 1;
+    margin-bottom: 1em;
+}
+
+/*** custom checkboxes ***/
+
+input[type=checkbox] { display:none; } /* to hide the checkbox itself */
+input[type=checkbox] + label:before {
+    font-family: FontAwesome;
+
+}
+
+input[type=checkbox] + label:before { content: "\f096"; } /* unchecked icon */
+input[type=checkbox] + label:before { letter-spacing: 10px; } /* space between checkbox and label */
+
+input[type=checkbox]:checked + label:before { content: "\f046"; } /* checked icon */
+input[type=checkbox]:checked + label:before { letter-spacing: 5px; } /* allow space for check mark */
 
 .back-to-top{
     cursor:pointer;

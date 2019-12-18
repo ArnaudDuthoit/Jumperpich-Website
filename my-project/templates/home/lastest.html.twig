@@ -39,7 +39,7 @@
                                 <div class="tag-top">
                                     {% for tag in projet.tags %}
                                         <h5 class="name_tag"
-                                            style="color:{% if tag.id == 1 %}red{% endif %}{% if tag.id == 2 %}orange{% endif %}{% if tag.id == 3 %}#8ee800{% endif %}">{{ tag.name }}</h5>
+                                            style="color:{{ tag.color }}">{{ tag.name }}</h5>
                                     {% endfor %}
                                 </div>
 

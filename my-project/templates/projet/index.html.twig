@@ -3,31 +3,54 @@
 {% block title %}Jumperpich | Mixes  {% endblock %}
 
 
+
 {% block body %}
 
-    <div class="container-fluid pt-4 js-filter">
+
+    <div class="container-fluid pt-4 js-filter main">
+
+
 
         <div id="loading">
             <img src="{{ asset('pictures/loader.gif') }}" alt="Website Loader">
         </div>
 
-        <div class="container my-4 py-4 " id="filter" style="color: black;">
+        <div class="container-fluid">
 
-            {% include 'projet/_filter.html.twig' with {form:form} only %}
-
-        </div>
-
-        <div class="container mt-4 rounded pt-2 pb-4">
-
-            <div class="row text-center js-filter-content" id="mixes">
-                {% include 'projet/_projets.html.twig' %}
+            <div id="podcast" class="parallax-one"
+                 style="background: #000 url('{{ asset('pictures/parallax3.jpg') }}') center no-repeat fixed">
+                <div class="quote1-pattern" id="parallax-one"
+                     style="background: url('{{ asset('pictures/services-banner.png') }}');">
+                </div>
+                <div class="row m-0">
+                    <div>
+                        <h1 class="parallax-title"><img src="{{ asset('pictures/podcasts.PNG') }}"></h1>
+                    </div>
+                </div>
             </div>
 
-            <div class="js-filter-pagination">
-                {% include 'projet/_pagination.html.twig' %}
-            </div>
 
+            <div class="container my-4 py-4 " id="filter">
+
+                <div class="row">
+
+                    <div class="col-md-3 mb-4">
+
+                        {% include 'projet/_filter.html.twig' with {form:form} only %}
+                    </div>
+
+                    <div class="col-md-9">
+
+                        <div class="row text-center js-filter-content" id="mixes">
+                            {% include 'projet/_projets.html.twig' %}
+                        </div>
+
+                        <div class="js-filter-pagination">
+                            {% include 'projet/_pagination.html.twig' %}
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-
 {% endblock %}
