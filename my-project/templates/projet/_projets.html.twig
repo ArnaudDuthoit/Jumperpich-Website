@@ -1,3 +1,5 @@
 {% for projet in projets %}
+
     {% include 'projet/_card.html.twig' with {projet:projet} only %}
+
 {% endfor %}

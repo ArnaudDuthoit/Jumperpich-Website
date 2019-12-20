@@ -12,7 +12,6 @@ function Filter(element) {
         this.content = element.querySelector('.js-filter-content');
         this.form = element.querySelector('.js-filter-form');
         this.page = parseInt(new URLSearchParams(window.location.search).get('page') || 1);
-
         this.bindEvents();
     }
 }
@@ -56,7 +55,7 @@ async function loadURL(url) {
     showLoader();
 
     const params = new URLSearchParams(url.split('?')[1] || '');
-    params.set('ajax', '1')
+    params.set('ajax', '1');
     const response = await fetch(url.split('?')[0] + '?' + params.toString(), {
         headers: {
             'X-Requested-With': 'XMLHttpRequest'
@@ -66,12 +65,18 @@ async function loadURL(url) {
     if (response.status >= 200 && response.status < 300) {
         const data = await response.json();
         this.content.innerHTML = data.content;
+        let cards = Array.from(document.querySelectorAll('.article'));
+        cards.forEach((card) => {
+            card.classList.add('is-animated')
+        });
         this.pagination.innerHTML = data.pagination;
         params.delete('ajax');
         history.replaceState({}, '', url.split('?')[0] + '?' + params.toString())
     } else {
         console.error(response)
     }
+
+
 
     hideLoader();
 }
@@ -146,6 +151,7 @@ function gtags() {
     gtag('js', new Date());
     gtag('config', 'UA-143368877-1')
 }
+
 
 BackToTop();
 GoToPodcast();
