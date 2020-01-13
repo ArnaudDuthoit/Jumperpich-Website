@@ -5,7 +5,6 @@
 
 {% block body %}
 
-
     <div class="container-fluid main">
 
 
@@ -31,32 +30,23 @@
             </div>
         {% endfor %}
 
+        <header style="background: #000 url('{{ asset('pictures/Background_header_webp.webp') }}') center no-repeat fixed" >
+            <h1>{% trans %}Bienvenue sur Jumperpich.com{% endtrans %}</h1>
+            <p>Harddance , EDM & Future House podcasts.</p>
+            <a href="{{ path('projet.index') }}" class="mt-4 btn btn__custom">
+                {% trans %}TOUS LES PODCASTS{% endtrans %}</a>
+        </header>
 
-        <div class="jumbotron jumbotron-fluid"
-             style="background: #000 url('{{ asset('pictures/Background_header_webp.webp') }}') center no-repeat fixed ;min-height: 100vh;">
-
-            <div class="container text-white header text-center">
-
-                <h1 style="font-size: 6vh">{% trans %}BIENVENUE{% endtrans %}</h1>
-
-                <div class="homepage-text">
-                    <div class="bottom-icon">
-                        <a id="go-to-podcast" href="#" class="btn btn__custom btn-lg" role="button"
-                           data-toggle="tooltip" data-placement="left" aria-label="go-to-podcast"><i class="fas fa-arrow-down"></i> </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="podcast" class="parallax-one m-0"
-             style="background: #000 url('{{ asset('pictures/parallax3_webp.webp') }}') center no-repeat fixed">
+        <div id="podcast" class="parallax-one mt-4"
+             style="background: #000 url('{{ asset('pictures/parallax3_webp.webp') }}') center no-repeat ">
             <div class="quote1-pattern" id="parallax-one"
                  style="background: url('{{ asset('pictures/services-banner.png') }}');">
 
             </div>
             <div class="row m-0">
                 <div>
-                    <h1 class="parallax-title"><img src="{{ asset('pictures/podcasts_webp.webp') }}" alt="Podcast_Banner"></h1>
+                    <h1 class="parallax-title"><img src="{{ asset('pictures/podcasts_webp.webp') }}"
+                                                    alt="Podcast_Banner"></h1>
                 </div>
             </div>
         </div>
@@ -116,7 +106,7 @@
             </div>
 
             <div class="text-center mt-4">
-                <a href="{{ path('lastest') }}" class="btn btn__custom">
+                <a href="{{ path('projet.index') }}" class="btn btn__custom">
                     {% trans %}VOIR TOUT{% endtrans %}</a>
             </div>
         </div>
@@ -178,7 +168,7 @@
             </div>
 
             <div class="text-center mt-4">
-                <a href="{{ path('ranking') }}" class="btn btn__custom">
+                <a href="{{ path('projet.index') }}" class="btn btn__custom">
                     {% trans %}VOIR TOUT{% endtrans %}</a>
             </div>
         </div>

@@ -14,10 +14,10 @@
             <img src="{{ asset('pictures/loader.gif') }}" alt="Website Loader">
         </div>
 
-        <div class="container-fluid">
+        <div class="container-fluid mt-4">
 
             <div id="podcast" class="parallax-one"
-                 style="background: #000 url('{{ asset('pictures/parallax3.jpg') }}') center no-repeat fixed">
+                 style="background: #000 url('{{ asset('pictures/parallax3.jpg') }}') center no-repeat">
                 <div class="quote1-pattern" id="parallax-one"
                      style="background: url('{{ asset('pictures/services-banner.png') }}');">
                 </div>
@@ -29,17 +29,15 @@
                 </div>
             </div>
 
+            <div class="container-fluid mt-4">
 
-            <div class="container my-4 py-4 " id="filter">
+            <div class="row mx-4 my-4 py-4 px-4" id="filter">
 
-                <div class="row">
-
-                    <div class="col-md-3 mb-4">
-
+                    <div class="col-lg-3 col-xl-3 mb-4">
                         {% include 'projet/_filter.html.twig' with {form:form} only %}
                     </div>
 
-                    <div class="col-md-9">
+                    <div class="col-lg-9 col-xl-9">
 
                         <div class="row text-center js-filter-content" id="mixes">
                             {% include 'projet/_projets.html.twig' %}
@@ -49,8 +47,8 @@
                             {% include 'projet/_pagination.html.twig' %}
                         </div>
                     </div>
-                </div>
             </div>
+
         </div>
     </div>
 {% endblock %}

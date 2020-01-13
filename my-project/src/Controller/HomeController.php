@@ -5,14 +5,16 @@ namespace App\Controller;
 
 use App\Repository\ProjetRepository;
 use App\Repository\SoonRepository;
-use Gregwar\CaptchaBundle\Type\CaptchaType;
+use DateTime;
+use Exception;
 use ReCaptcha\ReCaptcha;
+use Swift_Mailer;
+use Swift_Message;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -40,7 +42,7 @@ class HomeController extends AbstractController
      * @Route("/", name="home")
      * @param ProjetRepository $repository
      * @param SoonRepository $soonRepository
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function index(ProjetRepository $repository, SoonRepository $soonRepository)
     {
@@ -67,52 +69,11 @@ class HomeController extends AbstractController
 
 
     /**
-     * List of all the lastest projects published
-     * @Route("/recent", name="lastest")
-     * @param ProjetRepository $repository
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function lastest(ProjetRepository $repository)
-    {
-
-        $lastest = $repository->findAllLatest();
-        $ua = htmlentities($_SERVER['HTTP_USER_AGENT'], ENT_QUOTES, 'UTF-8');
-        if (preg_match('~MSIE|Internet Explorer~i', $ua) || (strpos($ua, 'Trident/7.0') !== false && strpos($ua, 'rv:11.0') !== false)) {
-            return $this->render('InternetExplorer.html.twig');
-        } else {
-
-            return $this->render('home/lastest.html.twig', [
-                'lastest' => $lastest
-            ]);
-        }
-    }
-
-    /**
-     * List of all the lastest projects published
-     * @Route("/popular", name="ranking")
-     * @param ProjetRepository $repository
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function views(ProjetRepository $repository)
-    {
-
-        $views = $repository->findViewest();
-
-        $ua = htmlentities($_SERVER['HTTP_USER_AGENT'], ENT_QUOTES, 'UTF-8');
-        if (preg_match('~MSIE|Internet Explorer~i', $ua) || (strpos($ua, 'Trident/7.0') !== false && strpos($ua, 'rv:11.0') !== false)) {
-            return $this->render('InternetExplorer.html.twig');
-        } else {
-            return $this->render('home/ranking.html.twig', [
-                'views' => $views
-            ]);
-        }
-    }
-
-    /**
      * Contact Form Page
      * @Route("/contact", name="contact")
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
+     * @throws Exception
      */
     public function createAction(Request $request)
     {
@@ -120,7 +81,7 @@ class HomeController extends AbstractController
 
         $GOOGLE_RECAPTCHA_SECRET = $_ENV['GOOGLE_RECAPTCHA_SECRET'];
 
-        $recaptcha = new \ReCaptcha\ReCaptcha($GOOGLE_RECAPTCHA_SECRET);
+        $recaptcha = new ReCaptcha($GOOGLE_RECAPTCHA_SECRET);
 
         # Add form fields
         $form = $this->createFormBuilder($contact)
@@ -147,7 +108,7 @@ class HomeController extends AbstractController
             $contact->setEmail($email);
             $contact->setSubject($subject);
             $contact->setMessage($message);
-            $contact->setCreatedAt(new \DateTime());
+            $contact->setCreatedAt(new DateTime());
             $contact->setUpdatedAt(null);
             # finally add data in database
             $sn = $this->getDoctrine()->getManager();
@@ -162,9 +123,9 @@ class HomeController extends AbstractController
             ->setUsername($MAILER_USERNAME)
                 ->setPassword($MAILER_PASSWORD);
 
-            $mailer = new \Swift_Mailer($transport);
+            $mailer = new Swift_Mailer($transport);
 
-            $message = (new \Swift_Message ('Re:'.$subject))#Config of the email
+            $message = (new Swift_Message ('Re:'.$subject))#Config of the email
                 ->setFrom(['contact@jumperpich.com' => 'Jumperpich'])
                 ->setTo($email)
                 ->setBody($this->renderView('home/sendemail.html.twig', [
@@ -191,7 +152,7 @@ class HomeController extends AbstractController
         /**
      * General Data Protection Regulation page
      * @Route("/rgpd", name="RGPD")
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function RGPD()
     {

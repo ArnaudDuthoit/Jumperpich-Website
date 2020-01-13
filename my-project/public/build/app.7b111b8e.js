@@ -5,9 +5,7 @@ let loader = document.querySelector('.js-loading');
 
 function Filter(element) {
 
-    if (element == null) {
-        console.log('no filter')
-    } else {
+    if (element !== null) {
         this.pagination = element.querySelector('.js-filter-pagination');
         this.content = element.querySelector('.js-filter-content');
         this.form = element.querySelector('.js-filter-form');
@@ -65,18 +63,17 @@ async function loadURL(url) {
     if (response.status >= 200 && response.status < 300) {
         const data = await response.json();
         this.content.innerHTML = data.content;
-        let cards = Array.from(document.querySelectorAll('.article'));
+        let cards = Array.from(document.querySelectorAll('.mix'));
         cards.forEach((card) => {
             card.classList.add('is-animated')
         });
         this.pagination.innerHTML = data.pagination;
+
         params.delete('ajax');
         history.replaceState({}, '', url.split('?')[0] + '?' + params.toString())
     } else {
         console.error(response)
     }
-
-
 
     hideLoader();
 }
@@ -122,23 +119,6 @@ function BackToTop() {
     })
 }
 
-// Aller a la section Podcast /
-function GoToPodcast() {
-    $(document).ready(function () {
-        $(window).scroll(function () {
-            if ($(this).scrollTop() > 50) {
-                $('#go-to-podcast').fadeOut()
-            } else {
-                $('#go-to-podcast').fadeIn()
-            }
-        });
-        $('#go-to-podcast').click(function () {
-            $('body,html').animate({scrollTop: $(window).height()}, 800);
-            return false;
-        });
-    })
-}
-
 
 // Google Analytics //
 function gtags() {
@@ -152,9 +132,7 @@ function gtags() {
     gtag('config', 'UA-143368877-1')
 }
 
-
 BackToTop();
-GoToPodcast();
 gtags();
 
 
