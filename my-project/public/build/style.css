@@ -11,6 +11,20 @@ body {
 
 }
 
+a[aria-expanded=true] .fa-chevron-right {
+    display: none;
+}
+a[aria-expanded=false] .fa-chevron-down {
+    display: none;
+}
+
+#headingTwo a {
+    color: white;
+}
+
+#headingTwo a:hover {
+    color: red;
+}
 
 .is-loading::before {
     content: '';
@@ -245,8 +259,8 @@ input[type=checkbox]:checked + label:before {
     top: 0;
     left: 0;
     background: #2c2c2c;
-    padding: .3rem .6rem .5rem;
-    border-bottom-right-radius: 1rem;
+    padding: .2rem .2rem .2rem;
+    /*  border-bottom-right-radius: 1rem; */
     font-size: .5rem;
     text-align: center;
 }
@@ -322,6 +336,7 @@ h1 > a:hover {
 
 .name_tag {
     position: relative;
+    font-size: 1rem;
 }
 
 h6 {
@@ -781,7 +796,7 @@ h1 {
     font-weight: 700;
     margin: 0;
     text-transform: uppercase;
-    letter-spacing: 3px;
+    /* letter-spacing: 3px; */
     color: #fff;
     text-align: center;
 }
@@ -1038,7 +1053,7 @@ table td span {
 }
 
 .text-uppercase {
-    letter-spacing: 0.1em;
+    /* letter-spacing: 0.1em; */
 }
 
 .text-gray {

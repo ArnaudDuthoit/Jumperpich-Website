@@ -30,15 +30,18 @@
             </div>
         {% endfor %}
 
-        <header style="background: #000 url('{{ asset('pictures/Background_header_webp.webp') }}') center no-repeat fixed" >
-            <h1>{% trans %}Bienvenue sur Jumperpich.com{% endtrans %}</h1>
-            <p>Harddance , EDM & Future House podcasts.</p>
-            <a href="{{ path('projet.index') }}" class="mt-4 btn btn__custom">
-                {% trans %}TOUS LES PODCASTS{% endtrans %}</a>
+        <header style="background: #000 url('{{ asset('pictures/Background_header_webp.webp') }}') center no-repeat fixed">
+
+                <h1>{% trans %}Bienvenue sur Jumperpich.com{% endtrans %}</h1>
+                <p class="h5">Harddance , EDM & Future House podcasts.</p>
+
+                <a href="{{ path('projet.index') }}" class="mt-4 btn btn__custom">
+                    {% trans %}TOUS LES PODCASTS{% endtrans %}</a>
+
         </header>
 
         <div id="podcast" class="parallax-one mt-4"
-             style="background: #000 url('{{ asset('pictures/parallax3_webp.webp') }}') center no-repeat ">
+             style="background: #000 url('{{ asset('pictures/parallax3_webp.webp') }}') center no-repeat fixed">
             <div class="quote1-pattern" id="parallax-one"
                  style="background: url('{{ asset('pictures/services-banner.png') }}');">
 
@@ -77,27 +80,24 @@
                                     </div>
                                 </a>
 
-                                <div class="tag-top">
-                                    {% for tag in projet.tags %}
-                                        <h5 class="name_tag" style="color: {{ tag.color }}">{{ tag.name }}</h5>
-                                    {% endfor %}
+                                {% for tag in projet.tags %}
+                                <div class="tag-top" style="background:{{ tag.color }}">
+                                    <div class="name_tag" style="color : white">{{ tag.name }}</div>
                                 </div>
+                                {% endfor %}
 
                             </figure>
 
                         </a>
 
                         <div class="info infos">
-                            <div class="row flex-wrap m15">
-                                <div class="col-12 mw-100 info_flex">
+
                                     <div class="info__content d-flex align-items-center w-100">
                                         <h1 class="mt-0 pt-0 mb-0 text-uppercase flex-grow-1" style="font-size: 1rem">
                                             <a href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}"
                                                aria-label="Read more about {{ projet.title }}">{{ projet.title }}</a>
                                         </h1>
 
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </article>
@@ -137,10 +137,9 @@
                                     </div>
                                 </a>
 
-                                <div class="tag-top">
-                                    {% for tag in projet.tags %}
-                                        <h5 class="name_tag"
-                                            style="color: {{ tag.color }}">{{ tag.name }}</h5>
+                                {% for tag in projet.tags %}
+                                <div class="tag-top" style="background:{{ tag.color }}">
+                                    <div class="name_tag" style="color : white">{{ tag.name }}</div>
                                     {% endfor %}
                                 </div>
 
@@ -149,17 +148,13 @@
                         </a>
 
                         <div class="info infos">
-                            <div class="row flex-wrap m15">
-                                <div class="col-12 mw-100 info_flex">
+
                                     <div class="info__content d-flex align-items-center w-100">
                                         <h1 class="mt-0 pt-0 mb-0 text-uppercase flex-grow-1" style="font-size: 1rem">
                                             <a href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}"
                                                aria-label="Read more about {{ projet.title }}">{{ projet.title }}</a>
                                         </h1>
-
                                     </div>
-                                </div>
-                            </div>
                         </div>
                     </article>
 

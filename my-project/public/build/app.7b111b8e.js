@@ -119,21 +119,8 @@ function BackToTop() {
     })
 }
 
-
-// Google Analytics //
-function gtags() {
-    window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-        dataLayer.push(arguments)
-    }
-
-    gtag('js', new Date());
-    gtag('config', 'UA-143368877-1')
-}
-
 BackToTop();
-gtags();
+
 
 
 // Intersect Observer pour animation apparition au scroll //

@@ -3,7 +3,8 @@
 
 {% block OG %}
     <!-- Open Graph meta -->
-    <meta property="og:url" content="https://www.jumperpich.com/{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}"/>
+    <meta property="og:url"
+          content="https://www.jumperpich.com/{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}"/>
     <meta property="og:type" content="website"/>
     <meta property="og:title" content="{{ projet.title }}"/>
     <meta property="og:description"
@@ -17,132 +18,131 @@
     <div class="container-fluid main">
 
 
-        <div id="loading">
-            <img src="{{ asset('pictures/loader.gif') }}" alt="Website Loader">
+    <div id="loading">
+        <img src="{{ asset('pictures/loader.gif') }}" alt="Website Loader">
+    </div>
+
+
+    {% for message in app.flashes('report') %}
+        <div class="text-center fixed-bottom alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Warning !</strong> {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endfor %}
+
+    <div class="container my-4 py-2 text-center shadow rounded">
+        <div class="Blog-meta my-4 pt-4">
+            {{ projet.createdAt | date('d/m/Y') }} - {% for tag in projet.tags %}{{ tag.name }}{% endfor %}
         </div>
 
+        <h6><abbr>{{ projet.title }}</abbr></h6>
 
-        {% for message in app.flashes('report') %}
-            <div class="text-center fixed-bottom alert alert-success alert-dismissible fade show" role="alert">
-                <strong>Warning !</strong> {{ message }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+        <div class="row" id="{{ projet.filename }}">
+            {% if projet.filename %}
+                <img src="{{ vich_uploader_asset(projet, 'imageFile') | imagine_filter('medium') }}"
+                     alt="{{ projet.title }}"
+                     class="mx-auto d-block h-auto" style="width: 50vh">
+            {% else %}
+                <img src="{{ 'images/projets/empty.jpg' | imagine_filter('medium') }}" alt="{{ projet.title }}"
+                     class="mx-auto d-block height-auto" style="width: 50vh">
+            {% endif %}
+        </div>
+
+        {% if projet.mixcloud %}
+            <div class="container" id="play__button">
+
+                <div class="row justify-content-center">
+                    <div class="p-2">
+                        <div id="openplayer">
+                            <div class="btn btn__custom" role="button">
+                                <i class="fa fa-play"></i>
+                                <span>{% trans %}Lire{% endtrans %}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
-        {% endfor %}
+        {% endif %}
 
-        <div class="container my-4 py-2 text-center shadow rounded">
-            <div class="Blog-meta my-4 pt-4">
-                {{ projet.createdAt | date('d/m/Y') }} - {% for tag in projet.tags %}{{ tag.name }}{% endfor %}
+        <div class="container my-4 py-4" id="tracklist">
+
+            <h6><abbr>Tracklist</abbr></h6>
+
+            <div class="BlogItem-tracklist text-center">
+                {{ projet.description | nl2br }}
             </div>
 
-            <h6><abbr>{{ projet.title }}</abbr></h6>
+        </div>
 
-            <div class="row" id="{{ projet.filename }}">
-                {% if projet.filename %}
-                    <img src="{{ vich_uploader_asset(projet, 'imageFile') | imagine_filter('medium') }}"
-                         alt="{{ projet.title }}"
-                         class="mx-auto d-block h-auto" style="width: 50vh">
+        <div class="container my-4 pt-4" id="download">
+
+            <h6><abbr>{% trans %}Téléchargement{% endtrans %}</abbr></h6>
+
+            <div class="mx-4 py-4">
+
+                {% if projet.mp3filename %}
+                    <a class="btn btn-default" role="button" target="_blank"
+                       href="{{ path('downloadcount', {'mp3filename' : projet.mp3filename}) }}">
+                        <img alt="Télécharger" src="{{ 'pictures/Download-icon.png' | imagine_filter('medium') }}"
+                             class="d-block mw-100 h-auto mr-auto ml-auto">
+                        {% trans %}Télécharger{% endtrans %}
+                        <small> ({{ projet.filesize }} Mo)</small>
+                    </a>
                 {% else %}
-                    <img src="{{ 'images/projets/empty.jpg' | imagine_filter('medium') }}" alt="{{ projet.title }}"
-                         class="mx-auto d-block height-auto" style="width: 50vh">
+                    <div class="text-center">
+                        {% trans %}Téléchargement indisponible{% endtrans %}...
+                    </div>
+                {% endif %}
+
+            </div>
+
+
+        </div>
+
+        {% if projet.soundcloud is not null or projet.ytblink is not null %}
+        <div class="container my-4 py-4">
+
+            <h6><abbr>STREAM</abbr></h6>
+
+            <div class="row justify-content-center">
+
+                {% if projet.soundcloud %}
+                    <div class="p-2 mx-auto">
+                        <a href="{{ projet.soundcloud }}" target="_blank" rel="noopener">
+                            <i class="fab fa-soundcloud"></i>
+                        </a>
+                    </div>
+                {% endif %}
+                {% if projet.ytblink %}
+                    <div class="p-2 mx-auto">
+                        <a href="{{ projet.ytblink }}" target="_blank" rel="noopener">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
                 {% endif %}
             </div>
 
-            {% if projet.mixcloud %}
-                <div class="container" id="play__button">
-
-                    <div class="row justify-content-center">
-                        <div class="p-2">
-                            <div id="openplayer">
-                                <div class="btn btn__custom" role="button">
-                                    <i class="fa fa-play"></i>
-                                    <span>{% trans %}Lire{% endtrans %}</span>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
             {% endif %}
 
-            <div class="container my-4 py-4" id="tracklist">
+            {% if projet.mixcloud %}
 
-                <h6><abbr>Tracklist</abbr></h6>
+                <app-musicplayer>
+                    <div class="musicplayer fixed-bottom" id="player">
+                        <div class="flexy">
+                            <!---->
+                            {{ projet.mixcloud | raw }}
+                            <!---->
+                            <a class="link" download="" target="_blank" title="Download"
+                               href="{{ path('downloadcount', {'mp3filename' : projet.mp3filename}) }}">
+                                <i class="fas fa-download"></i></a></div>
+                        <a id="closePlayer" class="closeBtn" href="#" title="Close music player">
+                            <i class="fas fa-times"></i></a></div>
 
-                <div class="BlogItem-tracklist text-center">
-                    {{ projet.description | nl2br }}
-                </div>
+                </app-musicplayer>
 
-            </div>
-
-            <div class="container my-4 pt-4" id="download">
-
-                <h6><abbr>{% trans %}Téléchargement{% endtrans %}</abbr></h6>
-
-                <div class="mx-4 py-4">
-
-                    {% if projet.mp3filename %}
-                        <a class="btn btn-default" role="button" target="_blank"
-                           href="{{ path('downloadcount', {'mp3filename' : projet.mp3filename}) }}">
-                            <img alt="Télécharger" src="{{ 'pictures/Download-icon.png' | imagine_filter('medium') }}"
-                                 class="d-block mw-100 h-auto mr-auto ml-auto">
-                            {% trans %}Télécharger{% endtrans %}
-                            <small> ({{ projet.filesize }} Mo)</small>
-                        </a>
-                    {% else %}
-                        <div class="text-center">
-                            {% trans %}Téléchargement indisponible{% endtrans %}...
-                        </div>
-                    {% endif %}
-
-                </div>
-
-
-            </div>
-
-            {% if projet.soundcloud is not null or projet.ytblink is not null %}
-                <div class="container my-4 py-4">
-
-                    <h6><abbr>STREAM</abbr></h6>
-
-                    <div class="row justify-content-center">
-
-                        {% if projet.soundcloud %}
-                            <div class="p-2 mx-auto">
-                                <a href="{{ projet.soundcloud }}" target="_blank" rel="noopener">
-                                    <i class="fab fa-soundcloud"></i>
-                                </a>
-                            </div>
-                        {% endif %}
-                        {% if projet.ytblink %}
-                            <div class="p-2 mx-auto">
-                                <a href="{{ projet.ytblink }}" target="_blank" rel="noopener">
-                                    <i class="fab fa-youtube"></i>
-                                </a>
-                            </div>
-                        {% endif %}
-                    </div>
-
-                    {% if projet.mixcloud %}
-
-                        <app-musicplayer>
-                            <div class="musicplayer fixed-bottom" id="player">
-                                <div class="flexy">
-                                    <!---->
-                                    {{ projet.mixcloud | raw }}
-                                    <!---->
-                                    <a class="link" download="" target="_blank" title="Download"
-                                       href="{{ path('downloadcount', {'mp3filename' : projet.mp3filename}) }}">
-                                        <i class="fas fa-download"></i></a></div>
-                                <a id="closePlayer" class="closeBtn" href="#" title="Close music player">
-                                    <i class="fas fa-times"></i></a></div>
-
-                        </app-musicplayer>
-
-                    {% endif %}
-
-                </div>
             {% endif %}
 
             <div class="container my-4 py-4 text-center" id="share">

@@ -1,4 +1,3 @@
-
 <article class="mix col-12 col-md-6 col-lg-4 col-xl-4 article" id="card-{{ projet.id }}">
 
     <a href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}"
@@ -16,10 +15,9 @@
                     <i class="far fa-play-circle text"></i>
                 </div>
             </a>
-
-            <div class="tag-top">
-                {% for tag in projet.tags %}
-                    <h5 class="name_tag" style="color : {{ tag.color }}">{{ tag.name }}</h5>
+            {% for tag in projet.tags %}
+            <div class="tag-top" style="background:{{ tag.color }}">
+                <div class="name_tag" style="color : white">{{ tag.name }}</div>
                 {% endfor %}
             </div>
 
@@ -28,8 +26,7 @@
     </a>
 
     <div class="info infos">
-        <div class="row flex-wrap m15">
-            <div class="col-12 mw-100 info_flex">
+
                 <div class="info__content d-flex align-items-center w-100">
                     <h1 class="mt-0 pt-0 mb-0 text-uppercase flex-grow-1" style="font-size: 1rem">
                         <a href="{{ path('projet.show', {'id': projet.id, "slug": projet.slug}) }}"
@@ -38,6 +35,5 @@
 
                 </div>
             </div>
-        </div>
-    </div>
+
 </article>

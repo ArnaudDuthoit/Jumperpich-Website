@@ -2,14 +2,21 @@
     .form-check {
         padding-left: 0;
     }
+
 </style>
 
 <div class="filt sticky-filt">
 
-    <div class="a-filter pl-0">
+    <div class="a-filter pl-0" id="accordion">
 
-        <div class="title">{% trans %}Trouve ton podcast{% endtrans %}</div>
-
+        <div class="title" id="headingTwo">
+            <a data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                {% trans %}Trouve ton podcast{% endtrans %}
+                <i class="fa fa-chevron-right pull-right" style="line-height: 1.5;"></i>
+                <i class="fa fa-chevron-down pull-right" style="line-height: 1.5;"></i>
+            </a>
+           </div>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
         {{ form_start(form, {'attr': {'class' : 'js-filter-form'}}) }}
 
         <div class="spinner-border js-loading" role="status" aria-hidden="true" style="display:none" id="loader">
@@ -17,6 +24,6 @@
             <span class="sr-only">Loading ... </span>
         </div>
         {{ form_end(form) }}
-
+        </div>
     </div>
 </div>
