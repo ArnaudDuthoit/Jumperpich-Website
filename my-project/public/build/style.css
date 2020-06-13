@@ -11,6 +11,40 @@ body {
 
 }
 
+
+#q {
+    color: black;
+    background-image: url(https://cdn2.iconfinder.com/data/icons/round-mobile-ui-set/154/find-loop-search-20.png);
+    background-position: 10px center;
+    background-repeat: no-repeat;
+    border: 3px solid #ccc;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+    border-radius: 4px;
+    padding: 10px 5px 10px 20px;
+    text-indent: 20px;
+    -webkit-transition: all 0.2s;
+    -moz-transition: all 2s;
+    transition: all 0.2s;
+}
+.form-check-label:hover {
+    color:red
+}
+
+.form-check-label {
+    font-size:1.2rem
+}
+
+#Tags {
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -5px;
+    margin-left: -5px;
+}
+
 a[aria-expanded=true] .fa-chevron-right {
     display: none;
 }
@@ -97,8 +131,8 @@ a[aria-expanded=false] .fa-chevron-down {
 .a-filter {
     float: left;
     width: 100%;
-    color: rgba(255, 255, 255, 1);
-    background: rgba(37, 40, 42, 1);
+    color: black;
+    
 }
 
 .a-filter .title {

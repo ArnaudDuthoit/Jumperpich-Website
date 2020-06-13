@@ -31,7 +31,7 @@ function bindEvents() {
         input.addEventListener('keyup', this.loadForm.bind(this))
     });
 
-        this.pagination.addEventListener('click', aClickListener)
+    this.pagination.addEventListener('click', aClickListener)
 }
 
 
@@ -62,15 +62,27 @@ async function loadURL(url) {
 
     if (response.status >= 200 && response.status < 300) {
         const data = await response.json();
-        this.content.innerHTML = data.content;
-        let cards = Array.from(document.querySelectorAll('.mix'));
-        cards.forEach((card) => {
-            card.classList.add('is-animated')
-        });
-        this.pagination.innerHTML = data.pagination;
 
-        params.delete('ajax');
-        history.replaceState({}, '', url.split('?')[0] + '?' + params.toString())
+
+        if (data.content !== '') {
+
+            this.content.innerHTML = data.content;
+            let cards = Array.from(document.querySelectorAll('.mix'));
+            cards.forEach((card) => {
+                card.classList.add('is-animated')
+            });
+            this.pagination.innerHTML = data.pagination;
+
+            params.delete('ajax');
+            history.replaceState({}, '', url.split('?')[0] + '?' + params.toString())
+
+        } else {
+
+            this.content.innerHTML = ' <div class="container mt-4"><h3 style="color:black">Désolé aucun mix ne correspond à votre recherche ...</h3></div>';
+            params.delete('ajax');
+            history.replaceState({}, '', url.split('?')[0] + '?' + params.toString())
+        }
+
     } else {
         console.error(response)
     }
@@ -120,7 +132,6 @@ function BackToTop() {
 }
 
 BackToTop();
-
 
 
 // Intersect Observer pour animation apparition au scroll //

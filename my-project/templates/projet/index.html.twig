@@ -31,24 +31,39 @@
 
             <div class="container-fluid mt-4">
 
-            <div class="row mx-4 my-4 py-4 " id="filter">
+                <div class="mx-4 my-4" id="filter">
 
-                    <div class="col-lg-3 col-xl-3 mb-4">
-                        {% include 'projet/_filter.html.twig' with {form:form} only %}
-                    </div>
-
-                    <div class="col-lg-9 col-xl-9">
-
-                        <div class="row text-center js-filter-content" id="mixes">
-                            {% include 'projet/_projets.html.twig' %}
-                        </div>
-
-                        <div class="js-filter-pagination">
-                            {% include 'projet/_pagination.html.twig' %}
+                    <div class="row">
+                        <div class="col-lg-12 col-xl-12 mb-4">
+                            {% include 'projet/_filter.html.twig' with {form:form} only %}
                         </div>
                     </div>
+
+                    <div class="row">
+                        <div class="col-lg-12 col-xl-12">
+
+                            <div class="row text-center js-filter-content" id="mixes">
+
+                                {% if projets.getTotalItemCount() is same as (0) %}
+                                    <div class="container mt-4">
+                                    <h3 style="color:black">Désolé aucun mix ne correspond à votre recherche ...</h3>
+                                    </div>
+                                {% endif %}
+
+                                {% include 'projet/_projets.html.twig' %}
+
+
+
+                            </div>
+
+                            <div class="js-filter-pagination">
+                                {% include 'projet/_pagination.html.twig' %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-
         </div>
     </div>
 {% endblock %}

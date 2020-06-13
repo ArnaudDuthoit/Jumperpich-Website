@@ -133,6 +133,13 @@ class HomeController extends AbstractController
                 ]), 'text/html');
             $mailer->send($message);
 
+            $message_2 = (new Swift_Message ('Nouveau Message'))
+            ->setFrom(['contact@jumperpich.com' => 'Jumperpich.com'])
+                ->setTo('contact@jumperpich.com')
+                ->setBody('Nouveau Message sur le site Jumperpich.com', 'text/html');
+            $mailer->send($message_2);
+
+
             $this->addFlash("success", "Formulaire envoyé avec succès !");
 
             return $this->redirectToRoute('contact');

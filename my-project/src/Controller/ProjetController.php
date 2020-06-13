@@ -10,6 +10,7 @@ use App\Repository\ProjetRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -47,16 +48,16 @@ class ProjetController extends AbstractController
 
         $projets = $repository->findSearch($data);
 
-        if($request->get('ajax')){
+        if ($request->get('ajax')) {
             return new JsonResponse([
-                'content' => $this->renderview('projet/_projets.html.twig',['projets' => $projets]),
-                'pagination' => $this->renderview('projet/_pagination.html.twig',['projets' => $projets]),
+                'content' => $this->renderview('projet/_projets.html.twig', ['projets' => $projets]),
+                'pagination' => $this->renderview('projet/_pagination.html.twig', ['projets' => $projets]),
             ]);
         }
 
         return $this->render('projet/index.html.twig', [
             'projets' => $projets,
-            'form' =>$form->createView(),
+            'form' => $form->createView(),
             'current_menu' => 'mixes'
         ]);
 
@@ -69,7 +70,7 @@ class ProjetController extends AbstractController
      * @param Projet $projet
      * @param string $slug
      * @param ObjectManager $manager
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     * @return RedirectResponse|Response
      */
     public function show(Projet $projet, string $slug, ObjectManager $manager)
 
@@ -83,7 +84,15 @@ class ProjetController extends AbstractController
         }
 
         $views = $projet->getViews();
-        $projet->setViews($views + 1);
+
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_ANONYMOUSLY'); // Récupère l'info si c'est un utilisateur anonyme
+
+        $user = $this->getUser();
+
+        if ($user === null){ // Si c'est un anonyme on augmente la nombre de page vues
+            $projet->setViews($views + 1);
+        }
+
         $manager->persist($projet);
         $manager->flush();
 
@@ -99,7 +108,7 @@ class ProjetController extends AbstractController
      * @param Projet $projet
      * @param Request $request
      * @param DownloadHandler $downloadHandler
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     * @return RedirectResponse|Response
      */
     public function download(Projet $projet, Request $request, DownloadHandler $downloadHandler)
 
@@ -110,8 +119,17 @@ class ProjetController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
         $projet = $entityManager->getRepository(Projet::class)->findOneBy(['mp3filename' => $mp3filename]);
 
+
         $download = $projet->getDownloadCount();
-        $projet->setDownloadCount($download + 1);
+
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_ANONYMOUSLY'); // Récupère l'info si c'est un utilisateur anonyme
+
+        $user = $this->getUser();
+
+        if ($user === null){ // Si c'est un anonyme on augmente la nombre de téléchargement
+            $projet->setDownloadCount($download + 1);
+        }
+
         $entityManager->persist($projet);
         $entityManager->flush();
 
