@@ -48,8 +48,7 @@ Design
 
 ## Built With
 
-* [Symfony](https://symfony.com/doc/current/index.html#gsc.tab=0) - The web framework used
-
+* [Symfony Version 4.2](https://symfony.com/doc/current/index.html#gsc.tab=0) - The web framework used
 
 ## Authors
 
